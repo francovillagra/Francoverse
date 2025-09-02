@@ -11,21 +11,22 @@ export default function ParticlesBackground() {
   }, []);
 
   const options: ISourceOptions = {
-    fullScreen: { enable: true, zIndex: -1 }, // canvas fijo detrás del contenido
-    fpsLimit: 60,
-    detectRetina: true,
-    background: { color: "transparent" },
+    // Captura el mouse aunque el canvas no reciba eventos directamente
     interactivity: {
+      detectsOn: "window",
       events: {
         onHover: { enable: true, mode: "repulse" },
         onClick: { enable: true, mode: "push" },
         resize: true,
       },
       modes: {
-        repulse: { distance: 150 },
+        repulse: { distance: 140 },
         push: { quantity: 4 },
       },
     },
+    fpsLimit: 60,
+    detectRetina: true,
+    background: { color: "transparent" },
     particles: {
       number: { value: 80, density: { enable: true, area: 800 } },
       color: { value: "#ffffff" },
@@ -37,5 +38,10 @@ export default function ParticlesBackground() {
     },
   };
 
-  return <Particles id="tsparticles" init={particlesInit} options={options} />;
+  // wrapper fijo a pantalla, detrás de todo y sin capturar eventos
+  return (
+    <div className="fixed inset-0 -z-10 pointer-events-none">
+      <Particles id="tsparticles" init={particlesInit} options={options} />
+    </div>
+  );
 }
