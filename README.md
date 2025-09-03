@@ -36,7 +36,7 @@ Este proyecto está construido con un stack tecnológico robusto y actualizado p
 
 Iniciar el servidor de desarrollo:
 
-````bash
+```
 yarn dev
 
 ---
@@ -45,9 +45,9 @@ yarn dev
 
 Para iniciar el servidor de desarrollo:
 
-```bash
+```
 yarn dev
-````
+```
 
 Para construir el proyecto para producción:
 ```
