@@ -50,15 +50,15 @@ yarn dev
 ````
 
 Para construir el proyecto para producción:
-```bash
+```
 yarn build
 ```
 Para iniciar la aplicación en modo producción:
-```bash
+```
 yarn start
 ```
 Para ejecutar el linter y verificar la calidad del código:
-```bash
+```
 yarn lint
 ```
 ---
