@@ -7,27 +7,17 @@
 
 Este proyecto está construido con un stack tecnológico robusto y actualizado para crear una experiencia web fluida y escalable:
 
-**Next.js (v15.3.x)** — framework React con App Router, SSR/SSG y Turbopack.
-
-**React (v19.1.0)** — librería base para construir interfaces reactivas.
-
-**TypeScript (v5)** — tipado estático para mayor calidad y mantenibilidad.
-
-**Tailwind CSS (v3.4.1)** — utilidades CSS para un diseño responsivo y consistente.
-
-**Framer Motion** — animaciones declarativas y transiciones suaves.
-
-**React-tsparticles / tsparticles** — partículas interactivas como fondo dinámico.
-
-**Three.js, React Three Fiber y Drei** — base para integrar gráficos y efectos 3D (en expansión futura).
-
-**React Icons, Heroicons, Ionicons** — íconos SVG para enriquecer la interfaz.
-
-**Emotion** — estilos dinámicos por componente (CSS-in-JS).
-
-**Immer** — manejo simple de estados inmutables.
-
-**React Intersection Observer** — optimización de carga y animaciones según visibilidad.
+- **Next.js (v15.3.x)** — framework React con App Router, SSR/SSG y Turbopack.
+- **React (v19.1.0)** — librería base para construir interfaces reactivas.
+- **TypeScript (v5)** — tipado estático para mayor calidad y mantenibilidad.
+- **Tailwind CSS (v3.4.1)** — utilidades CSS para un diseño responsivo y consistente.
+- **Framer Motion** — animaciones declarativas y transiciones suaves.
+- **React-tsparticles / tsparticles** — partículas interactivas como fondo dinámico.
+- **Three.js, React Three Fiber y Drei** — base para integrar gráficos y efectos 3D (en expansión futura).
+- **React Icons, Heroicons, Ionicons** — íconos SVG para enriquecer la interfaz.
+- **Emotion** — estilos dinámicos por componente (CSS-in-JS).
+- **Immer** — manejo simple de estados inmutables.
+- **React Intersection Observer** — optimización de carga y animaciones según visibilidad.
 
 ---
 
