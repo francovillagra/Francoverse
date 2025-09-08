@@ -1,43 +1,67 @@
-'use client';
+"use client";
 
-import ProjectCard from './ProjectCard';
+import { motion } from "framer-motion";
+import ProjectCard, { Project } from "./ProjectCard";
 
 type ProjectsSectionProps = {
   isStandalone?: boolean;
 };
 
-const projects = [
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, ease: "easeOut" },
+  },
+};
+
+const projects: Project[] = [
   {
-    title: 'Portfolio Personal',
-    description: 'Mi portfolio web moderno hecho con Next.js, Tailwind y React.',
-    imageUrl: '/projects/portfolio.png',
-    techStack: ['Next.js', 'React', 'Tailwind CSS'],
-    projectLink: 'https://tu-portfolio-url.com',
+    title: "Francoverse (Portfolio)",
+    description:
+      "Mi portfolio web hecho con Next.js, Tailwind y animaciones con Framer Motion. Fondo de partículas interactivas con react-tsparticles.",
+    imageUrl: "/projects/portfolio.png",
+    techStack: ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
+    demoUrl: "https://tu-demo-o-vercel.app", // reemplazar si ya tenés deploy
+    repoUrl: "https://github.com/francovillagra/Francoverse",
   },
   {
-    title: 'App de Tareas',
-    description: 'Aplicación para gestionar tareas con autenticación y backend en Node.js.',
-    imageUrl: '/projects/tasks.png',
-    techStack: ['Node.js', 'Express', 'MongoDB', 'React'],
-    projectLink: 'https://github.com/tuusuario/app-tareas',
+    title: "App de Tareas",
+    description:
+      "Aplicación para gestionar tareas con autenticación y backend en Node.js.",
+    imageUrl: "/projects/tasks.png",
+    techStack: ["Node.js", "Express", "MongoDB", "React"],
+    demoUrl: "https://tu-demo-tareas.app",
+    repoUrl: "https://github.com/francovillagra/app-tareas",
   },
-  // Puedes agregar más proyectos aquí
+  // Agregá acá otros proyectos reales (Telecom X, SomosEquipo API, etc.)
 ];
 
 export default function ProjectsSection({ isStandalone = false }: ProjectsSectionProps) {
   return (
     <section
-      className={`w-full flex flex-col items-center justify-center px-6 py-12 gap-12 ${
-        isStandalone ? 'min-h-screen bg-[#030014]' : ''
+      id="projects"
+      className={`w-full flex flex-col items-center justify-center px-6 py-16 gap-10 ${
+        isStandalone ? "min-h-screen bg-[#030014]" : ""
       }`}
+      aria-label="Sección de Proyectos"
     >
-      {isStandalone && (
-        <h2 className="text-4xl font-bold text-white mb-8">Proyectos</h2>
-      )}
-      <div className="max-w-5xl w-full flex flex-col gap-10">
-        {projects.map((project) => (
-          <ProjectCard key={project.title} {...project} />
-        ))}
+      <div className="mx-auto w-full max-w-6xl">
+        <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">
+          Proyectos
+        </h2>
+
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+          className="mt-8 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6"
+        >
+          {projects.map((p) => (
+            <ProjectCard key={p.title} {...p} />
+          ))}
+        </motion.div>
       </div>
     </section>
   );
