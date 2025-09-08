@@ -1,18 +1,17 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import HeroSection from '@/components/sections/Hero';
-import { ProjectsSection } from '@/components/sections/Projects';
-import ParticlesBackground from '@/components/ui/ParticlesBackground';
+import Link from "next/link";
+import HeroSection from "@/components/sections/Hero/HeroSection";
+import ProjectsSection from "@/components/sections/Projects/ProjectsSection";
 
 export default function Home() {
   return (
     <>
-      {/* Fondo de partículas */}
-      <ParticlesBackground />
-
-      {/* Sección principal del Hero */}
+      {/* Hero principal */}
       <HeroSection />
+
+      {/* Sección de Proyectos (asegurate que tenga id="projects" dentro del componente) */}
+      <ProjectsSection />
 
       {/* Bienvenida + links a secciones individuales */}
       <main className="min-h-screen flex flex-col items-center justify-center text-white p-8 relative z-10">
@@ -43,9 +42,6 @@ export default function Home() {
           </Link>
         </div>
       </main>
-
-      {/* Sección de proyectos */}
-      <ProjectsSection />
     </>
   );
 }
