@@ -34,29 +34,36 @@ const projects: Project[] = [
     demoUrl: "https://tu-demo-tareas.app",
     repoUrl: "https://github.com/francovillagra/app-tareas",
   },
-  // Agregá acá otros proyectos reales (Telecom X, SomosEquipo API, etc.)
 ];
 
 export default function ProjectsSection({ isStandalone = false }: ProjectsSectionProps) {
   return (
     <section
       id="projects"
-      className={`w-full flex flex-col items-center justify-center px-6 py-16 gap-10 ${
+      aria-label="Sección de Proyectos"
+      aria-labelledby="projects-title"
+      className={`w-full flex flex-col items-center justify-center px-6 py-16 gap-10 scroll-mt-24 ${
         isStandalone ? "min-h-screen bg-[#030014]" : ""
       }`}
-      aria-label="Sección de Proyectos"
     >
       <div className="mx-auto w-full max-w-6xl">
-        <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">
+        <motion.h2
+          id="projects-title"
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          className="text-3xl md:text-4xl font-extrabold tracking-tight"
+        >
           Proyectos
-        </h2>
+        </motion.h2>
 
         <motion.div
           variants={container}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
-          className="mt-8 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6"
+          className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {projects.map((p) => (
             <ProjectCard key={p.title} {...p} />
