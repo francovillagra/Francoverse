@@ -1,30 +1,23 @@
-'use client';
+// components/layout/ClientWrapper.tsx
+"use client";
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { AnimatePresence, motion } from "framer-motion";
+import { usePathname } from "next/navigation";
+import { ReactNode } from "react";
 
-type SectionKey = 'home' | 'about' | 'skills' | 'projects' | 'contact' | 'hero';
-
-interface SectionContextProps {
-  activeSection: SectionKey;
-  setActiveSection: (section: SectionKey) => void;
-}
-
-const SectionContext = createContext<SectionContextProps | undefined>(undefined);
-
-export const useSection = () => {
-  const context = useContext(SectionContext);
-  if (!context) {
-    throw new Error('useSection debe usarse dentro de un ClientWrapper');
-  }
-  return context;
+const variants = {
+  initial: { opacity: 0, y: 12 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.35, ease: "easeOut" } },
+  exit: { opacity: 0, y: -12, transition: { duration: 0.25, ease: "easeIn" } },
 };
 
 export default function ClientWrapper({ children }: { children: ReactNode }) {
-  const [activeSection, setActiveSection] = useState<SectionKey>('hero');
-
+  const pathname = usePathname();
   return (
-    <SectionContext.Provider value={{ activeSection, setActiveSection }}>
-      {children}
-    </SectionContext.Provider>
+    <AnimatePresence mode="wait">
+      <motion.div key={pathname} variants={variants} initial="initial" animate="animate" exit="exit">
+        {children}
+      </motion.div>
+    </AnimatePresence>
   );
 }
