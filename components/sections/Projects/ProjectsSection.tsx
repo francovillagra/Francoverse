@@ -19,22 +19,32 @@ const projects: Project[] = [
   {
     title: "Francoverse (Portfolio)",
     description:
-      "Mi portfolio web hecho con Next.js, Tailwind y animaciones con Framer Motion. Fondo de partículas interactivas con react-tsparticles.",
-    imageUrl: "/velocidadluz.jpg",
+      "Portfolio personal hecho con Next.js, Tailwind y animaciones con Framer Motion. Incluye partículas interactivas con react-tsparticles.",
+    imageUrl: "/projects/caminatalunar.jpg",
     techStack: ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
-    demoUrl: "https://tu-demo-o-vercel.app", // reemplazar si ya tenés deploy
+    demoUrl: "https://francoverse.vercel.app", // reemplazá con tu deploy real
     repoUrl: "https://github.com/francovillagra/Francoverse",
   },
   {
-    title: "App de Tareas",
+    title: "Challenge Telecom X",
     description:
-      "Aplicación para gestionar tareas con autenticación y backend en Node.js.",
-    imageUrl: "/projects/tasks.png",
-    techStack: ["Node.js", "Express", "MongoDB", "React"],
-    demoUrl: "https://tu-demo-tareas.app",
-    repoUrl: "https://github.com/francovillagra/app-tareas",
+      "Análisis de churn de clientes usando Python, Pandas y Matplotlib. Incluye limpieza de datos, análisis exploratorio y visualización para entender la evasión.",
+    imageUrl: "/projects/telecom.jpg",
+    techStack: ["Python", "Pandas", "Matplotlib", "Jupyter"],
+    demoUrl: "", // no aplica demo online
+    repoUrl: "https://github.com/francovillagra/ChallengeTelecomX",
+  },
+  {
+    title: "SomosEquipo API",
+    description:
+      "API colaborativa de gestión de tareas construida con FastAPI. Permite CRUD de usuarios y tareas, almacenando datos en JSON con endpoints documentados.",
+    imageUrl: "/projects/somosequipo.jpg",
+    techStack: ["FastAPI", "Python", "REST", "JSON"],
+    demoUrl: "", // opcional si la subís a Azure
+    repoUrl: "https://github.com/francovillagra/SomosEquipo",
   },
 ];
+
 
 export default function ProjectsSection({ isStandalone = false }: ProjectsSectionProps) {
   return (
