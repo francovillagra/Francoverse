@@ -38,7 +38,7 @@ const projects: Project[] = [
     title: "SomosEquipo API",
     description:
       "API colaborativa de gestión de tareas construida con FastAPI. Permite CRUD de usuarios y tareas, almacenando datos en JSON con endpoints documentados.",
-    imageUrl: "/projects/somosequipo.jpg",
+    imageUrl: "/projects/trabajoenequipo.jpg",
     techStack: ["FastAPI", "Python", "REST", "JSON"],
     demoUrl: "", // opcional si la subís a Azure
     repoUrl: "https://github.com/francovillagra/SomosEquipo",
