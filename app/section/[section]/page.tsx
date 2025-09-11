@@ -2,6 +2,7 @@ import Link from "next/link";
 import HeroSection from "@/components/sections/Hero/HeroSection";
 import ProjectsSection from "@/components/sections/Projects/ProjectsSection";
 import SkillsSection from "@/components/sections/Skills/SkillsSection";
+import AboutSection from "@/components/sections/About/AboutSection"
 
 type Props = { params: { section: string } };
 
@@ -29,6 +30,13 @@ export default function SectionPage({ params }: Props) {
           <div className="w-full max-w-6xl">
             <HeroSection />
           </div>
+        </main>
+      );
+
+    case "about":
+      return (
+        <main className="relative w-full h-dvh">
+          <AboutSection />
         </main>
       );
 
