@@ -1,14 +1,27 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 
 export default function AboutSection() {
   return (
     <section
       id="about"
-      className="w-full h-dvh flex items-center justify-center px-6"
       aria-label="Sobre mí"
+      className="relative w-full h-dvh flex items-center justify-center px-6"
     >
+      {/* Botón Volver */}
+      <div className="absolute top-4 left-4 z-20">
+        <Link
+          href="/"
+          className="rounded-xl px-3 py-2 border border-white/30 hover:border-white/60 transition"
+          aria-label="Volver al inicio"
+        >
+          ← Volver
+        </Link>
+      </div>
+
+      {/* Contenido */}
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
@@ -18,22 +31,17 @@ export default function AboutSection() {
         <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">
           Sobre mí
         </h2>
+
         <p className="text-base md:text-lg text-white/80 leading-relaxed">
-          Soy <span className="font-semibold text-white">Franco Villagra</span>, 
-          Auditor Financiero y de Cumplimiento en la Auditoría General de la Nación, 
-          y Desarrollador Fullstack apasionado por crear soluciones digitales 
-          que unan la precisión de los datos con la experiencia de usuario.
+          Soy <span className="font-semibold text-white">Franco Villagra</span>, Auditor Financiero y de Cumplimiento en la Auditoría General de la Nación, y Desarrollador Fullstack apasionado por crear soluciones digitales que unan la precisión de los datos con la experiencia de usuario.
         </p>
+
         <p className="text-base md:text-lg text-white/80 leading-relaxed">
-          Mi recorrido profesional combina la <span className="font-semibold">auditoría y el análisis de datos</span> 
-          con el desarrollo web moderno en <span className="font-semibold">React, Next.js y Python</span>. 
-          Esta dualidad me permite abordar proyectos tanto desde la perspectiva 
-          técnica como desde la visión estratégica.
+          Mi recorrido profesional combina la <span className="font-semibold">auditoría y el análisis de datos</span> con el desarrollo web moderno en <span className="font-semibold">React, Next.js y Python</span>. Esta dualidad me permite abordar proyectos tanto desde la perspectiva técnica como desde la visión estratégica.
         </p>
+
         <p className="text-base md:text-lg text-white/80 leading-relaxed">
-          Me motiva <span className="font-semibold">transformar la complejidad en claridad</span>, 
-          construyendo productos escalables y visualmente atractivos, 
-          siempre enfocados en aportar valor real.
+          Me motiva <span className="font-semibold">transformar la complejidad en claridad</span>, construyendo productos escalables y visualmente atractivos, siempre enfocados en aportar valor real.
         </p>
 
         <motion.a
