@@ -19,8 +19,8 @@ function BackHome() {
   );
 }
 
-export default function SectionPage({ params }: Props) {
-  const { section } = params;
+export default async function SectionPage({ params }: Props) {
+  const { section } = await params;
 
   switch (section) {
     case "hero":
