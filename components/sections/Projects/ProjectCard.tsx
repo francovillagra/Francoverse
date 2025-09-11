@@ -33,16 +33,18 @@ export default function ProjectCard({
       className="group bg-white/5 rounded-xl overflow-hidden border border-white/10 hover:border-white/30 transition shadow-lg"
     >
       {/* Imagen */}
-      <div className="relative w-full h-48">
-        <Image
-          src={imageUrl}
-          alt={title}
-          fill
-          className="object-cover"
-          sizes="(max-width:768px) 100vw, (max-width:1280px) 50vw, 33vw"
+
+    <div className="relative w-full aspect-[16/9] overflow-hidden">
+    <Image
+      src={imageUrl}
+      alt={title}
+      fill
+      className="object-cover"
+      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+      priority={false}
         />
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition" />
       </div>
+
 
       {/* Contenido */}
       <div className="p-5 flex flex-col gap-3">
