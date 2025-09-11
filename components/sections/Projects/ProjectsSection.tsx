@@ -20,7 +20,7 @@ const projects: Project[] = [
     title: "Francoverse (Portfolio)",
     description:
       "Portfolio personal hecho con Next.js, Tailwind y animaciones con Framer Motion. Incluye partículas interactivas con react-tsparticles.",
-    imageUrl: "/projects/caminatalunar.jpg",
+    imageUrl: "/Projects/caminatalunar.jpg",
     techStack: ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
     demoUrl: "https://francoverse.vercel.app", // reemplazá con tu deploy real
     repoUrl: "https://github.com/francovillagra/Francoverse",
@@ -29,7 +29,7 @@ const projects: Project[] = [
     title: "Challenge Telecom X",
     description:
       "Análisis de churn de clientes usando Python, Pandas y Matplotlib. Incluye limpieza de datos, análisis exploratorio y visualización para entender la evasión.",
-    imageUrl: "/projects/telecom.jpg",
+    imageUrl: "/Projects/telecom.jpg",
     techStack: ["Python", "Pandas", "Matplotlib", "Jupyter"],
     demoUrl: "", // no aplica demo online
     repoUrl: "https://github.com/francovillagra/ChallengeTelecomX",
@@ -38,7 +38,7 @@ const projects: Project[] = [
     title: "SomosEquipo API",
     description:
       "API colaborativa de gestión de tareas construida con FastAPI. Permite CRUD de usuarios y tareas, almacenando datos en JSON con endpoints documentados.",
-    imageUrl: "/projects/trabajoenequipo.jpg",
+    imageUrl: "/Projects/trabajoenequipo.jpg",
     techStack: ["FastAPI", "Python", "REST", "JSON"],
     demoUrl: "", // opcional si la subís a Azure
     repoUrl: "https://github.com/francovillagra/SomosEquipo",
