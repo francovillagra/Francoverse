@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Github, ExternalLink } from "lucide-react";
+import { useState, useEffect } from "react";
 
 type ProjectCardProps = {
   title: string;
@@ -26,13 +27,21 @@ export default function ProjectCard({
   demoUrl,
   repoUrl,
 }: ProjectCardProps) {
+  
+  const [src, setSrc] = useState(imageUrl);
+  const [loading, setLoading] = useState(true);
+
+   useEffect(() => {
+    setSrc(imageUrl); // si cambias la prop, resetea
+  }, [imageUrl]);
+  
   return (
     <motion.div
       variants={cardVariants}
       whileHover={{ y: -4 }}
       className="group bg-white/5 rounded-xl overflow-hidden border border-white/10 hover:border-white/30 transition shadow-lg"
     >
-      {/* Imagen */}
+      {/* Imagen con skeleton + fallback + log*/}
 
     <div className="relative w-full aspect-[16/9] overflow-hidden">
     <Image
@@ -42,9 +51,15 @@ export default function ProjectCard({
       className="object-cover"
       sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
       priority={false}
+      onLoad={() => setLoading(false)}
+          onError={() => {
+            console.warn(`[ProjectCard] Falló cargar "${src}" → uso placeholder`);
+            setSrc("/projects/placeholder.jpg"); // crea este archivo en public/projects/
+            setLoading(false);
+          }}
         />
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition" />
       </div>
-
 
       {/* Contenido */}
       <div className="p-5 flex flex-col gap-3">
