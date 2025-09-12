@@ -20,7 +20,7 @@ const projects: Project[] = [
     title: "Francoverse (Portfolio)",
     description:
       "Portfolio personal hecho con Next.js, Tailwind y animaciones con Framer Motion. Incluye partículas interactivas con react-tsparticles.",
-    imageUrl: "/projects/open.jpg",
+    imageUrl: "/projects/openb.jpg",
     techStack: ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
     demoUrl: "https://francoverse.vercel.app", // reemplazá con tu deploy real
     repoUrl: "https://github.com/francovillagra/Francoverse",
