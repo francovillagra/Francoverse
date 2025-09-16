@@ -36,11 +36,13 @@ export default function ProjectCard({
   }, [imageUrl]);
   
   return (
-    <motion.div
-      variants={cardVariants}
-      whileHover={{ y: -4 }}
-      className="group bg-white/5 rounded-xl overflow-hidden border border-white/10 hover:border-white/30 transition shadow-lg"
+  // ProjectCard.tsx (wrapper)
+  <motion.div
+    variants={cardVariants}
+    whileHover={{ y: -4 }}
+    className="group bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden border border-white/10 hover:border-white/30 transition shadow-lg"
     >
+
       {/* Imagen con skeleton + fallback + log*/}
 
     <div className="relative w-full aspect-[16/9] overflow-hidden">
