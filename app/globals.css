@@ -7,14 +7,19 @@
     height: 100%;
   }
 
+  /* Alturas base */
   html,
   body {
     height: 100%;
     min-height: 100%;
+    /* Sin scroll global */
+    overflow: hidden; /* <-- clave para la pantalla única */
+    /* Colores/base */
     @apply bg-[#030014] text-white antialiased m-0 p-0;
-    overflow-x: hidden;
-    overflow-y: auto; /* Scroll vertical habilitado */
   }
+
+  /* Soporte robusto para viewport móvil (evita “saltos” de 100vh en iOS/Android) */
+  /* Úsalo en contenedores de página: class="h-dvh" (ya lo venimos usando) */
 }
 
 /* ---------------------------
@@ -72,7 +77,6 @@
 .transform-image-shift {
   transform: translateY(-10px) translateX(60px);
 }
-
 .scale-90 {
   transform: scale(0.9);
 }

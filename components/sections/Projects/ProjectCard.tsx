@@ -1,42 +1,109 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { Github, ExternalLink } from "lucide-react";
+import { useState, useEffect } from "react";
 
 type ProjectCardProps = {
   title: string;
   description: string;
   imageUrl: string;
   techStack: string[];
-  projectLink?: string;
+  demoUrl?: string;
+  repoUrl?: string;
 };
 
-export default function ProjectCard({ title, description, imageUrl, techStack, projectLink }: ProjectCardProps) {
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+};
+
+export default function ProjectCard({
+  title,
+  description,
+  imageUrl,
+  techStack,
+  demoUrl,
+  repoUrl,
+}: ProjectCardProps) {
+  
+  const [src, setSrc] = useState(imageUrl);
+  const [loading, setLoading] = useState(true);
+
+   useEffect(() => {
+    setSrc(imageUrl); // si cambias la prop, resetea
+  }, [imageUrl]);
+  
   return (
-    <div className="bg-gray-800 rounded-lg shadow-lg p-6 flex flex-col md:flex-row gap-6 hover:shadow-purple-500 transition-shadow">
-      <div className="relative w-full md:w-1/3 h-48 md:h-auto rounded overflow-hidden">
-        <Image src={imageUrl} alt={title} fill className="object-cover" />
+  // ProjectCard.tsx (wrapper)
+  <motion.div
+    variants={cardVariants}
+    whileHover={{ y: -4 }}
+    className="group bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden border border-white/10 hover:border-white/30 transition shadow-lg"
+    >
+
+      {/* Imagen con skeleton + fallback + log*/}
+
+    <div className="relative w-full aspect-[16/9] overflow-hidden">
+    <Image
+      src={imageUrl}
+      alt={title}
+      fill
+      className="object-cover"
+      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+      priority={false}
+      onLoad={() => setLoading(false)}
+          onError={() => {
+            console.warn(`[ProjectCard] Falló cargar "${src}" → uso placeholder`);
+            setSrc("/projects/placeholder.jpg"); // crea este archivo en public/projects/
+            setLoading(false);
+          }}
+        />
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition" />
       </div>
-      <div className="flex flex-col justify-between w-full md:w-2/3 text-white">
-        <h3 className="text-2xl font-semibold mb-2">{title}</h3>
-        <p className="text-gray-300 mb-4">{description}</p>
-        <div className="flex flex-wrap gap-2 mb-4">
+
+      {/* Contenido */}
+      <div className="p-5 flex flex-col gap-3">
+        <h3 className="text-xl font-semibold">{title}</h3>
+        <p className="text-sm text-white/80">{description}</p>
+
+        <div className="flex flex-wrap gap-2">
           {techStack.map((tech) => (
-            <span key={tech} className="bg-purple-700 px-3 py-1 rounded-full text-sm">
+            <span
+              key={tech}
+              className="text-xs px-2 py-1 rounded-full border border-white/15 bg-white/5"
+            >
               {tech}
             </span>
           ))}
         </div>
-        {projectLink && (
-          <a
-            href={projectLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition"
-          >
-            Ver proyecto
-          </a>
-        )}
+
+        <div className="mt-4 flex items-center gap-3">
+          {demoUrl && (
+            <a
+              href={demoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg px-3 py-2 bg-white text-black text-sm font-semibold hover:opacity-90 transition"
+            >
+              <ExternalLink size={16} />
+              Demo
+            </a>
+          )}
+          {repoUrl && (
+            <a
+              href={repoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg px-3 py-2 border border-white/30 hover:border-white/60 text-sm transition"
+            >
+              <Github size={16} />
+              Repo
+            </a>
+          )}
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

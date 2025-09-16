@@ -1,30 +1,58 @@
-'use client';
+"use client";
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { AnimatePresence, motion } from "framer-motion";
+import { usePathname } from "next/navigation";
+import { ReactNode, useMemo } from "react";
 
-type SectionKey = 'home' | 'about' | 'skills' | 'projects' | 'contact' | 'hero';
-
-interface SectionContextProps {
-  activeSection: SectionKey;
-  setActiveSection: (section: SectionKey) => void;
-}
-
-const SectionContext = createContext<SectionContextProps | undefined>(undefined);
-
-export const useSection = () => {
-  const context = useContext(SectionContext);
-  if (!context) {
-    throw new Error('useSection debe usarse dentro de un ClientWrapper');
-  }
-  return context;
+type VariantSet = {
+  initial: object;
+  animate: object;
+  exit: object;
 };
 
+function getVariants(pathname: string) {
+  if (pathname.startsWith("/section/projects")) {
+    return { initial: { opacity: 0, scale: 0.96 },
+      animate: { opacity: 1, scale: 1, transition: { duration: 0.35, ease: "easeOut" } },
+      exit: { opacity: 0, scale: 0.98, transition: { duration: 0.2, ease: "easeIn" } },
+    };
+  }
+  if (pathname.startsWith("/section/skills")) {
+    return { initial: { opacity: 0, x: 24 },
+      animate: { opacity: 1, x: 0, transition: { duration: 0.35, ease: "easeOut" } },
+      exit: { opacity: 0, x: -16, transition: { duration: 0.2, ease: "easeIn" } },
+    };
+  }
+  if (pathname.startsWith("/section/about")) {   // <- antes era /section/hero
+    return { initial: { opacity: 0, y: 16 },
+      animate: { opacity: 1, y: 0, transition: { duration: 0.35, ease: "easeOut" } },
+      exit: { opacity: 0, y: -12, transition: { duration: 0.2, ease: "easeIn" } },
+    };
+  }
+  return {
+    initial: { opacity: 0 },
+    animate: { opacity: 1, transition: { duration: 0.28, ease: "easeOut" } },
+    exit: { opacity: 0, transition: { duration: 0.2, ease: "easeIn" } },
+  };
+}
+
+
 export default function ClientWrapper({ children }: { children: ReactNode }) {
-  const [activeSection, setActiveSection] = useState<SectionKey>('hero');
+  const pathname = usePathname();
+  const variants = useMemo(() => getVariants(pathname), [pathname]);
 
   return (
-    <SectionContext.Provider value={{ activeSection, setActiveSection }}>
-      {children}
-    </SectionContext.Provider>
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={pathname}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        variants={variants}
+        className="w-full h-dvh" // cada page debe encajar en 1 pantalla
+      >
+        {children}
+      </motion.div>
+    </AnimatePresence>
   );
 }
