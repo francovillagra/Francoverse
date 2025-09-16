@@ -48,14 +48,16 @@ const projects: Project[] = [
 
 export default function ProjectsSection({ isStandalone = false }: ProjectsSectionProps) {
   return (
-    <section
+   // ProjectsSection.tsx
+  <section
       id="projects"
       aria-label="Sección de Proyectos"
       aria-labelledby="projects-title"
-      className={`w-full flex flex-col items-center justify-center px-6 py-16 gap-10 scroll-mt-24 ${
-        isStandalone ? "min-h-screen bg-[#030014]" : ""
-      }`}
-    >
+      className={`w-full flex flex-col items-center justify-center px-6 py-16 gap-10 ${
+      isStandalone ? "h-dvh" : ""
+    }`}
+  >
+
       <div className="mx-auto w-full max-w-6xl">
         <motion.h2
           id="projects-title"
