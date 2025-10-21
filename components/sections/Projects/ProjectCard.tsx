@@ -1,11 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Github, ExternalLink } from "lucide-react";
 import { useState, useEffect } from "react";
 
-type ProjectCardProps = {
+export type Project = {
   title: string;
   description: string;
   imageUrl: string;
@@ -14,9 +14,13 @@ type ProjectCardProps = {
   repoUrl?: string;
 };
 
-const cardVariants = {
+type ProjectCardProps = Project & { priority?: boolean };
+
+const easeOut: number[] = [0.16, 1, 0.3, 1];
+
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: easeOut } },
 };
 
 export default function ProjectCard({
@@ -26,41 +30,37 @@ export default function ProjectCard({
   techStack,
   demoUrl,
   repoUrl,
+  priority = false,
 }: ProjectCardProps) {
-  
   const [src, setSrc] = useState(imageUrl);
   const [loading, setLoading] = useState(true);
 
-   useEffect(() => {
-    setSrc(imageUrl); // si cambias la prop, resetea
-  }, [imageUrl]);
-  
+  useEffect(() => setSrc(imageUrl), [imageUrl]);
+
   return (
-  // ProjectCard.tsx (wrapper)
-  <motion.div
-    variants={cardVariants}
-    whileHover={{ y: -4 }}
-    className="group bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden border border-white/10 hover:border-white/30 transition shadow-lg"
+    <motion.div
+      variants={cardVariants}
+      whileHover={{ y: -4 }}
+      className="group bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden border border-white/10 hover:border-white/30 transition shadow-lg"
     >
-
-      {/* Imagen con skeleton + fallback + log*/}
-
-    <div className="relative w-full aspect-[16/9] overflow-hidden">
-    <Image
-      src={imageUrl}
-      alt={title}
-      fill
-      className="object-cover"
-      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-      priority={false}
-      onLoad={() => setLoading(false)}
+      {/* Imagen con skeleton + fallback */}
+      <div className="relative w-full aspect-[16/9] overflow-hidden">
+        {loading && <div className="absolute inset-0 animate-pulse bg-white/10" />}
+        <Image
+          src={src}
+          alt={title}
+          fill
+          className="object-cover"
+          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+          priority={priority}
+          onLoad={() => setLoading(false)}
           onError={() => {
             console.warn(`[ProjectCard] Falló cargar "${src}" → uso placeholder`);
-            setSrc("/projects/placeholder.jpg"); // crea este archivo en public/projects/
+            setSrc("/projects/placeholder.jpg"); // asegurate de tenerla
             setLoading(false);
           }}
         />
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition" />
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition" />
       </div>
 
       {/* Contenido */}
@@ -70,10 +70,7 @@ export default function ProjectCard({
 
         <div className="flex flex-wrap gap-2">
           {techStack.map((tech) => (
-            <span
-              key={tech}
-              className="text-xs px-2 py-1 rounded-full border border-white/15 bg-white/5"
-            >
+            <span key={tech} className="text-xs px-2 py-1 rounded-full border border-white/15 bg-white/5">
               {tech}
             </span>
           ))}

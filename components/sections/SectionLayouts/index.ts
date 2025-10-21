@@ -1,1 +1,2 @@
-export { default as PageWrapper } from '@/components/Sections/SectionLayouts/PageWrapper';
+import PageWrapper from '@/components/sections/SectionLayouts/PageWrapper';
+export { PageWrapper };

@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import HeroSection from './Sections/Hero/HeroSection';
-import SkillsSection from './Sections/Skills/SkillsSection';
-import ProjectsSection from './Sections/Projects/ProjectsSection';
+import HeroSection from "./sections/Hero/HeroSection";
+import SkillsSection from "./sections/Skills/SkillsSection";
+import ProjectsSection from "./sections/Projects/ProjectsSection";
 
 type Section = 'hero' | 'skills' | 'projects';
 
