@@ -3,6 +3,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import ThemeToggle from "./ThemeToggle";
 
 const links = [
   { href: "/section/about", label: "Sobre mí" },
@@ -12,7 +13,6 @@ const links = [
 
 export default function TopNav() {
   const pathname = usePathname();
-
   const isActive = (href: string) =>
     pathname === href || pathname.startsWith(href + "/");
 
@@ -41,6 +41,9 @@ export default function TopNav() {
             </li>
           );
         })}
+        <li>
+          <ThemeToggle />
+        </li>
       </ul>
     </nav>
   );
