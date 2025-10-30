@@ -1,17 +1,10 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, type Variants } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { ReactNode, useMemo } from "react";
 
-type VariantSet = {
-  initial: object;
-  animate: object;
-  exit: object;
-};
-
-// 🌫️ Transición Fade ultra sutil (simple y elegante)
-function getVariants(): VariantSet {
+function getVariants(): Variants {
   return {
     initial: { opacity: 0 },
     animate: {
@@ -27,11 +20,8 @@ function getVariants(): VariantSet {
 
 export default function ClientWrapper({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-
-  // 🔒 Normaliza la key: sin hash ni query
   const routeKey = useMemo(() => pathname.replace(/[#?].*$/, ""), [pathname]);
-
-  const variants = useMemo(() => getVariants(), [routeKey]);
+  const variants = useMemo<Variants>(() => getVariants(), [routeKey]);
 
   return (
     <AnimatePresence initial={false}>
