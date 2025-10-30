@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: "class", // 👈 habilita modo oscuro por clase
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
@@ -14,3 +15,4 @@ module.exports = {
   },
   plugins: [],
 }
+
