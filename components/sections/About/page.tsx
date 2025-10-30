@@ -1,7 +1,8 @@
 // app/section/about/page.tsx
-import Stats from "@/components/about/Stats";
-// Si tenés un array de proyectos:
-import { projects } from "@/data/projects"; // ajustá el path si aplica
+
+import Stats from "@/components/sections/About/Stats";
+import { projects } from "@/data/projects";
+
 
 export default function Page() {
   return (
