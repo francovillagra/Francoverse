@@ -1,4 +1,3 @@
-// components/about/Stats.tsx
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
@@ -26,7 +25,6 @@ export default function Stats({
     const next = prev + 1;
     localStorage.setItem(key, String(next));
     setVisits(next);
-    // Futuro: persistir en /api/visits
   }, []);
 
   const items = [
