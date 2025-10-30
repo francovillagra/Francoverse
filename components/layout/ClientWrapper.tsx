@@ -10,19 +10,17 @@ type VariantSet = {
   exit: object;
 };
 
+// 🌫️ Transición Fade ultra sutil (simple y elegante)
 function getVariants(): VariantSet {
-  // Slide lateral sutil (sin “pantalla negra”)
   return {
-    initial: { opacity: 0, x: 60 },
+    initial: { opacity: 0 },
     animate: {
       opacity: 1,
-      x: 0,
-      transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 0.22, ease: "easeOut" },
     },
     exit: {
       opacity: 0,
-      x: -40,
-      transition: { duration: 0.25, ease: [0.4, 0, 1, 1] },
+      transition: { duration: 0.18, ease: "easeIn" },
     },
   };
 }
@@ -31,15 +29,11 @@ export default function ClientWrapper({ children }: { children: ReactNode }) {
   const pathname = usePathname();
 
   // 🔒 Normaliza la key: sin hash ni query
-  const routeKey = useMemo(
-    () => pathname.replace(/[#?].*$/, ""),
-    [pathname]
-  );
+  const routeKey = useMemo(() => pathname.replace(/[#?].*$/, ""), [pathname]);
 
   const variants = useMemo(() => getVariants(), [routeKey]);
 
   return (
-    // 👇 Sin mode="wait" para que no haya “vacío” entre páginas
     <AnimatePresence initial={false}>
       <motion.div
         key={routeKey}
