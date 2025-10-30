@@ -5,21 +5,17 @@
 @layer base {
   :root {
     height: 100%;
+    color-scheme: light dark; /* ayuda a formularios/UA */
   }
 
-  /* Alturas base */
   html,
   body {
     height: 100%;
     min-height: 100%;
-    /* Sin scroll global */
-    overflow: hidden; /* <-- clave para la pantalla única */
-    /* Colores/base */
-    @apply bg-[#030014] text-white antialiased m-0 p-0;
+    overflow: hidden; /* pantalla única */
+    /* 🎨 Tema por clase (Tailwind darkMode: 'class') */
+    @apply antialiased m-0 p-0 bg-white text-neutral-900 dark:bg-[#030014] dark:text-white;
   }
-
-  /* Soporte robusto para viewport móvil (evita “saltos” de 100vh en iOS/Android) */
-  /* Úsalo en contenedores de página: class="h-dvh" (ya lo venimos usando) */
 }
 
 /* ---------------------------
@@ -47,12 +43,20 @@
   word-spacing: 4px;
 }
 
+/* Opción: atenuar un poco en light si querés contraste más suave */
+/*
+:root:not(.dark) .Welcome-text {
+  opacity: 0.9;
+}
+*/
+
 .Welcome-box {
   @apply relative overflow-hidden backdrop-blur-[8px] flex items-center w-max;
   padding: 0.25rem 0.5rem;
   margin-left: 2.5rem;
   margin-top: 0.625rem;
   border-radius: 1rem;
+  /* Sombra acorde a tema */
   box-shadow: inset 0 -7px 11px #a48fff1f;
   isolation: isolate;
   transition: box-shadow 0.45s cubic-bezier(0.6, 0.6, 0, 1);
