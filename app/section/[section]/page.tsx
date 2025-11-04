@@ -2,8 +2,9 @@ import Link from "next/link";
 import HeroSection from "@/components/sections/Hero/HeroSection";
 import ProjectsSection from "@/components/sections/Projects/ProjectsSection";
 import SkillsSection from "@/components/sections/Skills/SkillsSection";
-import AboutSection from "@/components/sections/About/AboutSection"
+import AboutSection from "@/components/sections/About/AboutSection";
 
+type SectionKey = "hero" | "about" | "projects" | "skills" | "cv";
 type Props = { params: { section: string } };
 
 function BackHome() {
@@ -19,10 +20,10 @@ function BackHome() {
   );
 }
 
-export default async function SectionPage({ params }: Props) {
-  const { section } = await params;
+export default function SectionPage({ params }: Props) {
+  const { section } = params; // ✅ sin await
 
-  switch (section) {
+  switch (section as SectionKey) {
     case "hero":
       return (
         <main className="relative w-full h-dvh grid place-items-center px-6">
@@ -53,7 +54,7 @@ export default async function SectionPage({ params }: Props) {
     case "skills":
       return (
         <main className="relative w-full h-dvh grid place-items-center px-6">
-          <BackHome />
+        <BackHome />
           <div className="w-full max-w-6xl">
             <SkillsSection />
           </div>
@@ -83,7 +84,9 @@ export default async function SectionPage({ params }: Props) {
           <BackHome />
           <div>
             <h2 className="text-3xl md:text-4xl font-extrabold">Sección no encontrada</h2>
-            <p className="text-white/70 mt-2">Probá con /section/hero, /section/projects, /section/skills o /section/cv.</p>
+            <p className="text-white/70 mt-2">
+              Probá con /section/hero, /section/projects, /section/skills o /section/cv.
+            </p>
           </div>
         </main>
       );
