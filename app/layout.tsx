@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import ParticlesBackground from "@/components/ui/ParticlesBackground";
 import ClientWrapper from "@/components/layout/ClientWrapper";
-import TopNav from "@/components/navigation/TopNav";
+import TopNav from "@/components/sections/Navigation/TopNav";
 import ThemeProvider from "@/components/providers/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
