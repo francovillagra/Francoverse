@@ -7,7 +7,7 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import NavigationMenu from "./NavigationMenu";
 import NavigationItem from "./NavigationItem";
 // Botón animado nuevo
-import NavigationButton from "./NavigationButton";
+import NavigationButton from "./NavigationButtons";
 
 // Si tu Button no existe, reemplazalo por un <button> nativo
 import Button from "@/components/ui/Button";
