@@ -49,7 +49,7 @@ export default function HomeNavigation({ setActiveSection }: Props) {
   return (
     <>
       {/* Header fijo con menú */}
-      <header className="bg-gray-900 text-white px-4 py-3 flex items-center justify-between shadow-md sticky top-0 z-50">
+      <header className="bg-white/80 text-neutral-900 dark:bg-gray-900/90 dark:text-white backdrop-blur border-b border-black/5 dark:border-white/10 px-4 py-3 ...">
         {/* Logo / Nombre */}
         <div
           className="text-xl font-bold cursor-pointer hover:text-purple-400 transition-colors"
