@@ -3,10 +3,13 @@
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
-// 👇 ahora importamos desde la misma carpeta consolidada
+// Menú existente (se mantiene)
 import NavigationMenu from "./NavigationMenu";
 import NavigationItem from "./NavigationItem";
-// Si tu Button no existe, podés usar un <button> nativo
+// Botón animado nuevo
+import NavigationButton from "./NavigationButton";
+
+// Si tu Button no existe, reemplazalo por un <button> nativo
 import Button from "@/components/ui/Button";
 
 type SectionKey = "home" | "about" | "skills" | "projects" | "contact" | "hero";
@@ -44,49 +47,64 @@ export default function HomeNavigation({ setActiveSection }: Props) {
   };
 
   return (
-    <header className="bg-gray-900 text-white px-4 py-3 flex items-center justify-between shadow-md sticky top-0 z-50">
-      {/* Logo / Nombre */}
-      <div
-        className="text-xl font-bold cursor-pointer hover:text-purple-400 transition-colors"
-        onClick={() => go("hero", "/")} // hero → home
-      >
-        Franco Villagra
-      </div>
+    <>
+      {/* Header fijo con menú */}
+      <header className="bg-gray-900 text-white px-4 py-3 flex items-center justify-between shadow-md sticky top-0 z-50">
+        {/* Logo / Nombre */}
+        <div
+          className="text-xl font-bold cursor-pointer hover:text-purple-400 transition-colors"
+          onClick={() => go("hero", "/")} // hero → home
+        >
+          Franco Villagra
+        </div>
 
-      {/* Menú Desktop */}
-      <nav className="hidden md:flex gap-6 items-center">
-        <NavigationMenu>
-          {LINKS.map(({ section, label, icon, route }) => (
-            <NavigationItem
-              key={section}
-              icon={icon}
-              label={label}
-              onClick={() => go(section, route)}
-            />
-          ))}
-        </NavigationMenu>
-      </nav>
-
-      {/* Botón hamburguesa (móvil) */}
-      <Button onClick={toggleMenu} variant="icon" className="md:hidden text-2xl p-2">
-        {isOpen ? <FaTimes /> : <FaBars />}
-      </Button>
-
-      {/* Menú Mobile */}
-      {isOpen && (
-        <div className="absolute top-16 left-0 w-full bg-gray-800 flex flex-col items-start px-6 py-4 gap-4 md:hidden z-40">
-          <NavigationMenu direction="column">
+        {/* Menú Desktop */}
+        <nav className="hidden md:flex gap-6 items-center">
+          <NavigationMenu>
             {LINKS.map(({ section, label, icon, route }) => (
               <NavigationItem
-                key={`m-${section}`}
+                key={section}
                 icon={icon}
                 label={label}
                 onClick={() => go(section, route)}
               />
             ))}
           </NavigationMenu>
+        </nav>
+
+        {/* Botón hamburguesa (móvil) */}
+        <Button onClick={toggleMenu} variant="icon" className="md:hidden text-2xl p-2">
+          {isOpen ? <FaTimes /> : <FaBars />}
+        </Button>
+
+        {/* Menú Mobile */}
+        {isOpen && (
+          <div className="absolute top-16 left-0 w-full bg-gray-800 flex flex-col items-start px-6 py-4 gap-4 md:hidden z-40">
+            <NavigationMenu direction="column">
+              {LINKS.map(({ section, label, icon, route }) => (
+                <NavigationItem
+                  key={`m-${section}`}
+                  icon={icon}
+                  label={label}
+                  onClick={() => go(section, route)}
+                />
+              ))}
+            </NavigationMenu>
+          </div>
+        )}
+      </header>
+
+      {/* Capa de botones animados (CTA rápidos) */}
+      <div className="px-4 py-4">
+        <div className="mx-auto max-w-5xl grid gap-3 grid-cols-2 sm:grid-cols-4">
+          {LINKS.map(({ section, label, route }, idx) => (
+            <div key={`cta-${section}`} onClick={() => go(section, route)}>
+              <NavigationButton href={route} label={label} delay={0.08 * idx} />
+            </div>
+          ))}
         </div>
-      )}
-    </header>
+      </div>
+    </>
   );
 }
+
