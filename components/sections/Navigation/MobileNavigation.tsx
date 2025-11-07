@@ -20,7 +20,10 @@ export default function MobileNavigation() {
       </button>
 
       {isOpen && (
-        <div className="absolute top-full left-0 w-full bg-gray-800 text-white flex flex-col gap-4 p-4 z-50">
+        <div className="absolute top-full left-0 w-full
+  bg-white/90 text-neutral-900 dark:bg-gray-900/90 dark:text-white
+  backdrop-blur flex flex-col gap-4 p-4 z-50 border-t border-black/10 dark:border-white/10">
+
           <Link href="/" onClick={() => setIsOpen(false)} className="hover:text-blue-400">
             Inicio
           </Link>
