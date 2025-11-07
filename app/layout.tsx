@@ -18,12 +18,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es" className="h-full" suppressHydrationWarning>
       <body className={`${inter.className} relative min-h-dvh`}>
-        {/* Fondo de partículas SIEMPRE detrás y sin interceptar clicks */}
-        <div className="fixed inset-0 -z-10 pointer-events-none">
-          <ParticlesBackground />
-        </div>
-
         <ThemeProvider>
+          {/* Fondo de partículas SIEMPRE detrás y sin interceptar clicks */}
+          <div className="fixed inset-0 -z-10 pointer-events-none">
+            <ParticlesBackground />
+          </div>
+
           {/* Nav arriba */}
           <div className="relative z-20">
             <TopNav />
