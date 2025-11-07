@@ -8,7 +8,10 @@ type Props = {
 
 const MainMenu = ({ onSelectSection }: Props) => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-[#030014] text-white gap-6 px-4">
+    <div className="flex flex-col items-center justify-center min-h-screen
+  bg-white/80 text-neutral-900 dark:bg-[#030014]/95 dark:text-white backdrop-blur
+  gap-6 px-4 transition-colors">
+
       <h1 className="text-4xl font-bold mb-8">Bienvenido a mi Portafolio</h1>
       
       <button
