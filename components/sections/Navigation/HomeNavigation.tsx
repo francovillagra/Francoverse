@@ -9,7 +9,7 @@ import NavigationItem from "./NavigationItem";
 // Botón animado nuevo
 import NavigationButton from "./NavigationButtons";
 
-// Si tu Button no existe, reemplazalo por un <button> nativo
+// Si Button no existe, reemplazalo por un <button> nativo
 import Button from "@/components/ui/Button";
 
 type SectionKey = "home" | "about" | "skills" | "projects" | "contact" | "hero";
@@ -49,7 +49,9 @@ export default function HomeNavigation({ setActiveSection }: Props) {
   return (
     <>
       {/* Header fijo con menú */}
-      <header className="bg-white/80 text-neutral-900 dark:bg-gray-900/90 dark:text-white backdrop-blur border-b border-black/5 dark:border-white/10 px-4 py-3 ...">
+<header className="bg-white/80 text-neutral-900 dark:bg-gray-900/90 dark:text-white
+  backdrop-blur border-b border-black/5 dark:border-white/10 px-4 py-3 transition-colors">
+
         {/* Logo / Nombre */}
         <div
           className="text-xl font-bold cursor-pointer hover:text-purple-400 transition-colors"
