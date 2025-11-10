@@ -52,7 +52,7 @@ export default function TopNav() {
                 tabIndex={active ? -1 : 0}
                 className={`text-sm px-3 py-1.5 rounded-xl transition
                   ${active
-                    ? "bg-black/[0.08] text-neutral-900 dark:bg-white/90 dark:text-black font-semibold cursor-default"
+                    ? "bg-black/[0.08] text-neutral-900 dark:bg-white/90 dark:text-black font-semibold cursor-default border border-black/10 dark:border-white/10"
                     : "text-neutral-900 hover:bg-black/[0.05] dark:text-white dark:hover:bg-white/10"
                   }`}
                 prefetch={false}
