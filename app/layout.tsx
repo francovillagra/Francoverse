@@ -4,8 +4,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import ParticlesBackground from "@/components/ui/ParticlesBackground";
 import ClientWrapper from "@/components/layout/ClientWrapper";
-import TopNav from "@/components/sections/Navigation/TopNav";
 import ThemeProvider from "@/components/providers/ThemeProvider";
+import SideNav from "@/components/sections/Navigation/SideNav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,14 +19,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="es" className="h-full" suppressHydrationWarning>
       <body className={`${inter.className} relative min-h-dvh`}>
         <ThemeProvider>
-          {/* Fondo de partículas SIEMPRE detrás y sin interceptar clicks */}
+          {/* Fondo de partículas detrás y sin interceptar clicks */}
           <div className="fixed inset-0 -z-10 pointer-events-none">
             <ParticlesBackground />
           </div>
 
-          {/* Nav arriba */}
+          {/* Barra lateral fija */}
           <div className="relative z-20">
-            <TopNav />
+            <SideNav />
           </div>
 
           {/* Contenido con transiciones */}
@@ -38,3 +38,4 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
+
