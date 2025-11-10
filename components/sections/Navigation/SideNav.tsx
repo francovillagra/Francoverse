@@ -43,6 +43,7 @@ export default function SideNav() {
         {LINKS.map(({ href, label, icon }) => {
           const active = isActive(href);
           const showLabel = hovered === href;
+
           return (
             <div
               key={href}
@@ -56,8 +57,8 @@ export default function SideNav() {
                 aria-current={active ? "page" : undefined}
                 aria-label={label}
               >
-                {/* Círculo con halo */}
-                <div
+                {/* Círculo con halo animado */}
+                <motion.div
                   className={`
                     relative grid place-items-center
                     size-10 rounded-full transition
@@ -71,12 +72,32 @@ export default function SideNav() {
                       ? "0 0 20px 4px rgba(168,85,247,0.6), 0 0 40px 12px rgba(56,189,248,0.35)"
                       : "0 0 14px 2px rgba(168,85,247,0.25)",
                   }}
+                  animate={{
+                    boxShadow: active
+                      ? [
+                          "0 0 22px 6px rgba(168,85,247,0.55), 0 0 44px 14px rgba(56,189,248,0.33)",
+                          "0 0 28px 8px rgba(168,85,247,0.75), 0 0 52px 18px rgba(56,189,248,0.45)",
+                          "0 0 22px 6px rgba(168,85,247,0.55), 0 0 44px 14px rgba(56,189,248,0.33)",
+                        ]
+                      : [
+                          "0 0 10px 2px rgba(168,85,247,0.18)",
+                          "0 0 16px 3px rgba(168,85,247,0.30)",
+                          "0 0 10px 2px rgba(168,85,247,0.18)",
+                        ],
+                    scale: active ? [1, 1.03, 1] : [1, 1.02, 1],
+                  }}
+                  transition={{
+                    duration: 2.4,
+                    repeat: Infinity,
+                    repeatType: "mirror",
+                    ease: "easeInOut",
+                  }}
                 >
                   <span className="text-base">{icon}</span>
-                </div>
+                </motion.div>
               </Link>
 
-              {/* Etiqueta: aparece solo cuando se pasa sobre el ícono */}
+              {/* Etiqueta que aparece al pasar sobre el ícono */}
               <AnimatePresence>
                 {showLabel && (
                   <motion.span
@@ -104,13 +125,13 @@ export default function SideNav() {
       {/* Separador */}
       <div className="w-full h-px my-1 bg-black/10 dark:bg-white/10" />
 
-      {/* Toggle de tema */}
+      {/* Toggle de tema con pulso */}
       <div
         onMouseEnter={() => setHovered("theme")}
         onMouseLeave={() => setHovered(null)}
         className="flex items-center"
       >
-        <div
+        <motion.div
           className="
             relative grid place-items-center size-10 rounded-full
             bg-white dark:bg-white/10 text-neutral-900 dark:text-white
@@ -120,10 +141,24 @@ export default function SideNav() {
           style={{
             boxShadow: "0 0 14px 2px rgba(168,85,247,0.25)",
           }}
+          animate={{
+            boxShadow: [
+              "0 0 10px 2px rgba(168,85,247,0.18)",
+              "0 0 16px 3px rgba(168,85,247,0.30)",
+              "0 0 10px 2px rgba(168,85,247,0.18)",
+            ],
+            scale: [1, 1.02, 1],
+          }}
+          transition={{
+            duration: 2.4,
+            repeat: Infinity,
+            repeatType: "mirror",
+            ease: "easeInOut",
+          }}
           aria-label="Cambiar tema"
         >
           <ThemeToggle />
-        </div>
+        </motion.div>
 
         <AnimatePresence>
           {hovered === "theme" && (
