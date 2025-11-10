@@ -6,7 +6,10 @@ import Paragraph from '@/components/ui/Paragraph';
 
 export default function SkillsSection() {
   return (
-    <section className="min-h-screen w-full flex items-center justify-center bg-[#030014] px-6">
+    <section className="min-h-screen w-full flex items-center justify-center
+  bg-white/80 dark:bg-[#030014]/95 backdrop-blur px-6
+  text-neutral-900 dark:text-white transition-colors">
+
       <Container>
         <Title>Habilidades</Title>
         <Paragraph>
