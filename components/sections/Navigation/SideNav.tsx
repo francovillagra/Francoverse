@@ -28,26 +28,26 @@ export default function SideNav() {
   const isActive = (href: string) =>
     pathname === href || pathname.startsWith(href + "/");
 
-  // ======= DESKTOP (md+) — barra a la IZQUIERDA =======
+  // ======= DESKTOP (md+) — BARRA A LA DERECHA, EXPANDE HACIA LA IZQUIERDA =======
   const DesktopAside = (
     <aside
       className="
         hidden md:flex
-        fixed left-4 top-1/2 -translate-y-1/2 z-30
+        fixed right-4 top-1/2 -translate-y-1/2 z-30
         bg-white/60 dark:bg-white/5 backdrop-blur
         border border-black/10 dark:border-white/10
-        rounded-2xl p-2 flex-col items-start gap-2
+        rounded-2xl p-2 flex-col items-end gap-2
         shadow-[0_10px_30px_-10px_rgba(0,0,0,0.4)]
       "
       aria-label="Barra de navegación lateral"
     >
-      <nav className="flex flex-col items-start gap-2">
+      <nav className="flex flex-col items-end gap-2">
         {LINKS.map(({ href, label, icon }) => {
           const active = isActive(href);
           const isHovered = hovered === href;
-          const expandedW = 164; // ancho de la "píldora" expandida
+
           const baseW = 48;      // ancho base del botón
-          const shift = -(expandedW - baseW); // desplazar hacia la IZQUIERDA
+          const expandedW = 164; // ancho al hacer hover
           const iconColorClass = active ? "text-white dark:text-black" : "text-neutral-900 dark:text-white";
 
           return (
@@ -61,20 +61,20 @@ export default function SideNav() {
                 <motion.button
                   type="button"
                   className={`
-                    absolute left-0 top-0 h-12
-                    flex items-center justify-center gap-2
-                    rounded-full pl-3
+                    absolute right-0 top-0 h-12
+                    flex items-center justify-end gap-2
+                    rounded-full pr-3
                     border border-black/10 dark:border-white/10
                     ${active ? "bg-black/90 dark:bg-white" : "bg-white dark:bg-white/10 hover:bg-white/80 dark:hover:bg-white/20"}
                     outline-none
+                    shadow-[0_0_12px_2px_rgba(168,85,247,0.22)]
                   `}
                   style={{ width: baseW }}
                   animate={{
-                    // expansión hacia la IZQUIERDA
+                    // ✅ anclado a la derecha, solo crece hacia la izquierda
                     width: isHovered ? expandedW : baseW,
-                    x: isHovered ? shift : 0,
                     borderRadius: isHovered ? 16 : 9999,
-                    // efecto pulsante (scale + shadow) siempre activo
+                    // 🔄 pulso continuo (idle/active)
                     scale: active ? [1, 1.04, 1] : [1, 1.02, 1],
                     boxShadow: active
                       ? [
@@ -96,13 +96,13 @@ export default function SideNav() {
                   }}
                   transition={{ duration: 2.6, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
                 >
-                  {/* Label a la IZQUIERDA del ícono (porque expandimos hacia la izquierda) */}
+                  {/* Texto a la izquierda del ícono (porque el botón crece hacia la izquierda) */}
                   <AnimatePresence initial={false}>
                     {isHovered && (
                       <motion.span
-                        initial={{ opacity: 0, x: -8 }}
+                        initial={{ opacity: 0, x: 8 }}
                         animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -8 }}
+                        exit={{ opacity: 0, x: 8 }}
                         transition={{ duration: 0.16 }}
                         className="text-sm font-medium select-none pointer-events-none text-neutral-900 dark:text-white"
                       >
@@ -111,7 +111,7 @@ export default function SideNav() {
                     )}
                   </AnimatePresence>
 
-                  {/* Ícono */}
+                  {/* Ícono pegado a la derecha */}
                   <span className={`text-base ${iconColorClass}`}>{icon}</span>
                 </motion.button>
               </Link>
@@ -122,7 +122,7 @@ export default function SideNav() {
 
       <div className="w-full h-px my-1 bg-black/10 dark:bg-white/10" />
 
-      {/* Toggle tema — mismo patrón: expandir hacia la IZQUIERDA con pulsación */}
+      {/* Toggle de tema — mismo patrón: a la derecha y expande hacia la izquierda con pulso */}
       <div
         onMouseEnter={() => setHovered("theme")}
         onMouseLeave={() => setHovered(null)}
@@ -130,16 +130,16 @@ export default function SideNav() {
       >
         <motion.div
           className="
-            absolute left-0 top-0 h-12
-            flex items-center justify-center gap-2
-            rounded-full pl-3
+            absolute right-0 top-0 h-12
+            flex items-center justify-end gap-2
+            rounded-full pr-3
             bg-white dark:bg-white/10 hover:bg-white/80 dark:hover:bg-white/20 transition
             border border-black/10 dark:border-white/10
+            shadow-[0_0_12px_2px_rgba(168,85,247,0.22)]
           "
           style={{ width: 48 }}
           animate={{
             width: hovered === "theme" ? 140 : 48,
-            x: hovered === "theme" ? -(140 - 48) : 0,
             borderRadius: hovered === "theme" ? 16 : 9999,
             scale: [1, 1.02, 1],
             boxShadow: [
@@ -151,21 +151,31 @@ export default function SideNav() {
           transition={{ duration: 2.6, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
           aria-label="Cambiar tema"
         >
-          <span className="pointer-events-none select-none text-sm font-medium text-neutral-900 dark:text-white">
-            {hovered === "theme" ? "Tema" : ""}
-          </span>
+          <AnimatePresence initial={false}>
+            {hovered === "theme" && (
+              <motion.span
+                initial={{ opacity: 0, x: 8 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 8 }}
+                transition={{ duration: 0.16 }}
+                className="text-sm font-medium select-none pointer-events-none text-neutral-900 dark:text-white"
+              >
+                Tema
+              </motion.span>
+            )}
+          </AnimatePresence>
           <ThemeToggle />
         </motion.div>
       </div>
     </aside>
   );
 
-  // ======= MOBILE (sm) — FAB y Drawer a la IZQUIERDA (coherencia) =======
+  // ======= MOBILE (sm) — FAB y Drawer a la DERECHA =======
   const MobileFab = (
     <button
       onClick={() => setOpenMobile(true)}
       className="
-        md:hidden fixed left-4 bottom-4 z-40
+        md:hidden fixed right-4 bottom-4 z-40
         grid place-items-center size-12 rounded-full
         bg-white text-neutral-900 dark:bg-white/10 dark:text-white
         border border-black/10 dark:border-white/10
@@ -190,17 +200,17 @@ export default function SideNav() {
             exit={{ opacity: 0 }}
             onClick={() => setOpenMobile(false)}
           />
-          {/* Panel izquierdo */}
+          {/* Panel derecho */}
           <motion.aside
             className="
-              md:hidden fixed left-0 top-0 h-full w-64 z-50
+              md:hidden fixed right-0 top-0 h-full w-64 z-50
               bg-white/90 text-neutral-900 dark:bg-gray-900/95 dark:text-white
-              backdrop-blur border-r border-black/10 dark:border-white/10
+              backdrop-blur border-l border-black/10 dark:border-white/10
               p-3 flex flex-col gap-2
             "
-            initial={{ x: -280, opacity: 0 }}
+            initial={{ x: 280, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            exit={{ x: -280, opacity: 0 }}
+            exit={{ x: 280, opacity: 0 }}
             transition={{ type: "spring", stiffness: 280, damping: 26 }}
             aria-label="Menú de navegación"
           >
