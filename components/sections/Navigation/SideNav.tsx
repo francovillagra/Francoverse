@@ -23,8 +23,10 @@ const LINKS: NavItem[] = [
 export default function SideNav() {
   const pathname = usePathname();
   const [hovered, setHovered] = useState<string | null>(null); // desktop: hover por ítem
-  const [openMobile, setOpenMobile] = useState(false);        // mobile: drawer
-  const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
+  const [openMobile, setOpenMobile] = useState(false);         // mobile: drawer
+
+  const isActive = (href: string) =>
+    pathname === href || pathname.startsWith(href + "/");
 
   // ======= DESKTOP (md+) =======
   const DesktopAside = (
@@ -45,56 +47,58 @@ export default function SideNav() {
           const isHovered = hovered === href;
           const showLabel = isHovered;
           const iconColorClass = active ? "text-white dark:text-black" : "text-neutral-900 dark:text-white";
-          const targetSize = isHovered ? 48 : 40; // sólo crece el ícono hovered
 
           return (
             <div
               key={href}
               onMouseEnter={() => setHovered(href)}
               onMouseLeave={() => setHovered(null)}
-              className="flex items-center"
+              className="relative flex items-center"
             >
               <Link href={href} prefetch={false} aria-current={active ? "page" : undefined} aria-label={label}>
-                <motion.div
-                  className={`
-                    relative grid place-items-center rounded-full transition
-                    ${active ? "bg-black/90 dark:bg-white" : "bg-white dark:bg-white/10 hover:bg-white/80 dark:hover:bg-white/20"}
-                  `}
-                  style={{
-                    width: 40,
-                    height: 40,
-                    boxShadow: active
-                      ? "0 0 22px 6px rgba(168,85,247,0.55), 0 0 44px 14px rgba(56,189,248,0.33)"
-                      : "0 0 12px 2px rgba(168,85,247,0.22)",
-                  }}
-                  animate={{
-                    width: targetSize,
-                    height: targetSize,
-                    boxShadow: active
-                      ? [
-                          "0 0 22px 6px rgba(168,85,247,0.55), 0 0 44px 14px rgba(56,189,248,0.33)",
-                          "0 0 28px 8px rgba(56,189,248,0.55), 0 0 52px 18px rgba(168,85,247,0.33)",
-                          "0 0 22px 6px rgba(168,85,247,0.55), 0 0 44px 14px rgba(56,189,248,0.33)",
-                        ]
-                      : isHovered
-                      ? [
-                          "0 0 12px 2px rgba(168,85,247,0.22)",
-                          "0 0 18px 4px rgba(56,189,248,0.30)",
-                          "0 0 12px 2px rgba(168,85,247,0.22)",
-                        ]
-                      : [
-                          "0 0 10px 2px rgba(168,85,247,0.16)",
-                          "0 0 16px 3px rgba(56,189,248,0.26)",
-                          "0 0 10px 2px rgba(168,85,247,0.16)",
-                        ],
-                    scale: active ? [1, 1.04, 1] : isHovered ? [1, 1.06, 1] : [1, 1.02, 1],
-                  }}
-                  transition={{ duration: 2.6, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
-                >
-                  <span className={`text-base ${iconColorClass}`}>{icon}</span>
-                </motion.div>
+                {/* Marco fijo para que el aside no cambie de ancho */}
+                <div className="grid place-items-center w-12 h-12">
+                  <motion.div
+                    className={`
+                      relative grid place-items-center rounded-full transition
+                      ${active ? "bg-black/90 dark:bg-white" : "bg-white dark:bg-white/10 hover:bg-white/80 dark:hover:bg-white/20"}
+                    `}
+                    style={{
+                      width: 40,
+                      height: 40,
+                      boxShadow: active
+                        ? "0 0 22px 6px rgba(168,85,247,0.55), 0 0 44px 14px rgba(56,189,248,0.33)"
+                        : "0 0 12px 2px rgba(168,85,247,0.22)",
+                    }}
+                    animate={{
+                      // Sólo escalamos el círculo interno (el marco exterior siempre es 48px)
+                      scale: isHovered ? 1.2 : active ? [1, 1.04, 1] : [1, 1.02, 1],
+                      boxShadow: active
+                        ? [
+                            "0 0 22px 6px rgba(168,85,247,0.55), 0 0 44px 14px rgba(56,189,248,0.33)",
+                            "0 0 28px 8px rgba(56,189,248,0.55), 0 0 52px 18px rgba(168,85,247,0.33)",
+                            "0 0 22px 6px rgba(168,85,247,0.55), 0 0 44px 14px rgba(56,189,248,0.33)",
+                          ]
+                        : isHovered
+                        ? [
+                            "0 0 12px 2px rgba(168,85,247,0.22)",
+                            "0 0 18px 4px rgba(56,189,248,0.30)",
+                            "0 0 12px 2px rgba(168,85,247,0.22)",
+                          ]
+                        : [
+                            "0 0 10px 2px rgba(168,85,247,0.16)",
+                            "0 0 16px 3px rgba(56,189,248,0.26)",
+                            "0 0 10px 2px rgba(168,85,247,0.16)",
+                          ],
+                    }}
+                    transition={{ duration: 2.6, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
+                  >
+                    <span className={`text-base ${iconColorClass}`}>{icon}</span>
+                  </motion.div>
+                </div>
               </Link>
 
+              {/* Etiqueta flotante: no afecta el layout del aside */}
               <AnimatePresence>
                 {showLabel && (
                   <motion.span
@@ -103,7 +107,9 @@ export default function SideNav() {
                     exit={{ opacity: 0, x: 6 }}
                     transition={{ duration: 0.18, ease: "easeOut" }}
                     className="
-                      ml-2 select-none rounded-xl px-3 py-1 text-sm font-medium
+                      pointer-events-none select-none
+                      absolute left-14 top-1/2 -translate-y-1/2
+                      rounded-xl px-3 py-1 text-sm font-medium
                       border border-black/10 dark:border-white/10
                       bg-white/80 text-neutral-900
                       dark:bg-white/10 dark:text-white
@@ -121,34 +127,34 @@ export default function SideNav() {
 
       <div className="w-full h-px my-1 bg-black/10 dark:bg-white/10" />
 
-      {/* Toggle tema desktop */}
+      {/* Toggle tema desktop - mismo patrón (marco fijo + escala) */}
       <div
         onMouseEnter={() => setHovered("theme")}
         onMouseLeave={() => setHovered(null)}
-        className="flex items-center"
+        className="relative flex items-center"
       >
-        <motion.div
-          className="
-            relative grid place-items-center rounded-full
-            bg-white dark:bg-white/10 hover:bg-white/80 dark:hover:bg-white/20 transition
-            border border-black/10 dark:border-white/10
-          "
-          style={{ width: 40, height: 40, boxShadow: "0 0 12px 2px rgba(168,85,247,0.22)" }}
-          animate={{
-            width: hovered === "theme" ? 48 : 40,
-            height: hovered === "theme" ? 48 : 40,
-            boxShadow: [
-              "0 0 10px 2px rgba(168,85,247,0.16)",
-              "0 0 16px 3px rgba(56,189,248,0.26)",
-              "0 0 10px 2px rgba(168,85,247,0.16)",
-            ],
-            scale: hovered === "theme" ? [1, 1.06, 1] : [1, 1.02, 1],
-          }}
-          transition={{ duration: 2.6, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
-          aria-label="Cambiar tema"
-        >
-          <ThemeToggle />
-        </motion.div>
+        <div className="grid place-items-center w-12 h-12">
+          <motion.div
+            className="
+              relative grid place-items-center rounded-full
+              bg-white dark:bg-white/10 hover:bg-white/80 dark:hover:bg-white/20 transition
+              border border-black/10 dark:border-white/10
+            "
+            style={{ width: 40, height: 40, boxShadow: "0 0 12px 2px rgba(168,85,247,0.22)" }}
+            animate={{
+              scale: hovered === "theme" ? 1.2 : [1, 1.02, 1],
+              boxShadow: [
+                "0 0 10px 2px rgba(168,85,247,0.16)",
+                "0 0 16px 3px rgba(56,189,248,0.26)",
+                "0 0 10px 2px rgba(168,85,247,0.16)",
+              ],
+            }}
+            transition={{ duration: 2.6, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
+            aria-label="Cambiar tema"
+          >
+            <ThemeToggle />
+          </motion.div>
+        </div>
 
         <AnimatePresence>
           {hovered === "theme" && (
@@ -158,7 +164,9 @@ export default function SideNav() {
               exit={{ opacity: 0, x: 6 }}
               transition={{ duration: 0.18, ease: "easeOut" }}
               className="
-                ml-2 select-none rounded-xl px-3 py-1 text-sm font-medium
+                pointer-events-none select-none
+                absolute left-14 top-1/2 -translate-y-1/2
+                rounded-xl px-3 py-1 text-sm font-medium
                 border border-black/10 dark:border-white/10
                 bg-white/80 text-neutral-900
                 dark:bg-white/10 dark:text-white
