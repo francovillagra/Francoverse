@@ -25,20 +25,20 @@ export default function ParticlesBackground() {
       fpsLimit: 60,
 
       interactivity: {
-        detectsOn: "canvas", // más confiable para hover
+        detectsOn: "window",
         events: {
           onHover: { enable: true, mode: "repulse" },
           onClick: { enable: true, mode: "push" },
           resize: true,
         },
         modes: {
-          repulse: { distance: 140 },
+          repulse: { distance: 140, duration: 0.4 },
           push: { quantity: 4 },
         },
       },
 
       particles: {
-        number: { value: 120, density: { enable: true, area: 800 } },
+        number: { value: 200, density: { enable: true, area: 800 } },
         color: { value: color },
         links: { enable: true, distance: 150, opacity: linkOpacity, width: 1, color },
         move: { enable: true, speed: 0.8, outModes: { default: "out" } },
