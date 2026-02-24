@@ -19,17 +19,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="es" className="h-full" suppressHydrationWarning>
       <body className={`${inter.className} relative min-h-dvh`}>
         <ThemeProvider>
-          {/* Fondo de partículas detrás y sin interceptar clicks */}
-          <div className="fixed inset-0 -z-10 pointer-events-none">
-            <ParticlesBackground />
-          </div>
+          {/* Fondo de partículas global */}
+          <ParticlesBackground />
 
           {/* Barra lateral fija */}
           <div className="relative z-20">
             <SideNav />
           </div>
 
-          {/* Contenido con transiciones */}
+          {/* Contenido */}
           <div className="relative z-10">
             <ClientWrapper>{children}</ClientWrapper>
           </div>
@@ -38,4 +36,3 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
-
