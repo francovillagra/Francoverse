@@ -14,17 +14,18 @@ export default function ParticlesBackground() {
     await loadSlim(engine);
   }, []);
 
-  const color = resolvedTheme === "dark" ? "#ffffff" : "#141414";
-  const linkOpacity = resolvedTheme === "dark" ? 0.25 : 0.18;
+  const isDark = resolvedTheme === "dark";
+  const color = isDark ? "#ffffff" : "#141414";
+  const linkOpacity = isDark ? 0.25 : 0.18;
 
-  // 👇 sin fullScreen: el tamaño/posición lo da el wrapper del layout
   const options: ISourceOptions = useMemo(
     () => ({
       detectRetina: true,
       background: { color: "transparent" },
       fpsLimit: 60,
+
       interactivity: {
-        detectsOn: "window",
+        detectsOn: "canvas", // más confiable para hover
         events: {
           onHover: { enable: true, mode: "repulse" },
           onClick: { enable: true, mode: "push" },
@@ -35,26 +36,27 @@ export default function ParticlesBackground() {
           push: { quantity: 4 },
         },
       },
+
       particles: {
         number: { value: 120, density: { enable: true, area: 800 } },
         color: { value: color },
         links: { enable: true, distance: 150, opacity: linkOpacity, width: 1, color },
         move: { enable: true, speed: 0.8, outModes: { default: "out" } },
-        opacity: { value: resolvedTheme === "dark" ? 0.5 : 0.45 },
+        opacity: { value: isDark ? 0.5 : 0.45 },
         shape: { type: "circle" },
         size: { value: { min: 1, max: 3 } },
       },
     }),
-    [resolvedTheme, color, linkOpacity]
+    [isDark, color, linkOpacity]
   );
 
   return (
-    <div className="absolute inset-0">
+    <div className="fixed inset-0 -z-10">
       <Particles
         id="tsparticles"
         init={particlesInit}
         options={options}
-        className="pointer-events-none absolute inset-0 w-full h-full"
+        className="absolute inset-0 w-full h-full"
       />
     </div>
   );
