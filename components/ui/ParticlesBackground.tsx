@@ -38,13 +38,13 @@ export default function ParticlesBackground() {
       },
 
       particles: {
-        number: { value: 200, density: { enable: true, area: 800 } },
+        number: { value: 150, density: { enable: true, area: 800 } },
         color: { value: color },
-        links: { enable: true, distance: 150, opacity: linkOpacity, width: 1, color },
+        links: { enable: true, distance: 150, opacity: linkOpacity, width: 1.2, color },
         move: { enable: true, speed: 0.8, outModes: { default: "out" } },
         opacity: { value: isDark ? 0.5 : 0.45 },
         shape: { type: "circle" },
-        size: { value: { min: 1, max: 3 } },
+        size: { value: { min: 1.5, max: 3.5 } },
       },
     }),
     [isDark, color, linkOpacity]
