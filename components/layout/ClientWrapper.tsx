@@ -31,7 +31,7 @@ export default function ClientWrapper({ children }: { children: ReactNode }) {
         animate="animate"
         exit="exit"
         variants={variants}
-        className="w-full h-dvh will-change-transform"
+        className="w-full min-h-dvh will-change-transform"
       >
         {children}
       </motion.div>

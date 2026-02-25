@@ -5,7 +5,7 @@ import "./globals.css";
 import ParticlesBackground from "@/components/ui/ParticlesBackground";
 import ClientWrapper from "@/components/layout/ClientWrapper";
 import ThemeProvider from "@/components/providers/ThemeProvider";
-import SideNav from "@/components/sections/Navigation/SideNav";
+import TopNav from "@/components/sections/Navigation/TopNav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
           {/* Barra lateral fija */}
           <div className="relative z-20">
-            <SideNav />
+            <TopNav />
           </div>
 
           {/* Contenido */}
