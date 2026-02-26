@@ -54,7 +54,6 @@ export default function TopNav() {
               <div key={href} className="relative h-12" style={{ width: expandedW }}>
                 <Link
                   href={href}
-                  prefetch={false}
                   aria-current={active ? "page" : undefined}
                   aria-label={label}
                 >
