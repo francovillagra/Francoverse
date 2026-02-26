@@ -21,13 +21,15 @@ export default function TopNav() {
   const [hovered, setHovered] = useState<string | null>(null);
   const [openMobile, setOpenMobile] = useState(false);
 
-  const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
+  // ✅ CORREGIDO
+  const isActive = (href: string) =>
+    href === "/"
+      ? pathname === "/"
+      : pathname.startsWith(href);
 
-  // Botón en reposo / expandido (mismo concepto que ya tenías)
   const baseW = 48;
   const expandedW = 172;
 
-  // ======= DESKTOP (md+) — HEADER SUPERIOR =======
   const DesktopHeader = (
     <header
       className="
@@ -49,18 +51,28 @@ export default function TopNav() {
               : "text-neutral-900 dark:text-white";
 
             return (
-              // Contenedor ancho fijo para evitar reflow; el botón se expande hacia la derecha
               <div key={href} className="relative h-12" style={{ width: expandedW }}>
-                <Link href={href} prefetch={false} aria-current={active ? "page" : undefined} aria-label={label}>
+                <Link
+                  href={href}
+                  prefetch={false}
+                  aria-current={active ? "page" : undefined}
+                  aria-label={label}
+                >
                   <motion.button
                     type="button"
                     onMouseEnter={() => setHovered(href)}
-                    onMouseLeave={() => setHovered((prev) => (prev === href ? null : prev))}
+                    onMouseLeave={() =>
+                      setHovered((prev) => (prev === href ? null : prev))
+                    }
                     className={`
                       absolute left-0 top-0 h-12
                       flex items-center justify-start gap-2 pl-3 pr-3 rounded-full
                       border border-black/10 dark:border-white/10
-                      ${active ? "bg-black/90 dark:bg-white" : "bg-white dark:bg-white/10 hover:bg-white/80 dark:hover:bg-white/20"}
+                      ${
+                        active
+                          ? "bg-black/90 dark:bg-white"
+                          : "bg-white dark:bg-white/10 hover:bg-white/80 dark:hover:bg-white/20"
+                      }
                       transform-gpu
                     `}
                     style={{ width: baseW, willChange: "transform,width" }}
@@ -69,9 +81,16 @@ export default function TopNav() {
                       borderRadius: isHovered ? 16 : 9999,
                       scale: isHovered ? 1.02 : active ? 1.01 : 1,
                     }}
-                    transition={{ type: "spring", stiffness: 420, damping: 34, mass: 0.7 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 420,
+                      damping: 34,
+                      mass: 0.7,
+                    }}
                   >
-                    <span className={`text-base ${iconColorClass}`}>{icon}</span>
+                    <span className={`text-base ${iconColorClass}`}>
+                      {icon}
+                    </span>
 
                     <AnimatePresence initial={false}>
                       {isHovered && (
@@ -80,7 +99,7 @@ export default function TopNav() {
                           animate={{ opacity: 1, x: 0 }}
                           exit={{ opacity: 0, x: -6 }}
                           transition={{ duration: 0.16, ease: "easeOut" }}
-                          className="text-sm font-medium select-none pointer-events-none text-neutral-900 dark:text-white"
+                          className={`text-sm font-medium select-none pointer-events-none ${iconColorClass}`}
                         >
                           {label}
                         </motion.span>
@@ -95,15 +114,14 @@ export default function TopNav() {
 
         <div className="w-px h-8 mx-1 bg-black/10 dark:bg-white/10" />
 
-        {/* Theme (fijo) */}
+        {/* Theme fijo */}
         <div className="flex items-center px-1">
-        <ThemeToggle />
+          <ThemeToggle />
         </div>
       </div>
     </header>
   );
 
-  // ======= MOBILE — HEADER + DRAWER DESDE ARRIBA =======
   const MobileHeader = (
     <header
       className="
@@ -115,7 +133,9 @@ export default function TopNav() {
       aria-label="Barra superior móvil"
     >
       <div className="flex items-center justify-between">
-        <span className="font-semibold text-neutral-900 dark:text-white">Francoverse</span>
+        <span className="font-semibold text-neutral-900 dark:text-white">
+          Francoverse
+        </span>
 
         <div className="flex items-center gap-2">
           <ThemeToggle />
@@ -137,91 +157,10 @@ export default function TopNav() {
     </header>
   );
 
-  const MobileDrawer = (
-    <AnimatePresence>
-      {openMobile && (
-        <>
-          <motion.div
-            className="md:hidden fixed inset-0 z-40 bg-black/40"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setOpenMobile(false)}
-          />
-          <motion.aside
-            className="
-              md:hidden fixed left-0 right-0 top-0 z-50
-              bg-white/95 text-neutral-900 dark:bg-gray-900/95 dark:text-white
-              backdrop-blur border-b border-black/10 dark:border-white/10
-              p-4
-            "
-            initial={{ y: -280, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -280, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 280, damping: 26 }}
-            aria-label="Menú de navegación"
-          >
-            <div className="flex items-center justify-between mb-3">
-              <span className="font-semibold">Navegación</span>
-              <button
-                className="grid place-items-center size-9 rounded-xl
-                           bg-white dark:bg-white/10 border border-black/10 dark:border-white/10"
-                onClick={() => setOpenMobile(false)}
-                aria-label="Cerrar navegación"
-              >
-                <FaTimes />
-              </button>
-            </div>
-
-            <nav className="grid grid-cols-2 gap-2">
-              {LINKS.map(({ href, label, icon }) => {
-                const active = isActive(href);
-                const iconColorClass = active
-                  ? "text-white dark:text-black"
-                  : "text-neutral-900 dark:text-white";
-
-                return (
-                  <Link
-                    key={href}
-                    href={href}
-                    prefetch={false}
-                    onClick={() => setOpenMobile(false)}
-                    className="
-                      flex items-center gap-3 rounded-xl px-3 py-3
-                      border border-black/10 dark:border-white/10
-                      bg-white/70 dark:bg-white/5
-                      hover:bg-black/[0.05] dark:hover:bg-white/10 transition
-                    "
-                  >
-                    <motion.div
-                      className={`
-                        grid place-items-center rounded-full
-                        ${active ? "bg-black/90 dark:bg-white" : "bg-white dark:bg-white/10"}
-                        border border-black/10 dark:border-white/10
-                      `}
-                      style={{ width: 40, height: 40, willChange: "transform" }}
-                      animate={{ scale: active ? 1.02 : 1 }}
-                      transition={{ type: "spring", stiffness: 420, damping: 30 }}
-                    >
-                      <span className={`text-base ${iconColorClass}`}>{icon}</span>
-                    </motion.div>
-
-                    <span className="text-sm font-medium">{label}</span>
-                  </Link>
-                );
-              })}
-            </nav>
-          </motion.aside>
-        </>
-      )}
-    </AnimatePresence>
-  );
-
   return (
     <>
       {DesktopHeader}
       {MobileHeader}
-      {MobileDrawer}
     </>
   );
 }
