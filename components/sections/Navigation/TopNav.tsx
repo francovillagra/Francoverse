@@ -95,44 +95,9 @@ export default function TopNav() {
 
         <div className="w-px h-8 mx-1 bg-black/10 dark:bg-white/10" />
 
-        {/* Theme: mismo patrón de expansión, pero horizontal */}
-        <div className="relative h-12" style={{ width: 140 }}>
-          <motion.div
-            onMouseEnter={() => setHovered("theme")}
-            onMouseLeave={() => setHovered((prev) => (prev === "theme" ? null : prev))}
-            className="
-              absolute left-0 top-0 h-12
-              flex items-center justify-start gap-2 pl-3 pr-3 rounded-full
-              bg-white dark:bg-white/10 hover:bg-white/80 dark:hover:bg-white/20 transition
-              border border-black/10 dark:border-white/10
-              transform-gpu
-            "
-            style={{ width: baseW, willChange: "transform,width" }}
-            animate={{
-              width: hovered === "theme" ? 140 : baseW,
-              borderRadius: hovered === "theme" ? 16 : 9999,
-              scale: hovered === "theme" ? 1.02 : 1,
-            }}
-            transition={{ type: "spring", stiffness: 420, damping: 34, mass: 0.7 }}
-            aria-label="Cambiar tema"
-          >
-            <AnimatePresence initial={false}>
-              {hovered === "theme" && (
-                <motion.span
-                  initial={{ opacity: 0, x: -6 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -6 }}
-                  transition={{ duration: 0.16, ease: "easeOut" }}
-                  className="text-sm font-medium select-none pointer-events-none text-neutral-900 dark:text-white"
-                >
-                  Tema
-                </motion.span>
-              )}
-            </AnimatePresence>
-
-            {/* El ThemeToggle actual tiene estilos “blancos”; lo ajustamos abajo */}
-            <ThemeToggle />
-          </motion.div>
+        {/* Theme (fijo) */}
+        <div className="flex items-center px-1">
+        <ThemeToggle />
         </div>
       </div>
     </header>
