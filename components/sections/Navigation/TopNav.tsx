@@ -10,10 +10,10 @@ import ThemeToggle from "./ThemeToggle";
 type NavItem = { href: string; label: string; icon: React.ReactNode };
 
 const LINKS: NavItem[] = [
-  { href: "/", label: "Inicio", icon: <FaHome /> },
-  { href: "/section/about", label: "Sobre mí", icon: <FaUser /> },
-  { href: "/section/projects", label: "Proyectos", icon: <FaCode /> },
-  { href: "/section/skills", label: "Habilidades", icon: <FaTools /> },
+  { href: "/#home", label: "Inicio", icon: <FaHome /> },
+  { href: "/#about", label: "Sobre mí", icon: <FaUser /> },
+  { href: "/#projects", label: "Proyectos", icon: <FaCode /> },
+  { href: "/#skills", label: "Habilidades", icon: <FaTools /> },
 ];
 
 export default function TopNav() {
@@ -21,11 +21,10 @@ export default function TopNav() {
   const [hovered, setHovered] = useState<string | null>(null);
   const [openMobile, setOpenMobile] = useState(false);
 
-  // ✅ CORREGIDO
-  const isActive = (href: string) =>
-    href === "/"
-      ? pathname === "/"
-      : pathname.startsWith(href);
+ const isActive = (href: string) => {
+  const base = href.split("#")[0] || "/";
+  return base === "/" ? pathname === "/" : pathname.startsWith(base);
+};
 
   const baseW = 48;
   const expandedW = 172;
