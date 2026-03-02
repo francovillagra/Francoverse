@@ -6,6 +6,9 @@ type Star = {
   x: number;
   y: number;
   z: number;
+  px: number;
+  py: number;
+  layer: 0 | 1 | 2;
 };
 
 export default function SpaceBackground() {
@@ -15,66 +18,130 @@ export default function SpaceBackground() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const context = canvas.getContext("2d");
-    if (!context) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
 
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
+    let w = (canvas.width = window.innerWidth);
+    let h = (canvas.height = window.innerHeight);
 
-    let centerX = width / 2;
-    let centerY = height / 2;
+    const mouse = { x: 0, y: 0 };
+    const onMouseMove = (e: MouseEvent) => {
+      mouse.x = (e.clientX / w) * 2 - 1; // -1..1
+      mouse.y = (e.clientY / h) * 2 - 1;
+    };
 
-    const STAR_COUNT = 400;
+    // Ajustables
+    const STAR_COUNT = 520;
+    const SPEED_BASE = 2.2;
+    const ROT_SPEED = 0.0012;
+    const TRAILS_ALPHA = 0.22;
+    const FOV = 0.95;
+    const MOUSE_INFLUENCE = 140;
 
-    const stars: Star[] = Array.from({ length: STAR_COUNT }).map(() => ({
-      x: (Math.random() - 0.5) * width,
-      y: (Math.random() - 0.5) * height,
-      z: Math.random() * width,
-    }));
+    const layerSpeed = [0.85, 1.0, 1.25] as const;
 
-    let animationId = 0;
+    const stars: Star[] = Array.from({ length: STAR_COUNT }).map(() => {
+      const layer = (Math.random() < 0.55 ? 0 : Math.random() < 0.82 ? 1 : 2) as 0 | 1 | 2;
+      return {
+        x: (Math.random() - 0.5) * w,
+        y: (Math.random() - 0.5) * h,
+        z: Math.random() * w + 1,
+        px: 0,
+        py: 0,
+        layer,
+      };
+    });
+
+    let angle = 0;
+    let raf = 0;
+
+    const resetStar = (s: Star) => {
+      s.x = (Math.random() - 0.5) * w;
+      s.y = (Math.random() - 0.5) * h;
+      s.z = w + Math.random() * (w * 0.35);
+      s.px = 0;
+      s.py = 0;
+      s.layer = (Math.random() < 0.55 ? 0 : Math.random() < 0.82 ? 1 : 2) as 0 | 1 | 2;
+    };
 
     const animate = () => {
-      context.fillStyle = "black";
-      context.fillRect(0, 0, width, height);
+      // “Persistencia” para trails
+      ctx.fillStyle = `rgba(0,0,0,${TRAILS_ALPHA})`;
+      ctx.fillRect(0, 0, w, h);
 
-      for (const star of stars) {
-        star.z -= 2;
+      const cx = w / 2 + mouse.x * MOUSE_INFLUENCE;
+      const cy = h / 2 + mouse.y * MOUSE_INFLUENCE;
 
-        if (star.z <= 1) {
-          star.x = (Math.random() - 0.5) * width;
-          star.y = (Math.random() - 0.5) * height;
-          star.z = width;
+      angle += ROT_SPEED;
+      const cosA = Math.cos(angle);
+      const sinA = Math.sin(angle);
+
+      for (const s of stars) {
+        const sp = SPEED_BASE * layerSpeed[s.layer];
+        s.z -= sp;
+
+        if (s.z <= 2) {
+          resetStar(s);
+          continue;
         }
 
-        const sx = centerX + (star.x / star.z) * width;
-        const sy = centerY + (star.y / star.z) * height;
+        // rotación XY (swirl)
+        const rx = s.x * cosA - s.y * sinA;
+        const ry = s.x * sinA + s.y * cosA;
 
-        const radius = Math.max(0.2, (1 - star.z / width) * 3);
+        // proyección
+        const k = (w * FOV) / s.z;
+        const x = cx + rx * k;
+        const y = cy + ry * k;
 
-        context.beginPath();
-        context.arc(sx, sy, radius, 0, Math.PI * 2);
-        context.fillStyle = "white";
-        context.fill();
+        const baseR = (1 - s.z / (w * 1.1)) * (2.2 + s.layer * 1.2);
+        const r = Math.max(0.2, baseR);
+
+        const alpha = Math.min(1, 0.25 + (1 - s.z / w) * 0.9);
+
+        // trail
+        if (s.px !== 0 || s.py !== 0) {
+          ctx.strokeStyle = `rgba(255,255,255,${alpha * 0.55})`;
+          ctx.lineWidth = Math.max(0.6, r * 0.75);
+          ctx.beginPath();
+          ctx.moveTo(s.px, s.py);
+          ctx.lineTo(x, y);
+          ctx.stroke();
+        }
+
+        // estrella
+        ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fill();
+
+        s.px = x;
+        s.py = y;
+
+        if (x < -120 || x > w + 120 || y < -120 || y > h + 120) resetStar(s);
       }
 
-      animationId = requestAnimationFrame(animate);
+      raf = requestAnimationFrame(animate);
     };
+
+    // init
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, w, h);
+
+    window.addEventListener("mousemove", onMouseMove);
+
+    const onResize = () => {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    };
+    window.addEventListener("resize", onResize);
 
     animate();
 
-    const handleResize = () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-      centerX = width / 2;
-      centerY = height / 2;
-    };
-
-    window.addEventListener("resize", handleResize);
-
     return () => {
-      window.removeEventListener("resize", handleResize);
-      cancelAnimationFrame(animationId);
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("resize", onResize);
+      cancelAnimationFrame(raf);
     };
   }, []);
 
