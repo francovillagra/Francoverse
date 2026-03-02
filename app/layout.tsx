@@ -7,7 +7,7 @@ import SpaceBackground from "@/components/ui/SpaceBackground";
 import ClientWrapper from "@/components/layout/ClientWrapper";
 import ThemeProvider from "@/components/providers/ThemeProvider";
 import TopNav from "@/components/sections/Navigation/TopNav";
-// import DustParticlesBackground from "@/components/ui/DustParticlesBackground"; // (lo agregamos en el commit 2)
+import DustParticlesBackground from "@/components/ui/DustParticlesBackground";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,11 +27,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
 
           {/* Capa de polvo (se activa en el commit 2) */}
-          {/*
           <div className="fixed inset-0 z-[1] pointer-events-none opacity-40">
             <DustParticlesBackground />
           </div>
-          */}
 
           {/* Top nav */}
           <div className="relative z-20">
