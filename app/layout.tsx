@@ -19,8 +19,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="es" className="h-full" suppressHydrationWarning>
       <body className={`${inter.className} relative min-h-dvh`}>
         <ThemeProvider>
-          {/* Fondo de partículas global */}
-          <SpaceBackground />
+          
+          {/* Fondo espacial global */}
+    <div className="fixed inset-0 z-0 pointer-events-none">
+   <SpaceBackground />
+    </div>
+
+{/* Capa sutil opcional (descomentás cuando la uses) */}
+{/*
+<div className="fixed inset-0 z-[1] pointer-events-none opacity-40">
+  <ParticlesBackground />
+</div>
+*/}
 
           {/* Barra lateral fija */}
           <div className="relative z-20">
