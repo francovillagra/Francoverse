@@ -123,7 +123,6 @@ export default function SpaceBackground() {
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, w, h);
 
-    window.addEventListener("mousemove", onMouseMove);
 
     const onResize = () => {
       w = canvas.width = window.innerWidth;
