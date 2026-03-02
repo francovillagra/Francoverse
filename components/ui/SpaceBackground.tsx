@@ -24,11 +24,6 @@ export default function SpaceBackground() {
     let w = (canvas.width = window.innerWidth);
     let h = (canvas.height = window.innerHeight);
 
-    const mouse = { x: 0, y: 0 };
-    const onMouseMove = (e: MouseEvent) => {
-      mouse.x = (e.clientX / w) * 2 - 1; // -1..1
-      mouse.y = (e.clientY / h) * 2 - 1;
-    };
 
     // Ajustables
     const STAR_COUNT = 520;
@@ -69,8 +64,8 @@ export default function SpaceBackground() {
       ctx.fillStyle = `rgba(0,0,0,${TRAILS_ALPHA})`;
       ctx.fillRect(0, 0, w, h);
 
-      const cx = w / 2 + mouse.x * MOUSE_INFLUENCE;
-      const cy = h / 2 + mouse.y * MOUSE_INFLUENCE;
+      const cx = w / 2;
+      const cy = h / 2;
 
       angle += ROT_SPEED;
       const cosA = Math.cos(angle);
@@ -139,7 +134,6 @@ export default function SpaceBackground() {
     animate();
 
     return () => {
-      window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("resize", onResize);
       cancelAnimationFrame(raf);
     };
