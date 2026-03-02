@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import ParticlesBackground from "@/components/ui/ParticlesBackground";
+import SpaceBackground from "@/components/ui/SpaceBackground";
 import ClientWrapper from "@/components/layout/ClientWrapper";
 import ThemeProvider from "@/components/providers/ThemeProvider";
 import TopNav from "@/components/sections/Navigation/TopNav";
@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${inter.className} relative min-h-dvh`}>
         <ThemeProvider>
           {/* Fondo de partículas global */}
-          <ParticlesBackground />
+          <SpaceBackground />
 
           {/* Barra lateral fija */}
           <div className="relative z-20">
