@@ -2,10 +2,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+
 import SpaceBackground from "@/components/ui/SpaceBackground";
 import ClientWrapper from "@/components/layout/ClientWrapper";
 import ThemeProvider from "@/components/providers/ThemeProvider";
 import TopNav from "@/components/sections/Navigation/TopNav";
+// import DustParticlesBackground from "@/components/ui/DustParticlesBackground"; // (lo agregamos en el commit 2)
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,20 +21,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="es" className="h-full" suppressHydrationWarning>
       <body className={`${inter.className} relative min-h-dvh`}>
         <ThemeProvider>
-          
           {/* Fondo espacial global */}
-    <div className="fixed inset-0 z-0 pointer-events-none">
-   <SpaceBackground />
-    </div>
+          <div className="fixed inset-0 z-0 pointer-events-none">
+            <SpaceBackground />
+          </div>
 
-{/* Capa sutil opcional (descomentás cuando la uses) */}
-{/*
-<div className="fixed inset-0 z-[1] pointer-events-none opacity-40">
-  <ParticlesBackground />
-</div>
-*/}
+          {/* Capa de polvo (se activa en el commit 2) */}
+          {/*
+          <div className="fixed inset-0 z-[1] pointer-events-none opacity-40">
+            <DustParticlesBackground />
+          </div>
+          */}
 
-          {/* Barra lateral fija */}
+          {/* Top nav */}
           <div className="relative z-20">
             <TopNav />
           </div>
