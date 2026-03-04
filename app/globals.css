@@ -213,14 +213,84 @@
   opacity: 1;
 }
 
-/* animación flotante independiente (suave) */
+/* animación flotante independiente (suave) - Deje comentado por si quiero volver a usarlo
 .tech-float {
   animation: float-soft 5.5s ease-in-out infinite;
-}
+} */
 
 /* seguridad: reduce motion */
 @media (prefers-reduced-motion: reduce) {
   .tech-float {
     animation: none;
   }
+}
+
+/* ===== Degradés por tecnología (se aplican en hover) ===== */
+.tech-grad {
+  background: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: currentColor;
+}
+
+/* En hover, el ícono se vuelve gradiente */
+.group:hover .tech-grad {
+  -webkit-text-fill-color: transparent;
+}
+
+/* React */
+.group:hover .grad-react {
+  background-image: linear-gradient(
+    90deg,
+    rgba(34, 211, 238, 1),
+    rgba(168, 85, 247, 1)
+  );
+}
+/* Next */
+.group:hover .grad-next {
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 1),
+    rgba(148, 163, 184, 1)
+  );
+}
+/* Node */
+.group:hover .grad-node {
+  background-image: linear-gradient(
+    90deg,
+    rgba(52, 211, 153, 1),
+    rgba(34, 197, 94, 1)
+  );
+}
+/* JS */
+.group:hover .grad-js {
+  background-image: linear-gradient(
+    90deg,
+    rgba(250, 204, 21, 1),
+    rgba(251, 146, 60, 1)
+  );
+}
+/* TS */
+.group:hover .grad-ts {
+  background-image: linear-gradient(
+    90deg,
+    rgba(56, 189, 248, 1),
+    rgba(59, 130, 246, 1)
+  );
+}
+/* Python */
+.group:hover .grad-py {
+  background-image: linear-gradient(
+    90deg,
+    rgba(96, 165, 250, 1),
+    rgba(250, 204, 21, 1)
+  );
+}
+/* Tailwind */
+.group:hover .grad-tw {
+  background-image: linear-gradient(
+    90deg,
+    rgba(45, 212, 191, 1),
+    rgba(34, 211, 238, 1)
+  );
 }
