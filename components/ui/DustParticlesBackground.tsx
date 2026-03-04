@@ -21,9 +21,7 @@ export default function DustParticlesBackground() {
       background: { color: "transparent" },
       fpsLimit: 60,
       interactivity: {
-        detectsOn: "window",
         events: {
-          onHover: { enable: true, mode: "bubble" }, // sutil
           resize: true,
         },
         modes: {
