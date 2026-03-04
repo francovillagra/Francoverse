@@ -142,3 +142,85 @@
   filter: brightness(1.08);
   box-shadow: 0 0 22px rgba(120, 180, 255, 0.16);
 }
+
+/* ===== Tech marquee: color + neon premium ===== */
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* base: apagado */
+.tech-chip {
+  position: relative;
+  transition:
+    transform 200ms ease,
+    filter 200ms ease,
+    opacity 200ms ease;
+  opacity: 0.88;
+}
+
+/* halo radial debajo del icono */
+.tech-chip::before {
+  content: "";
+  position: absolute;
+  inset: -18px -22px;
+  background: radial-gradient(
+    circle at 50% 45%,
+    rgba(120, 180, 255, 0.22),
+    transparent 55%
+  );
+  filter: blur(10px);
+  opacity: 0;
+  transition: opacity 220ms ease;
+  pointer-events: none;
+}
+
+/* reflejo / neon */
+.tech-chip::after {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 34px;
+  left: 50%;
+  top: 52%;
+  transform: translateX(-50%) rotate(-12deg);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(170, 210, 255, 0.22),
+    transparent
+  );
+  filter: blur(8px);
+  opacity: 0;
+  transition: opacity 220ms ease;
+  pointer-events: none;
+}
+
+.tech-chip:hover {
+  opacity: 1;
+  filter: brightness(1.12);
+  transform: translateY(-2px) scale(1.04);
+}
+
+.tech-chip:hover::before,
+.tech-chip:hover::after {
+  opacity: 1;
+}
+
+/* animación flotante independiente (suave) */
+.tech-float {
+  animation: float-soft 5.5s ease-in-out infinite;
+}
+
+/* seguridad: reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .tech-float {
+    animation: none;
+  }
+}
