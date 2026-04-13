@@ -1,6 +1,7 @@
 "use client";
 
 import TechMarquee from "@/components/ui/TechMarquee";
+import AboutSection from "@/components/sections/About/AboutSection";
 
 export default function Home() {
   return (
@@ -38,13 +39,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ABOUT */}
-      <section id="about" className="min-h-dvh px-6 py-20 scroll-mt-24">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold">Sobre mí</h2>
-          <p className="mt-4 text-white/70">Contenido en construcción.</p>
-        </div>
-      </section>
+            {/* ABOUT */}
+      <AboutSection />
 
       {/* PROJECTS */}
       <section id="projects" className="min-h-dvh px-6 py-20 scroll-mt-24">
