@@ -22,9 +22,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${inter.className} relative min-h-dvh`}>
         <ThemeProvider>
           {/* Fondo espacial global */}
-          <div className="fixed inset-0 z-0 pointer-events-none">
-            <SpaceBackground />
-          </div>
+          <div className="fixed inset-0 z-[5] pointer-events-none opacity-100">
+  <SpaceBackground />
+</div>
 
           {/* Capa de polvo (se activa en el commit 2) */}
           <div className="fixed inset-0 z-[1] pointer-events-none opacity-40">
@@ -37,9 +37,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
 
           {/* Contenido */}
-          <div className="relative z-10">
-            <ClientWrapper>{children}</ClientWrapper>
-          </div>
+       <div className="relative z-10">
+  <ClientWrapper>{children}</ClientWrapper>
+</div>
         </ThemeProvider>
       </body>
     </html>
