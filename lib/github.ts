@@ -1,4 +1,4 @@
-type GitHubRepo = {
+export type GitHubRepo = {
   id: number;
   name: string;
   description: string | null;
@@ -11,23 +11,23 @@ type GitHubRepo = {
   pushed_at: string;
 };
 
-export async function getGitHubProjects() {
-  const username = process.env.GITHUB_USERNAME || "francovillagra";
-  const token = process.env.GITHUB_TOKEN;
+const GITHUB_USERNAME = process.env.GITHUB_USERNAME || "francovillagra";
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
+export async function getGitHubProjects(): Promise<GitHubRepo[]> {
   const response = await fetch(
-    `https://api.github.com/users/${username}/repos?per_page=100&sort=updated`,
+    `https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&sort=updated`,
     {
       headers: {
         Accept: "application/vnd.github+json",
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...(GITHUB_TOKEN ? { Authorization: `Bearer ${GITHUB_TOKEN}` } : {}),
       },
       next: { revalidate: 3600 },
     }
   );
 
   if (!response.ok) {
-    throw new Error(`Error al obtener repositorios: ${response.status}`);
+    throw new Error(`Error al obtener repositorios de GitHub: ${response.status}`);
   }
 
   const repos = (await response.json()) as GitHubRepo[];
