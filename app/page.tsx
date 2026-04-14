@@ -44,12 +44,7 @@ export default function Home() {
       <AboutSection />
 
       {/* PROJECTS */}
-      <section id="projects" className="min-h-dvh px-6 py-20 scroll-mt-24">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold">Proyectos</h2>
-          <p className="mt-4 text-white/70">Contenido en construcción.</p>
-        </div>
-      </section>
+      <ProjectsSectionServer />
 
       {/* SKILLS */}
       <section id="skills" className="min-h-dvh px-6 py-20 scroll-mt-24">
