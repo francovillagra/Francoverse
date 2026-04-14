@@ -1,5 +1,3 @@
-"use client";
-
 import TechMarquee from "@/components/ui/TechMarquee";
 import AboutSection from "@/components/sections/About/AboutSection";
 import ProjectsSectionServer from "@/components/sections/Projects/ProjectsSectionServer";
