@@ -12,7 +12,7 @@ const container = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: { staggerChildren: 0.1, ease: "easeOut" },
+    transition: { staggerChildren: 0.1, ease: "easeOut" as const },
   },
 };
 
@@ -48,11 +48,13 @@ export default function ProjectsSection({
           viewport={{ once: true, amount: 0.2 }}
           className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {projects.map((p) => (
-            <ProjectCard key={p.title} {...p} />
+          {projects.map((project) => (
+            <ProjectCard key={project.title} {...project} />
           ))}
         </motion.div>
       </div>
     </section>
   );
 }
+
+export { ProjectsSection };
