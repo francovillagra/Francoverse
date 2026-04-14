@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className="h-full" suppressHydrationWarning>
-      <body className={`${inter.className} relative min-h-dvh`}>
+      <body className={`${inter.className} relative min-h-dvh isolate`}>
         <ThemeProvider>
           {/* Fondo espacial global */}
           <div className="fixed inset-0 z-[5] pointer-events-none opacity-100">
