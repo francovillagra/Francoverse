@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Github, ExternalLink } from "lucide-react";
 import { useState, useEffect } from "react";
 
-type ProjectCardProps = {
+export type Project = {
   title: string;
   description: string;
   imageUrl: string;
@@ -16,7 +16,11 @@ type ProjectCardProps = {
 
 const cardVariants = {
   hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: "easeOut" as const },
+  },
 };
 
 export default function ProjectCard({
@@ -26,44 +30,39 @@ export default function ProjectCard({
   techStack,
   demoUrl,
   repoUrl,
-}: ProjectCardProps) {
-  
+}: Project) {
   const [src, setSrc] = useState(imageUrl);
-  const [loading, setLoading] = useState(true);
+  const [, setLoading] = useState(true);
 
-   useEffect(() => {
-    setSrc(imageUrl); // si cambias la prop, resetea
+  useEffect(() => {
+    setSrc(imageUrl);
+    setLoading(true);
   }, [imageUrl]);
-  
+
   return (
-  // ProjectCard.tsx (wrapper)
-  <motion.div
-    variants={cardVariants}
-    whileHover={{ y: -4 }}
-    className="group bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden border border-white/10 hover:border-white/30 transition shadow-lg"
+    <motion.div
+      variants={cardVariants}
+      whileHover={{ y: -4 }}
+      className="group bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden border border-white/10 hover:border-white/30 transition shadow-lg"
     >
-
-      {/* Imagen con skeleton + fallback + log*/}
-
-    <div className="relative w-full aspect-[16/9] overflow-hidden">
-    <Image
-      src={imageUrl}
-      alt={title}
-      fill
-      className="object-cover"
-      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-      priority={false}
-      onLoad={() => setLoading(false)}
+      <div className="relative w-full aspect-[16/9] overflow-hidden">
+        <Image
+          src={src}
+          alt={title}
+          fill
+          className="object-cover"
+          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+          priority={false}
+          onLoad={() => setLoading(false)}
           onError={() => {
             console.warn(`[ProjectCard] Falló cargar "${src}" → uso placeholder`);
-            setSrc("/projects/placeholder.jpg"); // crea este archivo en public/projects/
+            setSrc("/projects/placeholder.jpg");
             setLoading(false);
           }}
         />
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition" />
       </div>
 
-      {/* Contenido */}
       <div className="p-5 flex flex-col gap-3">
         <h3 className="text-xl font-semibold">{title}</h3>
         <p className="text-sm text-white/80">{description}</p>
