@@ -138,5 +138,5 @@ export default function SpaceBackground() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="fixed inset-0 z-0" />;
+  return <canvas ref={canvasRef} className="fixed inset-0 w-full h-full" />;
 }
