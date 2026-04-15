@@ -12,7 +12,6 @@ export type GitHubRepo = {
 };
 
 const GITHUB_USERNAME = process.env.GITHUB_USERNAME || "francovillagra";
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
 export async function getGitHubProjects(): Promise<GitHubRepo[]> {
   const response = await fetch(
@@ -20,7 +19,6 @@ export async function getGitHubProjects(): Promise<GitHubRepo[]> {
     {
       headers: {
         Accept: "application/vnd.github+json",
-        ...(GITHUB_TOKEN ? { Authorization: `Bearer ${GITHUB_TOKEN}` } : {}),
       },
       next: { revalidate: 3600 },
     }
@@ -34,11 +32,6 @@ export async function getGitHubProjects(): Promise<GitHubRepo[]> {
 
   return repos
     .filter((repo) => !repo.fork && !repo.archived)
-    .filter(
-      (repo) =>
-        repo.name === "Francoverse" ||
-        repo.topics?.includes("portfolio")
-    )
     .sort(
       (a, b) =>
         new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime()
