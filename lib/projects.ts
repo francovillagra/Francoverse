@@ -11,7 +11,10 @@ export function mapRepoToProject(repo: GitHubRepo): Project {
 
   return {
     title: meta?.displayTitle || repo.name,
-    description: repo.description || "Proyecto sin descripción publicada todavía.",
+    description:
+      meta?.description ||
+      repo.description ||
+      "Proyecto sin descripción publicada todavía.",
     imageUrl: meta?.imageUrl || "/projects/placeholder.jpg",
     techStack: meta?.techStack || fallbackTechStack(repo),
     demoUrl: repo.homepage || "",
