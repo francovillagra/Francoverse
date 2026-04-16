@@ -27,7 +27,6 @@ export default function ProjectCard({
   title,
   description,
   imageUrl,
-  techStack,
   demoUrl,
   repoUrl,
 }: Project) {
@@ -50,7 +49,7 @@ export default function ProjectCard({
           src={src}
           alt={title}
           fill
-          className="object-cover"
+          className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
           sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
           priority={false}
           onLoad={() => setLoading(false)}
@@ -60,25 +59,16 @@ export default function ProjectCard({
             setLoading(false);
           }}
         />
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition" />
+        <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition" />
       </div>
 
-      <div className="p-5 flex flex-col gap-3">
-        <h3 className="text-xl font-semibold">{title}</h3>
-        <p className="text-sm text-white/80">{description}</p>
-
-        <div className="flex flex-wrap gap-2">
-          {techStack.map((tech) => (
-            <span
-              key={tech}
-              className="text-xs px-2 py-1 rounded-full border border-white/15 bg-white/5"
-            >
-              {tech}
-            </span>
-          ))}
+      <div className="p-5 flex flex-col gap-4">
+        <div className="space-y-2">
+          <h3 className="text-xl font-semibold text-white">{title}</h3>
+          <p className="text-sm leading-relaxed text-white/75">{description}</p>
         </div>
 
-        <div className="mt-4 flex items-center gap-3">
+        <div className="mt-auto flex items-center gap-3">
           {demoUrl && (
             <a
               href={demoUrl}
