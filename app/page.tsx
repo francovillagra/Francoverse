@@ -2,6 +2,7 @@ import TechMarquee from "@/components/ui/TechMarquee";
 import AboutSection from "@/components/sections/About/AboutSection";
 import ProjectsSectionServer from "@/components/sections/Projects/ProjectsSectionServer";
 import SkillsSection from "@/components/sections/Skills/SkillsSection";
+import SkillsSectionServer from "@/components/sections/Skills/SkillsSectionServer";
 
 export default function Home() {
   return (
@@ -46,7 +47,7 @@ export default function Home() {
       <ProjectsSectionServer />
 
       {/* SKILLS */}
-    <SkillsSection />
+        <SkillsSectionServer />
 
       {/* CONTACT */}
       <section id="contact" className="min-h-dvh px-6 py-20 scroll-mt-24">
