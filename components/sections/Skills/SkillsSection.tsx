@@ -33,7 +33,7 @@ type TechVisual = {
   label: string;
   icon: IconType;
   colorClass: string;
-  activeClass: string;
+  glowClass: string;
 };
 
 const techVisualMap: Record<string, TechVisual> = {
@@ -41,103 +41,103 @@ const techVisualMap: Record<string, TechVisual> = {
     label: "Next.js",
     icon: SiNextdotjs,
     colorClass: "text-white",
-    activeClass: "border-white/40 bg-white/10 shadow-[0_0_28px_rgba(255,255,255,0.14)]",
+    glowClass: "drop-shadow-[0_0_16px_rgba(255,255,255,0.28)]",
   },
   React: {
     label: "React",
     icon: SiReact,
     colorClass: "text-cyan-400",
-    activeClass: "border-cyan-400/60 bg-cyan-400/10 shadow-[0_0_28px_rgba(34,211,238,0.22)]",
+    glowClass: "drop-shadow-[0_0_18px_rgba(34,211,238,0.45)]",
   },
   TypeScript: {
     label: "TypeScript",
     icon: SiTypescript,
     colorClass: "text-blue-400",
-    activeClass: "border-blue-400/60 bg-blue-400/10 shadow-[0_0_28px_rgba(96,165,250,0.22)]",
+    glowClass: "drop-shadow-[0_0_18px_rgba(96,165,250,0.45)]",
   },
   JavaScript: {
     label: "JavaScript",
     icon: SiJavascript,
     colorClass: "text-yellow-300",
-    activeClass: "border-yellow-300/60 bg-yellow-300/10 shadow-[0_0_28px_rgba(253,224,71,0.22)]",
+    glowClass: "drop-shadow-[0_0_18px_rgba(253,224,71,0.45)]",
   },
   "Tailwind CSS": {
     label: "Tailwind CSS",
     icon: SiTailwindcss,
     colorClass: "text-cyan-300",
-    activeClass: "border-cyan-300/60 bg-cyan-300/10 shadow-[0_0_28px_rgba(103,232,249,0.22)]",
+    glowClass: "drop-shadow-[0_0_18px_rgba(103,232,249,0.45)]",
   },
   "Node.js": {
     label: "Node.js",
     icon: SiNodedotjs,
     colorClass: "text-green-400",
-    activeClass: "border-green-400/60 bg-green-400/10 shadow-[0_0_28px_rgba(74,222,128,0.22)]",
+    glowClass: "drop-shadow-[0_0_18px_rgba(74,222,128,0.45)]",
   },
   Python: {
     label: "Python",
     icon: SiPython,
     colorClass: "text-yellow-300",
-    activeClass: "border-yellow-300/60 bg-yellow-300/10 shadow-[0_0_28px_rgba(253,224,71,0.20)]",
+    glowClass: "drop-shadow-[0_0_18px_rgba(253,224,71,0.38)]",
   },
   FastAPI: {
     label: "FastAPI",
     icon: SiFastapi,
     colorClass: "text-emerald-400",
-    activeClass: "border-emerald-400/60 bg-emerald-400/10 shadow-[0_0_28px_rgba(52,211,153,0.22)]",
+    glowClass: "drop-shadow-[0_0_18px_rgba(52,211,153,0.45)]",
   },
   MongoDB: {
     label: "MongoDB",
     icon: SiMongodb,
     colorClass: "text-green-500",
-    activeClass: "border-green-500/60 bg-green-500/10 shadow-[0_0_28px_rgba(34,197,94,0.22)]",
+    glowClass: "drop-shadow-[0_0_18px_rgba(34,197,94,0.45)]",
   },
   MySQL: {
     label: "MySQL",
     icon: SiMysql,
     colorClass: "text-sky-400",
-    activeClass: "border-sky-400/60 bg-sky-400/10 shadow-[0_0_28px_rgba(56,189,248,0.22)]",
+    glowClass: "drop-shadow-[0_0_18px_rgba(56,189,248,0.45)]",
   },
   Pandas: {
     label: "Pandas",
     icon: SiPandas,
     colorClass: "text-violet-300",
-    activeClass: "border-violet-300/60 bg-violet-300/10 shadow-[0_0_28px_rgba(196,181,253,0.22)]",
+    glowClass: "drop-shadow-[0_0_18px_rgba(196,181,253,0.45)]",
   },
   Jupyter: {
     label: "Jupyter",
     icon: SiJupyter,
     colorClass: "text-orange-400",
-    activeClass: "border-orange-400/60 bg-orange-400/10 shadow-[0_0_28px_rgba(251,146,60,0.22)]",
+    glowClass: "drop-shadow-[0_0_18px_rgba(251,146,60,0.45)]",
   },
   "Framer Motion": {
     label: "Framer Motion",
     icon: SiFramer,
     colorClass: "text-pink-300",
-    activeClass: "border-pink-300/60 bg-pink-300/10 shadow-[0_0_28px_rgba(249,168,212,0.22)]",
+    glowClass: "drop-shadow-[0_0_18px_rgba(249,168,212,0.45)]",
   },
   Git: {
     label: "Git",
     icon: SiGit,
     colorClass: "text-orange-500",
-    activeClass: "border-orange-500/60 bg-orange-500/10 shadow-[0_0_28px_rgba(249,115,22,0.22)]",
+    glowClass: "drop-shadow-[0_0_18px_rgba(249,115,22,0.45)]",
   },
   GitHub: {
     label: "GitHub",
     icon: SiGithub,
     colorClass: "text-white",
-    activeClass: "border-white/40 bg-white/10 shadow-[0_0_28px_rgba(255,255,255,0.14)]",
+    glowClass: "drop-shadow-[0_0_16px_rgba(255,255,255,0.28)]",
   },
   JSON: {
     label: "JSON",
     icon: SiJson,
     colorClass: "text-amber-300",
-    activeClass: "border-amber-300/60 bg-amber-300/10 shadow-[0_0_28px_rgba(252,211,77,0.22)]",
+    glowClass: "drop-shadow-[0_0_18px_rgba(252,211,77,0.45)]",
   },
   REST: {
     label: "REST",
     icon: TbApi,
     colorClass: "text-cyan-300",
-    activeClass: "border-cyan-300/60 bg-cyan-300/10 shadow-[0_0_28px_rgba(103,232,249,0.22)]",
+    glowClass: "drop-shadow-[0_0_18px_rgba(103,232,249,0.45)]",
   },
 };
 
@@ -147,8 +147,7 @@ function getTechVisual(tech: string): TechVisual {
       label: tech,
       icon: TbApi,
       colorClass: "text-cyan-300",
-      activeClass:
-        "border-cyan-300/60 bg-cyan-300/10 shadow-[0_0_28px_rgba(103,232,249,0.22)]",
+      glowClass: "drop-shadow-[0_0_18px_rgba(103,232,249,0.45)]",
     }
   );
 }
@@ -182,36 +181,53 @@ export default function SkillsSection({ projects }: SkillsSectionProps) {
           </p>
         </div>
 
-        <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <div className="mt-14 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-y-10 gap-x-6">
           {technologies.map((tech) => {
             const isActive = selectedTech === tech;
-            const { icon: Icon, label, colorClass, activeClass } = getTechVisual(tech);
+            const { icon: Icon, label, colorClass, glowClass } = getTechVisual(tech);
 
             return (
               <button
                 key={tech}
                 type="button"
                 onClick={() => setSelectedTech(isActive ? null : tech)}
-                className={`group rounded-2xl border p-4 backdrop-blur-sm transition-all duration-200 flex flex-col items-center justify-center gap-3 min-h-[120px] ${
-                  isActive
-                    ? `${activeClass} text-white scale-[1.02]`
-                    : "border-white/10 bg-white/5 text-white/80 hover:border-white/25 hover:bg-white/8 hover:-translate-y-1"
-                }`}
                 aria-pressed={isActive}
                 aria-label={`Filtrar proyectos por ${label}`}
+                className="group flex flex-col items-center justify-center gap-3"
               >
                 <Icon
-                  className={`text-3xl md:text-4xl transition-transform duration-200 group-hover:scale-110 ${colorClass}`}
+                  className={[
+                    "text-5xl md:text-6xl transition-all duration-200",
+                    colorClass,
+                    isActive
+                      ? `scale-110 ${glowClass}`
+                      : "opacity-90 group-hover:scale-110 group-hover:opacity-100 group-hover:-translate-y-1 group-hover:" +
+                        glowClass,
+                  ].join(" ")}
                 />
-                <span className="text-xs md:text-sm font-medium text-center">
+                <span
+                  className={`text-xs md:text-sm font-medium text-center transition ${
+                    isActive
+                      ? "text-white"
+                      : "text-white/55 group-hover:text-white/85"
+                  }`}
+                >
                   {label}
                 </span>
+
+                <span
+                  className={`h-[2px] rounded-full transition-all duration-200 ${
+                    isActive
+                      ? "w-10 bg-white/80"
+                      : "w-0 bg-transparent group-hover:w-8 group-hover:bg-white/40"
+                  }`}
+                />
               </button>
             );
           })}
         </div>
 
-        <div className="mt-10">
+        <div className="mt-12">
           {!selectedTech ? (
             <p className="text-white/50">
               Seleccioná una tecnología para ver los proyectos donde la utilicé.
