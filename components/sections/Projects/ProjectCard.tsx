@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import { Github, ExternalLink } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -14,13 +14,13 @@ export type Project = {
   repoUrl?: string;
 };
 
-type ProjectCardProps = Project & { priority?: boolean };
-
-const easeOut: number[] = [0.16, 1, 0.3, 1];
-
-const cardVariants: Variants = {
+const cardVariants = {
   hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: easeOut } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: "easeOut" as const },
+  },
 };
 
 export default function ProjectCard({
@@ -30,12 +30,14 @@ export default function ProjectCard({
   techStack,
   demoUrl,
   repoUrl,
-  priority = false,
-}: ProjectCardProps) {
+}: Project) {
   const [src, setSrc] = useState(imageUrl);
-  const [loading, setLoading] = useState(true);
+  const [, setLoading] = useState(true);
 
-  useEffect(() => setSrc(imageUrl), [imageUrl]);
+  useEffect(() => {
+    setSrc(imageUrl);
+    setLoading(true);
+  }, [imageUrl]);
 
   return (
     <motion.div
@@ -43,34 +45,34 @@ export default function ProjectCard({
       whileHover={{ y: -4 }}
       className="group bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden border border-white/10 hover:border-white/30 transition shadow-lg"
     >
-      {/* Imagen con skeleton + fallback */}
       <div className="relative w-full aspect-[16/9] overflow-hidden">
-        {loading && <div className="absolute inset-0 animate-pulse bg-white/10" />}
         <Image
           src={src}
           alt={title}
           fill
           className="object-cover"
           sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-          priority={priority}
+          priority={false}
           onLoad={() => setLoading(false)}
           onError={() => {
             console.warn(`[ProjectCard] Falló cargar "${src}" → uso placeholder`);
-            setSrc("/projects/placeholder.jpg"); // asegurate de tenerla
+            setSrc("/projects/placeholder.jpg");
             setLoading(false);
           }}
         />
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition" />
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition" />
       </div>
 
-      {/* Contenido */}
       <div className="p-5 flex flex-col gap-3">
         <h3 className="text-xl font-semibold">{title}</h3>
         <p className="text-sm text-white/80">{description}</p>
 
         <div className="flex flex-wrap gap-2">
           {techStack.map((tech) => (
-            <span key={tech} className="text-xs px-2 py-1 rounded-full border border-white/15 bg-white/5">
+            <span
+              key={tech}
+              className="text-xs px-2 py-1 rounded-full border border-white/15 bg-white/5"
+            >
               {tech}
             </span>
           ))}

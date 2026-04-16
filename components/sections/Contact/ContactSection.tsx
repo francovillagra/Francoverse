@@ -4,7 +4,10 @@ import { FaEnvelope, FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa';
 
 export default function ContactSection() {
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center p-10 bg-[#030014] text-white">
+    <section className="min-h-screen flex flex-col items-center justify-center p-10
+  bg-white/80 text-neutral-900 dark:bg-[#030014]/95 dark:text-white backdrop-blur
+  transition-colors">
+
       <h2 className="text-4xl font-bold mb-6">Contacto</h2>
       <p className="max-w-xl text-center mb-8 text-gray-300">
         ¿Querés conectar conmigo? Podés enviarme un email o visitar mis perfiles en redes sociales.

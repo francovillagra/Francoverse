@@ -2,9 +2,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import ParticlesBackground from "@/components/ui/ParticlesBackground";
+
+import SpaceBackground from "@/components/ui/SpaceBackground";
 import ClientWrapper from "@/components/layout/ClientWrapper";
-import TopNav from "@/components/navigation/TopNav";
+import ThemeProvider from "@/components/providers/ThemeProvider";
+import TopNav from "@/components/sections/Navigation/TopNav";
+import DustParticlesBackground from "@/components/ui/DustParticlesBackground";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,14 +18,29 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className="h-full">
-      <body className={`${inter.className} relative z-0`}>
-        {/* Fondo de partículas detrás del contenido */}
-        <ParticlesBackground />
-        {/* Nav sutil arriba a la derecha */}
-        <TopNav />
-        {/* Contenido con transiciones y encima del fondo */}
-        <ClientWrapper>{children}</ClientWrapper>
+    <html lang="es" className="h-full" suppressHydrationWarning>
+      <body className={`${inter.className} relative min-h-dvh isolate`}>
+        <ThemeProvider>
+          {/* Fondo espacial global */}
+          <div className="fixed inset-0 z-[5] pointer-events-none opacity-100">
+  <SpaceBackground />
+</div>
+
+          {/* Capa de polvo (se activa en el commit 2) */}
+          <div className="fixed inset-0 z-[1] pointer-events-none opacity-40">
+            <DustParticlesBackground />
+          </div>
+
+          {/* Top nav */}
+          <div className="relative z-20">
+            <TopNav />
+          </div>
+
+          {/* Contenido */}
+       <div className="relative z-10">
+  <ClientWrapper>{children}</ClientWrapper>
+</div>
+        </ThemeProvider>
       </body>
     </html>
   );
