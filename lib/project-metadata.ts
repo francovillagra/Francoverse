@@ -3,6 +3,7 @@ export type ProjectMetadata = {
   imageUrl?: string;
   techStack?: string[];
   featured?: boolean;
+  description?: string;
 };
 
 export const projectMetadata: Record<string, ProjectMetadata> = {
@@ -11,17 +12,23 @@ export const projectMetadata: Record<string, ProjectMetadata> = {
     imageUrl: "/projects/openb.jpg",
     techStack: ["Next.js", "React", "Tailwind CSS", "Framer Motion", "TypeScript"],
     featured: true,
+    description:
+      "Portfolio personal diseñado para presentar mis proyectos, tecnologías y evolución profesional de una forma visual, moderna e interactiva.",
   },
   ChallengeTelecomX: {
     displayTitle: "Challenge Telecom X",
     imageUrl: "/projects/telecom.jpg",
     techStack: ["Python", "Pandas", "Matplotlib", "Jupyter"],
     featured: true,
+    description:
+      "Proyecto de análisis de datos enfocado en la evasión de clientes, orientado a identificar patrones, extraer conclusiones y facilitar la toma de decisiones a partir de información real.",
   },
   SomosEquipo: {
     displayTitle: "SomosEquipo API",
     imageUrl: "/projects/trabajoenequipo.jpg",
     techStack: ["FastAPI", "Python", "REST", "JSON"],
     featured: true,
+    description:
+      "API pensada para la gestión colaborativa de tareas y equipos, con foco en organización, flujos de trabajo y una estructura backend clara y escalable.",
   },
 };
