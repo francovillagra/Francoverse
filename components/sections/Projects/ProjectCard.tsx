@@ -42,8 +42,15 @@ export default function ProjectCard({
     <motion.article
       variants={cardVariants}
       whileHover={{ y: -6 }}
-      className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-300 hover:border-white/25 hover:bg-white/[0.07] hover:shadow-[0_0_30px_rgba(255,255,255,0.06)]"
+      className="group relative overflow-hidden rounded-[24px] border border-white/10 bg-white/[0.04] backdrop-blur-md transition-all duration-300 hover:border-white/20 hover:bg-white/[0.06]"
     >
+      {/* spotlight */}
+      <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+        <div className="absolute -left-10 top-0 h-40 w-40 rounded-full bg-cyan-400/10 blur-3xl" />
+        <div className="absolute right-0 top-1/3 h-36 w-36 rounded-full bg-violet-400/10 blur-3xl" />
+      </div>
+
+      {/* image */}
       <div className="relative aspect-[16/9] w-full overflow-hidden">
         <Image
           src={src}
@@ -60,16 +67,17 @@ export default function ProjectCard({
           }}
         />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-100" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
       </div>
 
+      {/* content */}
       <div className="relative p-6">
         <div className="space-y-3">
           <h3 className="text-xl md:text-2xl font-semibold tracking-tight text-white">
             {title}
           </h3>
 
-          <p className="text-sm md:text-base leading-relaxed text-white/72">
+          <p className="text-sm md:text-[15px] leading-relaxed text-white/72">
             {description}
           </p>
         </div>
