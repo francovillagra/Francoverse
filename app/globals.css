@@ -85,7 +85,6 @@
   transform: scale(0.9);
 }
 
-/* ===== Marquee (tech strip) ===== */
 @keyframes marquee-left {
   0% {
     transform: translateX(0);
@@ -95,20 +94,19 @@
   }
 }
 
-/* contenedor que enmascara bordes (fade) */
 .marquee-mask {
   -webkit-mask-image: linear-gradient(
     to right,
     transparent,
-    black 10%,
-    black 90%,
+    black 8%,
+    black 92%,
     transparent
   );
   mask-image: linear-gradient(
     to right,
     transparent,
-    black 10%,
-    black 90%,
+    black 8%,
+    black 92%,
     transparent
   );
 }
@@ -116,7 +114,7 @@
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee-left 22s linear infinite;
+  animation: marquee-left 28s linear infinite;
 }
 
 .marquee:hover .marquee-track {
