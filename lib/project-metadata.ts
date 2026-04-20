@@ -21,7 +21,7 @@ export const projectMetadata: Record<string, ProjectMetadata> = {
     techStack: ["Python", "Pandas", "Matplotlib", "Jupyter"],
     featured: true,
     description:
-      "Proyecto de análisis de datos enfocado en la evasión de clientes, orientado a identificar patrones, extraer conclusiones y facilitar la toma de decisiones a partir de información real.",
+      "Proyecto de análisis de datos orientado a estudiar la evasión de clientes, detectar patrones y transformar datos en información útil para la toma de decisiones.",
   },
   SomosEquipo: {
     displayTitle: "SomosEquipo API",
