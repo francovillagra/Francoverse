@@ -44,7 +44,7 @@ export default function Home() {
       <AboutSection />
 
       {/* PROJECTS */}
-      <ProjectsSectionServer />
+      <ProjectsSectionServer featuredOnly limit={6} showViewAll />
 
       {/* SKILLS */}
         <SkillsSectionServer />
