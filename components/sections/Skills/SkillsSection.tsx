@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import type { IconType } from "react-icons";
 import {
   SiNextdotjs,
@@ -29,14 +29,11 @@ type SkillsSectionProps = {
   projects: Project[];
 };
 
-type TechCategory = "Frontend" | "Backend" | "Datos" | "Herramientas";
-
 type TechVisual = {
   label: string;
   icon: IconType;
   colorClass: string;
   glowClass: string;
-  category: TechCategory;
 };
 
 const techVisualMap: Record<string, TechVisual> = {
@@ -45,128 +42,104 @@ const techVisualMap: Record<string, TechVisual> = {
     icon: SiNextdotjs,
     colorClass: "text-white",
     glowClass: "drop-shadow-[0_0_16px_rgba(255,255,255,0.28)]",
-    category: "Frontend",
   },
   React: {
     label: "React",
     icon: SiReact,
     colorClass: "text-cyan-400",
     glowClass: "drop-shadow-[0_0_18px_rgba(34,211,238,0.45)]",
-    category: "Frontend",
   },
   TypeScript: {
     label: "TypeScript",
     icon: SiTypescript,
     colorClass: "text-blue-400",
     glowClass: "drop-shadow-[0_0_18px_rgba(96,165,250,0.45)]",
-    category: "Frontend",
   },
   JavaScript: {
     label: "JavaScript",
     icon: SiJavascript,
     colorClass: "text-yellow-300",
     glowClass: "drop-shadow-[0_0_18px_rgba(253,224,71,0.45)]",
-    category: "Frontend",
   },
   "Tailwind CSS": {
     label: "Tailwind CSS",
     icon: SiTailwindcss,
     colorClass: "text-cyan-300",
     glowClass: "drop-shadow-[0_0_18px_rgba(103,232,249,0.45)]",
-    category: "Frontend",
-  },
-  "Framer Motion": {
-    label: "Framer Motion",
-    icon: SiFramer,
-    colorClass: "text-pink-300",
-    glowClass: "drop-shadow-[0_0_18px_rgba(249,168,212,0.45)]",
-    category: "Frontend",
   },
   "Node.js": {
     label: "Node.js",
     icon: SiNodedotjs,
     colorClass: "text-green-400",
     glowClass: "drop-shadow-[0_0_18px_rgba(74,222,128,0.45)]",
-    category: "Backend",
   },
   Python: {
     label: "Python",
     icon: SiPython,
     colorClass: "text-yellow-300",
     glowClass: "drop-shadow-[0_0_18px_rgba(253,224,71,0.38)]",
-    category: "Backend",
   },
   FastAPI: {
     label: "FastAPI",
     icon: SiFastapi,
     colorClass: "text-emerald-400",
     glowClass: "drop-shadow-[0_0_18px_rgba(52,211,153,0.45)]",
-    category: "Backend",
   },
   MongoDB: {
     label: "MongoDB",
     icon: SiMongodb,
     colorClass: "text-green-500",
     glowClass: "drop-shadow-[0_0_18px_rgba(34,197,94,0.45)]",
-    category: "Backend",
   },
   MySQL: {
     label: "MySQL",
     icon: SiMysql,
     colorClass: "text-sky-400",
     glowClass: "drop-shadow-[0_0_18px_rgba(56,189,248,0.45)]",
-    category: "Backend",
-  },
-  REST: {
-    label: "REST",
-    icon: TbApi,
-    colorClass: "text-cyan-300",
-    glowClass: "drop-shadow-[0_0_18px_rgba(103,232,249,0.45)]",
-    category: "Backend",
   },
   Pandas: {
     label: "Pandas",
     icon: SiPandas,
     colorClass: "text-violet-300",
     glowClass: "drop-shadow-[0_0_18px_rgba(196,181,253,0.45)]",
-    category: "Datos",
   },
   Jupyter: {
     label: "Jupyter",
     icon: SiJupyter,
     colorClass: "text-orange-400",
     glowClass: "drop-shadow-[0_0_18px_rgba(251,146,60,0.45)]",
-    category: "Datos",
+  },
+  "Framer Motion": {
+    label: "Framer Motion",
+    icon: SiFramer,
+    colorClass: "text-pink-300",
+    glowClass: "drop-shadow-[0_0_18px_rgba(249,168,212,0.45)]",
   },
   Git: {
     label: "Git",
     icon: SiGit,
     colorClass: "text-orange-500",
     glowClass: "drop-shadow-[0_0_18px_rgba(249,115,22,0.45)]",
-    category: "Herramientas",
   },
   GitHub: {
     label: "GitHub",
     icon: SiGithub,
     colorClass: "text-white",
     glowClass: "drop-shadow-[0_0_16px_rgba(255,255,255,0.28)]",
-    category: "Herramientas",
   },
   JSON: {
     label: "JSON",
     icon: SiJson,
     colorClass: "text-amber-300",
     glowClass: "drop-shadow-[0_0_18px_rgba(252,211,77,0.45)]",
-    category: "Herramientas",
+  },
+  REST: {
+    label: "REST",
+    icon: TbApi,
+    colorClass: "text-cyan-300",
+    glowClass: "drop-shadow-[0_0_18px_rgba(103,232,249,0.45)]",
   },
 };
-
-const categoryOrder: TechCategory[] = [
-  "Frontend",
-  "Backend",
-  "Datos",
-  "Herramientas",
-];
 
 function getTechVisual(tech: string): TechVisual {
   return (
@@ -175,31 +148,18 @@ function getTechVisual(tech: string): TechVisual {
       icon: TbApi,
       colorClass: "text-cyan-300",
       glowClass: "drop-shadow-[0_0_18px_rgba(103,232,249,0.45)]",
-      category: "Herramientas",
     }
   );
 }
 
 export default function SkillsSection({ projects }: SkillsSectionProps) {
+  const resultsRef = useRef<HTMLDivElement | null>(null);
+
   const technologies = useMemo(() => {
     return [...new Set(projects.flatMap((project) => project.techStack))].sort();
   }, [projects]);
 
-  const groupedTechnologies = useMemo(() => {
-    const groups: Record<TechCategory, string[]> = {
-      Frontend: [],
-      Backend: [],
-      Datos: [],
-      Herramientas: [],
-    };
-
-    technologies.forEach((tech) => {
-      const visual = getTechVisual(tech);
-      groups[visual.category].push(tech);
-    });
-
-    return groups;
-  }, [technologies]);
+  const marqueeItems = useMemo(() => [...technologies, ...technologies], [technologies]);
 
   const [selectedTech, setSelectedTech] = useState<string | null>(null);
 
@@ -207,6 +167,22 @@ export default function SkillsSection({ projects }: SkillsSectionProps) {
     if (!selectedTech) return [];
     return projects.filter((project) => project.techStack.includes(selectedTech));
   }, [projects, selectedTech]);
+
+  const handleSelectTech = (tech: string) => {
+    const nextValue = selectedTech === tech ? null : tech;
+    setSelectedTech(nextValue);
+
+    if (nextValue) {
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          resultsRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }, 50);
+      });
+    }
+  };
 
   return (
     <section
@@ -225,79 +201,51 @@ export default function SkillsSection({ projects }: SkillsSectionProps) {
           </p>
         </div>
 
-        <div className="relative mt-14">
-          <div className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute left-1/2 top-1/3 h-56 w-56 -translate-x-1/2 rounded-full bg-cyan-400/10 blur-3xl" />
-            <div className="absolute right-1/4 top-1/2 h-48 w-48 rounded-full bg-violet-400/10 blur-3xl" />
-            <div className="absolute left-1/4 bottom-0 h-44 w-44 rounded-full bg-blue-400/10 blur-3xl" />
-          </div>
-
-          <div className="space-y-12">
-            {categoryOrder.map((category) => {
-              const techs = groupedTechnologies[category];
-              if (!techs.length) return null;
+        <div className="mt-14 marquee marquee-mask overflow-hidden">
+          <div className="marquee-track gap-10 py-4">
+            {marqueeItems.map((tech, index) => {
+              const { icon: Icon, label, colorClass, glowClass } = getTechVisual(tech);
+              const isActive = selectedTech === tech;
 
               return (
-                <div key={category} className="space-y-5">
-                  <div className="flex items-center gap-3">
-                    <span className="h-px w-10 bg-white/20" />
-                    <h3 className="text-sm md:text-base font-semibold uppercase tracking-[0.25em] text-white/60">
-                      {category}
-                    </h3>
-                  </div>
-
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-y-10 gap-x-6">
-                    {techs.map((tech) => {
-                      const isActive = selectedTech === tech;
-                      const { icon: Icon, label, colorClass, glowClass } =
-                        getTechVisual(tech);
-
-                      return (
-                        <button
-                          key={tech}
-                          type="button"
-                          onClick={() => setSelectedTech(isActive ? null : tech)}
-                          aria-pressed={isActive}
-                          aria-label={`Filtrar proyectos por ${label}`}
-                          className="group flex flex-col items-center justify-center gap-3"
-                        >
-                          <Icon
-                            className={[
-                              "text-5xl md:text-6xl transition-all duration-200",
-                              colorClass,
-                              isActive
-                                ? `scale-110 ${glowClass}`
-                                : `opacity-90 group-hover:scale-110 group-hover:opacity-100 group-hover:-translate-y-1 group-hover:${glowClass}`,
-                            ].join(" ")}
-                          />
-                          <span
-                            className={`text-xs md:text-sm font-medium text-center transition ${
-                              isActive
-                                ? "text-white"
-                                : "text-white/55 group-hover:text-white/85"
-                            }`}
-                          >
-                            {label}
-                          </span>
-
-                          <span
-                            className={`h-[2px] rounded-full transition-all duration-200 ${
-                              isActive
-                                ? "w-10 bg-white/80"
-                                : "w-0 bg-transparent group-hover:w-8 group-hover:bg-white/40"
-                            }`}
-                          />
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
+                <button
+                  key={`${tech}-${index}`}
+                  type="button"
+                  onClick={() => handleSelectTech(tech)}
+                  aria-pressed={isActive}
+                  aria-label={`Filtrar proyectos por ${label}`}
+                  className="group flex shrink-0 flex-col items-center justify-center gap-3 px-2"
+                >
+                  <Icon
+                    className={[
+                      "text-5xl md:text-6xl transition-all duration-200",
+                      colorClass,
+                      isActive
+                        ? `scale-110 ${glowClass}`
+                        : `opacity-90 group-hover:scale-110 group-hover:-translate-y-1 group-hover:opacity-100 ${glowClass}`,
+                    ].join(" ")}
+                  />
+                  <span
+                    className={`text-xs md:text-sm font-medium text-center transition ${
+                      isActive ? "text-white" : "text-white/55 group-hover:text-white/85"
+                    }`}
+                  >
+                    {label}
+                  </span>
+                  <span
+                    className={`h-[2px] rounded-full transition-all duration-200 ${
+                      isActive
+                        ? "w-10 bg-white/80"
+                        : "w-0 bg-transparent group-hover:w-8 group-hover:bg-white/40"
+                    }`}
+                  />
+                </button>
               );
             })}
           </div>
         </div>
 
-        <div className="mt-12">
+        <div ref={resultsRef} className="mt-14">
           {!selectedTech ? (
             <p className="text-white/50">
               Seleccioná una tecnología para ver los proyectos donde la utilicé.
