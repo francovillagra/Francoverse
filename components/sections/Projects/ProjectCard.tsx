@@ -41,71 +41,66 @@ export default function ProjectCard({
   return (
     <motion.article
       variants={cardVariants}
-      whileHover={{ y: -6 }}
-      className="group relative overflow-hidden rounded-[24px] border border-white/10 bg-white/[0.04] backdrop-blur-md transition-all duration-300 hover:border-white/20 hover:bg-white/[0.06]"
+      whileHover={{ y: -4 }}
+      className="group overflow-hidden rounded-[24px] border border-white/10 bg-white/[0.04] backdrop-blur-md transition-all duration-300 hover:border-white/20 hover:bg-white/[0.06] hover:shadow-[0_0_30px_rgba(255,255,255,0.05)]"
     >
-      {/* spotlight */}
-      <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-        <div className="absolute -left-10 top-0 h-40 w-40 rounded-full bg-cyan-400/10 blur-3xl" />
-        <div className="absolute right-0 top-1/3 h-36 w-36 rounded-full bg-violet-400/10 blur-3xl" />
-      </div>
-
-      {/* image */}
-      <div className="relative aspect-[16/9] w-full overflow-hidden">
-        <Image
-          src={src}
-          alt={title}
-          fill
-          className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-          priority={false}
-          onLoad={() => setLoading(false)}
-          onError={() => {
-            console.warn(`[ProjectCard] Falló cargar "${src}" → uso placeholder`);
-            setSrc("/projects/placeholder.jpg");
-            setLoading(false);
-          }}
-        />
-
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
-      </div>
-
-      {/* content */}
-      <div className="relative p-6">
-        <div className="space-y-3">
-          <h3 className="text-xl md:text-2xl font-semibold tracking-tight text-white">
-            {title}
-          </h3>
-
-          <p className="text-sm md:text-[15px] leading-relaxed text-white/72">
-            {description}
-          </p>
+      <div className="grid grid-cols-1 md:grid-cols-[1.15fr_1fr]">
+        <div className="relative min-h-[240px] md:min-h-full overflow-hidden">
+          <Image
+            src={src}
+            alt={title}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+            sizes="(min-width: 768px) 50vw, 100vw"
+            priority={false}
+            onLoad={() => setLoading(false)}
+            onError={() => {
+              console.warn(`[ProjectCard] Falló cargar "${src}" → uso placeholder`);
+              setSrc("/projects/placeholder.jpg");
+              setLoading(false);
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/10 md:bg-gradient-to-r md:from-black/20 md:via-transparent md:to-black/30" />
         </div>
 
-        <div className="mt-6 flex flex-wrap items-center gap-3">
-          {demoUrl && (
-            <a
-              href={demoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-black transition hover:opacity-90"
-            >
-              <ExternalLink size={16} />
-              Demo
-            </a>
-          )}
+        <div className="relative flex flex-col justify-between p-6 md:p-7">
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <h3 className="text-2xl md:text-3xl font-semibold tracking-tight text-white">
+                {title}
+              </h3>
 
-          {repoUrl && (
-            <a
-              href={repoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-4 py-2.5 text-sm font-medium text-white/90 transition hover:border-white/45 hover:text-white"
-            >
-              <Github size={16} />
-              Repo
-            </a>
-          )}
+              <p className="text-sm md:text-base leading-relaxed text-white/72">
+                {description}
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            {demoUrl && (
+              <a
+                href={demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-black transition hover:opacity-90"
+              >
+                <ExternalLink size={16} />
+                Demo
+              </a>
+            )}
+
+            {repoUrl && (
+              <a
+                href={repoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-4 py-2.5 text-sm font-medium text-white/90 transition hover:border-white/45 hover:text-white"
+              >
+                <Github size={16} />
+                Repo
+              </a>
+            )}
+          </div>
         </div>
       </div>
     </motion.article>
