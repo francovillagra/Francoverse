@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Github, ExternalLink } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export type Project = {
   title: string;
@@ -39,17 +39,17 @@ export default function ProjectCard({
   }, [imageUrl]);
 
   return (
-    <motion.div
+    <motion.article
       variants={cardVariants}
-      whileHover={{ y: -4 }}
-      className="group bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden border border-white/10 hover:border-white/30 transition shadow-lg"
+      whileHover={{ y: -6 }}
+      className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-300 hover:border-white/25 hover:bg-white/[0.07] hover:shadow-[0_0_30px_rgba(255,255,255,0.06)]"
     >
-      <div className="relative w-full aspect-[16/9] overflow-hidden">
+      <div className="relative aspect-[16/9] w-full overflow-hidden">
         <Image
           src={src}
           alt={title}
           fill
-          className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+          className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
           sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
           priority={false}
           onLoad={() => setLoading(false)}
@@ -59,33 +59,40 @@ export default function ProjectCard({
             setLoading(false);
           }}
         />
-        <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition" />
+
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-100" />
       </div>
 
-      <div className="p-5 flex flex-col gap-4">
-        <div className="space-y-2">
-          <h3 className="text-xl font-semibold text-white">{title}</h3>
-          <p className="text-sm leading-relaxed text-white/75">{description}</p>
+      <div className="relative p-6">
+        <div className="space-y-3">
+          <h3 className="text-xl md:text-2xl font-semibold tracking-tight text-white">
+            {title}
+          </h3>
+
+          <p className="text-sm md:text-base leading-relaxed text-white/72">
+            {description}
+          </p>
         </div>
 
-        <div className="mt-auto flex items-center gap-3">
+        <div className="mt-6 flex flex-wrap items-center gap-3">
           {demoUrl && (
             <a
               href={demoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg px-3 py-2 bg-white text-black text-sm font-semibold hover:opacity-90 transition"
+              className="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-black transition hover:opacity-90"
             >
               <ExternalLink size={16} />
               Demo
             </a>
           )}
+
           {repoUrl && (
             <a
               href={repoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg px-3 py-2 border border-white/30 hover:border-white/60 text-sm transition"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-4 py-2.5 text-sm font-medium text-white/90 transition hover:border-white/45 hover:text-white"
             >
               <Github size={16} />
               Repo
@@ -93,6 +100,6 @@ export default function ProjectCard({
           )}
         </div>
       </div>
-    </motion.div>
+    </motion.article>
   );
 }
