@@ -28,7 +28,7 @@ export default function ContactSection() {
     <section
       id="contact"
       aria-label="Contacto"
-      className="min-h-dvh w-full px-6 py-20 scroll-mt-24"
+      className="w-full px-6 pt-20 pb-10 scroll-mt-24"
     >
       <div className="mx-auto max-w-5xl">
         <div className="max-w-3xl">
