@@ -50,13 +50,8 @@ export default function Home() {
       {/* SKILLS */}
         <SkillsSectionServer />
 
-      {/* CONTACT */}
-      <section id="contact" className="min-h-dvh px-6 py-20 scroll-mt-24">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold">Contacto</h2>
-          <p className="mt-4 text-white/70">Contenido en construcción.</p>
-        </div>
-      </section>
+    {/* CONTACT */}
+      <ContactSection />
     </main>
   );
 }
