@@ -3,6 +3,7 @@ import AboutSection from "@/components/sections/About/AboutSection";
 import ProjectsSectionServer from "@/components/sections/Projects/ProjectsSectionServer";
 import SkillsSection from "@/components/sections/Skills/SkillsSection";
 import SkillsSectionServer from "@/components/sections/Skills/SkillsSectionServer";
+import ContactSection from "@/components/sections/Contact/ContactSection";
 
 export default function Home() {
   return (
