@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { FaHome, FaUser, FaCode, FaTools, FaBars, FaTimes } from "react-icons/fa";
+import { FaHome, FaUser, FaCode, FaTools, FaBars, FaTimes, FaEnvelope } from "react-icons/fa";
 import ThemeToggle from "./ThemeToggle";
 
 type NavItem = { href: string; label: string; icon: React.ReactNode };
@@ -14,7 +14,7 @@ const LINKS: NavItem[] = [
   { href: "/#about", label: "Sobre mí", icon: <FaUser /> },
   { href: "/#projects", label: "Proyectos", icon: <FaCode /> },
   { href: "/#skills", label: "Habilidades", icon: <FaTools /> },
-  { href: "/#contact", label: "Contacto", icon: <FaUser /> },
+  { href: "/#contact", label: "Contacto", icon: <FaEnvelope /> },
 ];
 
 export default function TopNav() {
