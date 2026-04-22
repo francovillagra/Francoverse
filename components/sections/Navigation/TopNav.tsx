@@ -14,6 +14,7 @@ const LINKS: NavItem[] = [
   { href: "/#about", label: "Sobre mí", icon: <FaUser /> },
   { href: "/#projects", label: "Proyectos", icon: <FaCode /> },
   { href: "/#skills", label: "Habilidades", icon: <FaTools /> },
+  { href: "/#contact", label: "Contacto", icon: <FaUser /> },
 ];
 
 export default function TopNav() {
@@ -21,10 +22,10 @@ export default function TopNav() {
   const [hovered, setHovered] = useState<string | null>(null);
   const [openMobile, setOpenMobile] = useState(false);
 
- const isActive = (href: string) => {
-  const base = href.split("#")[0] || "/";
-  return base === "/" ? pathname === "/" : pathname.startsWith(base);
-};
+  const isActive = (href: string) => {
+    const base = href.split("#")[0] || "/";
+    return base === "/" ? pathname === "/" : pathname.startsWith(base);
+  };
 
   const baseW = 48;
   const expandedW = 172;
@@ -86,9 +87,7 @@ export default function TopNav() {
                       mass: 0.7,
                     }}
                   >
-                    <span className={`text-base ${iconColorClass}`}>
-                      {icon}
-                    </span>
+                    <span className={`text-base ${iconColorClass}`}>{icon}</span>
 
                     <AnimatePresence initial={false}>
                       {isHovered && (
@@ -112,7 +111,6 @@ export default function TopNav() {
 
         <div className="w-px h-8 mx-1 bg-black/10 dark:bg-white/10" />
 
-        {/* Theme fijo */}
         <div className="flex items-center px-1">
           <ThemeToggle />
         </div>
@@ -138,7 +136,7 @@ export default function TopNav() {
         <div className="flex items-center gap-2">
           <ThemeToggle />
           <button
-            onClick={() => setOpenMobile(true)}
+            onClick={() => setOpenMobile((prev) => !prev)}
             className="
               grid place-items-center size-10 rounded-xl
               bg-white text-neutral-900 dark:bg-white/10 dark:text-white
@@ -146,19 +144,76 @@ export default function TopNav() {
               shadow-[0_10px_30px_-10px_rgba(0,0,0,0.35)]
               active:scale-95 transition
             "
-            aria-label="Abrir navegación"
+            aria-label={openMobile ? "Cerrar navegación" : "Abrir navegación"}
+            aria-expanded={openMobile}
           >
-            <FaBars />
+            {openMobile ? <FaTimes /> : <FaBars />}
           </button>
         </div>
       </div>
     </header>
   );
 
+  const MobileMenu = (
+    <AnimatePresence>
+      {openMobile && (
+        <>
+          <motion.div
+            className="md:hidden fixed inset-0 z-30 bg-black/40 backdrop-blur-[2px]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setOpenMobile(false)}
+          />
+
+          <motion.div
+            className="
+              md:hidden fixed top-[68px] left-4 right-4 z-40
+              rounded-2xl border border-black/10 dark:border-white/10
+              bg-white/90 dark:bg-[#09090f]/90 backdrop-blur-xl
+              shadow-[0_20px_60px_-20px_rgba(0,0,0,0.45)]
+              p-3
+            "
+            initial={{ opacity: 0, y: -12, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -12, scale: 0.98 }}
+            transition={{ duration: 0.18, ease: "easeOut" }}
+          >
+            <nav className="flex flex-col">
+              {LINKS.map(({ href, label, icon }) => {
+                const active = isActive(href);
+
+                return (
+                  <Link
+                    key={href}
+                    href={href}
+                    onClick={() => setOpenMobile(false)}
+                    className={`
+                      flex items-center gap-3 rounded-xl px-4 py-3 transition
+                      ${
+                        active
+                          ? "bg-black/90 text-white dark:bg-white dark:text-black"
+                          : "text-neutral-900 dark:text-white hover:bg-black/5 dark:hover:bg-white/10"
+                      }
+                    `}
+                  >
+                    <span className="text-base">{icon}</span>
+                    <span className="text-sm font-medium">{label}</span>
+                  </Link>
+                );
+              })}
+            </nav>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+
   return (
     <>
       {DesktopHeader}
       {MobileHeader}
+      {MobileMenu}
     </>
   );
 }
