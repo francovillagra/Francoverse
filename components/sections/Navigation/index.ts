@@ -1,6 +1,5 @@
 // components/sections/Navigation/index.ts
 export { default as TopNav } from "./TopNav";
-export { default as ThemeToggle } from "./ThemeToggle";
 export { default as HomeNavigation } from "./HomeNavigation";
 export { default as MobileNavigation } from "./MobileNavigation";
 export { default as NavigationMenu } from "./NavigationMenu";
