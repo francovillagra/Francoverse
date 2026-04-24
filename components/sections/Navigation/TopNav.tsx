@@ -128,7 +128,7 @@ export default function TopNav() {
           Francoverse
         </span>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center">
          
           <button
             onClick={() => setOpenMobile((prev) => !prev)}
