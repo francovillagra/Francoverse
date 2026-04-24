@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { FaHome, FaUser, FaCode, FaTools, FaBars, FaTimes, FaEnvelope } from "react-icons/fa";
-import ThemeToggle from "./ThemeToggle";
 
 type NavItem = { href: string; label: string; icon: React.ReactNode };
 
@@ -109,11 +108,7 @@ export default function TopNav() {
           })}
         </nav>
 
-        <div className="w-px h-8 mx-1 bg-black/10 dark:bg-white/10" />
-
-        <div className="flex items-center px-1">
-          <ThemeToggle />
-        </div>
+      
       </div>
     </header>
   );
@@ -134,7 +129,7 @@ export default function TopNav() {
         </span>
 
         <div className="flex items-center gap-2">
-          <ThemeToggle />
+         
           <button
             onClick={() => setOpenMobile((prev) => !prev)}
             className="
