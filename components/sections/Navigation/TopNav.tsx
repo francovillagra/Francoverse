@@ -40,7 +40,7 @@ export default function TopNav() {
       "
       aria-label="Barra de navegación superior"
     >
-      <div className="flex items-center gap-2">
+      <div className="flex items-center">
         <nav className="flex items-center gap-2">
           {LINKS.map(({ href, label, icon }) => {
             const active = isActive(href);
