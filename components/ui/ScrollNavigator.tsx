@@ -1,86 +1,95 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 
 const SECTION_IDS = ["home", "about", "projects", "skills", "contact"] as const;
 type SectionId = (typeof SECTION_IDS)[number];
 
-function getCurrentSection(): SectionId {
+type SectionData = {
+  id: SectionId;
+  element: HTMLElement;
+};
+
+function getSections(): SectionData[] {
+  return SECTION_IDS.map((id) => {
+    const element = document.getElementById(id);
+    return element ? { id, element } : null;
+  }).filter((item): item is SectionData => item !== null);
+}
+
+function getVisibleSectionIndex(sections: SectionData[]): number {
+  if (!sections.length) return 0;
+
   const scrollY = window.scrollY;
   const viewportHeight = window.innerHeight;
   const docHeight = document.documentElement.scrollHeight;
 
-  if (scrollY <= 8) return "home";
-  if (scrollY + viewportHeight >= docHeight - 8) return "contact";
+  if (scrollY <= 8) return 0;
+  if (scrollY + viewportHeight >= docHeight - 8) return sections.length - 1;
 
-  const anchor = scrollY + 140;
+  const offset = 140;
+  let index = 0;
 
-  let current: SectionId = "home";
-
-  for (const id of SECTION_IDS) {
-    const el = document.getElementById(id);
-    if (!el) continue;
-
-    if (anchor >= el.offsetTop) {
-      current = id;
+  for (let i = 0; i < sections.length; i++) {
+    const top = sections[i].element.offsetTop;
+    if (scrollY + offset >= top) {
+      index = i;
     } else {
       break;
     }
   }
 
-  return current;
+  return index;
 }
 
 export default function ScrollNavigator() {
-  const [activeSection, setActiveSection] = useState<SectionId>("home");
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
-    const update = () => {
-      setActiveSection(getCurrentSection());
+    const updateActive = () => {
+      const sections = getSections();
+      setActiveIndex(getVisibleSectionIndex(sections));
     };
 
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
+    updateActive();
+    window.addEventListener("scroll", updateActive, { passive: true });
+    window.addEventListener("resize", updateActive);
 
     return () => {
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
+      window.removeEventListener("scroll", updateActive);
+      window.removeEventListener("resize", updateActive);
     };
   }, []);
 
-  const currentIndex = useMemo(
-    () => SECTION_IDS.findIndex((id) => id === activeSection),
-    [activeSection]
-  );
+  const scrollToIndex = (index: number) => {
+    const sections = getSections();
+    const target = sections[index];
+    if (!target) return;
 
-  const goToSection = (id: SectionId) => {
-    const element = document.getElementById(id);
-    if (!element) return;
-
-    element.scrollIntoView({
+    const top = target.element.offsetTop;
+    window.scrollTo({
+      top,
       behavior: "smooth",
-      block: "start",
     });
   };
 
   const goUp = () => {
-    const current = getCurrentSection();
-    const index = SECTION_IDS.findIndex((id) => id === current);
-    if (index <= 0) return;
-    goToSection(SECTION_IDS[index - 1]);
+    const sections = getSections();
+    const current = getVisibleSectionIndex(sections);
+    if (current <= 0) return;
+    scrollToIndex(current - 1);
   };
 
   const goDown = () => {
-    const current = getCurrentSection();
-    const index = SECTION_IDS.findIndex((id) => id === current);
-    if (index >= SECTION_IDS.length - 1) return;
-    goToSection(SECTION_IDS[index + 1]);
+    const sections = getSections();
+    const current = getVisibleSectionIndex(sections);
+    if (current >= sections.length - 1) return;
+    scrollToIndex(current + 1);
   };
 
-  const atTop = currentIndex <= 0;
-  const atBottom = currentIndex >= SECTION_IDS.length - 1;
+  const atTop = activeIndex <= 0;
+  const atBottom = activeIndex >= SECTION_IDS.length - 1;
 
   return (
     <div className="hidden lg:flex fixed right-5 top-1/2 -translate-y-1/2 z-30 flex-col items-center gap-3">
@@ -98,14 +107,14 @@ export default function ScrollNavigator() {
       </button>
 
       <div className="flex flex-col items-center gap-2">
-        {SECTION_IDS.map((id) => {
-          const isActive = id === activeSection;
+        {SECTION_IDS.map((id, index) => {
+          const isActive = index === activeIndex;
 
           return (
             <button
               key={id}
               type="button"
-              onClick={() => goToSection(id)}
+              onClick={() => scrollToIndex(index)}
               aria-label={`Ir a ${id}`}
               className={`rounded-full transition-all ${
                 isActive
