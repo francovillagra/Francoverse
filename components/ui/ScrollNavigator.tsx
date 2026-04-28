@@ -62,6 +62,11 @@ export default function ScrollNavigator() {
     const updateActive = () => {
       const sections = getSections();
 
+      console.log(
+    "ScrollNavigator sections:",
+    sections.map((section) => section.id)
+  );
+
       setSectionsCount(sections.length);
       setActiveIndex(getVisibleSectionIndex(sections));
     };
