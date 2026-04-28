@@ -10,34 +10,56 @@ type SectionId = (typeof SECTION_IDS)[number];
 export default function ScrollNavigator() {
   const [activeSection, setActiveSection] = useState<SectionId>("home");
 
-useEffect(() => {
-  const observers: IntersectionObserver[] = [];
+  useEffect(() => {
+    const getSections = () =>
+      SECTION_IDS.map((id) => ({
+        id,
+        element: document.getElementById(id),
+      })).filter(
+        (section): section is { id: SectionId; element: HTMLElement } =>
+          section.element !== null
+      );
 
-  SECTION_IDS.forEach((id) => {
-    const element = document.getElementById(id);
-    if (!element) return;
+    const updateActiveSection = () => {
+      const scrollY = window.scrollY;
+      const viewportHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setActiveSection(id);
-        }
-      },
-      {
-        root: null,
-        threshold: 0.2,
-        rootMargin: "-10% 0px -35% 0px",
+      if (scrollY <= 8) {
+        setActiveSection("home");
+        return;
       }
-    );
 
-   observer.observe(element);
-    observers.push(observer);
-  });
+      if (scrollY + viewportHeight >= documentHeight - 8) {
+        setActiveSection("contact");
+        return;
+      }
 
-  return () => {
-    observers.forEach((observer) => observer.disconnect());
-  };
-}, []);
+      const viewportMiddle = scrollY + viewportHeight / 2;
+      const sections = getSections();
+
+      for (const section of sections) {
+        const top = section.element.offsetTop;
+        const height = section.element.offsetHeight;
+        const bottom = top + height;
+
+        if (viewportMiddle >= top && viewportMiddle < bottom) {
+          setActiveSection(section.id);
+          return;
+        }
+      }
+    };
+
+    updateActiveSection();
+
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+    };
+  }, []);
 
   const currentIndex = useMemo(
     () => SECTION_IDS.findIndex((id) => id === activeSection),
@@ -54,15 +76,15 @@ useEffect(() => {
     });
   };
 
-const goUp = () => {
-  if (currentIndex <= 0) return;
-  goToSection(SECTION_IDS[currentIndex - 1]);
-};
+  const goUp = () => {
+    if (currentIndex <= 0) return;
+    goToSection(SECTION_IDS[currentIndex - 1]);
+  };
 
-const goDown = () => {
-  if (currentIndex >= SECTION_IDS.length - 1) return;
-  goToSection(SECTION_IDS[currentIndex + 1]);
-};
+  const goDown = () => {
+    if (currentIndex >= SECTION_IDS.length - 1) return;
+    goToSection(SECTION_IDS[currentIndex + 1]);
+  };
 
   const atTop = currentIndex <= 0;
   const atBottom = currentIndex >= SECTION_IDS.length - 1;
