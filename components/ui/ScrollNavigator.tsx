@@ -53,21 +53,15 @@ export default function ScrollNavigator() {
     });
   };
 
-  const goUp = () => {
-    if (currentIndex <= 0) {
-      goToSection("home");
-      return;
-    }
-    goToSection(SECTION_IDS[currentIndex - 1]);
-  };
+const goUp = () => {
+  if (currentIndex <= 0) return;
+  goToSection(SECTION_IDS[currentIndex - 1]);
+};
 
-  const goDown = () => {
-    if (currentIndex >= SECTION_IDS.length - 1) {
-      goToSection("contact");
-      return;
-    }
-    goToSection(SECTION_IDS[currentIndex + 1]);
-  };
+const goDown = () => {
+  if (currentIndex >= SECTION_IDS.length - 1) return;
+  goToSection(SECTION_IDS[currentIndex + 1]);
+};
 
   const atTop = currentIndex <= 0;
   const atBottom = currentIndex >= SECTION_IDS.length - 1;
