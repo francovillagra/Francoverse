@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-
+import ScrollNavigator from "@/components/ui/ScrollNavigator";
 import SpaceBackground from "@/components/ui/SpaceBackground";
 import ClientWrapper from "@/components/layout/ClientWrapper";
 import ThemeProvider from "@/components/providers/ThemeProvider";
@@ -35,6 +35,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="relative z-20">
             <TopNav />
           </div>
+
+          {/* ScrollNavigator */}
+          <ScrollNavigator />
 
           {/* Contenido */}
        <div className="relative z-10">
