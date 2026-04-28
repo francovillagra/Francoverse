@@ -18,6 +18,10 @@ function getSections(): SectionData[] {
   }).filter((item): item is SectionData => item !== null);
 }
 
+function getElementTop(element: HTMLElement): number {
+  return element.getBoundingClientRect().top + window.scrollY;
+}
+
 function getVisibleSectionIndex(sections: SectionData[]): number {
   if (!sections.length) return 0;
 
@@ -26,48 +30,72 @@ function getVisibleSectionIndex(sections: SectionData[]): number {
   const docHeight = document.documentElement.scrollHeight;
 
   if (scrollY <= 8) return 0;
-  if (scrollY + viewportHeight >= docHeight - 8) return sections.length - 1;
 
-  const offset = 140;
-  let index = 0;
+  if (scrollY + viewportHeight >= docHeight - 8) {
+    return sections.length - 1;
+  }
+
+  const offset = viewportHeight * 0.35;
+
+  let currentIndex = 0;
 
   for (let i = 0; i < sections.length; i++) {
-    const top = sections[i].element.offsetTop;
-    if (scrollY + offset >= top) {
-      index = i;
+    const sectionTop = getElementTop(sections[i].element);
+
+    if (scrollY + offset >= sectionTop) {
+      currentIndex = i;
     } else {
       break;
     }
   }
 
-  return index;
+  return currentIndex;
 }
 
 export default function ScrollNavigator() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [sectionsCount, setSectionsCount] = useState<number>(SECTION_IDS.length);
 
   useEffect(() => {
+    let ticking = false;
+
     const updateActive = () => {
       const sections = getSections();
+
+      setSectionsCount(sections.length);
       setActiveIndex(getVisibleSectionIndex(sections));
     };
 
+    const requestUpdate = () => {
+      if (ticking) return;
+
+      ticking = true;
+
+      window.requestAnimationFrame(() => {
+        updateActive();
+        ticking = false;
+      });
+    };
+
     updateActive();
-    window.addEventListener("scroll", updateActive, { passive: true });
-    window.addEventListener("resize", updateActive);
+
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
 
     return () => {
-      window.removeEventListener("scroll", updateActive);
-      window.removeEventListener("resize", updateActive);
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
     };
   }, []);
 
   const scrollToIndex = (index: number) => {
     const sections = getSections();
     const target = sections[index];
+
     if (!target) return;
 
-    const top = target.element.offsetTop;
+    const top = getElementTop(target.element);
+
     window.scrollTo({
       top,
       behavior: "smooth",
@@ -77,25 +105,30 @@ export default function ScrollNavigator() {
   const goUp = () => {
     const sections = getSections();
     const current = getVisibleSectionIndex(sections);
+
     if (current <= 0) return;
+
     scrollToIndex(current - 1);
   };
 
   const goDown = () => {
     const sections = getSections();
     const current = getVisibleSectionIndex(sections);
+
     if (current >= sections.length - 1) return;
+
     scrollToIndex(current + 1);
   };
 
   const atTop = activeIndex <= 0;
-  const atBottom = activeIndex >= SECTION_IDS.length - 1;
+  const atBottom = activeIndex >= sectionsCount - 1;
 
   return (
     <div className="hidden lg:flex fixed right-5 top-1/2 -translate-y-1/2 z-30 flex-col items-center gap-3">
       <button
         type="button"
         onClick={goUp}
+        disabled={atTop}
         aria-label="Ir a la sección anterior"
         className={`grid place-items-center size-11 rounded-2xl border backdrop-blur-md transition ${
           atTop
@@ -129,6 +162,7 @@ export default function ScrollNavigator() {
       <button
         type="button"
         onClick={goDown}
+        disabled={atBottom}
         aria-label="Ir a la siguiente sección"
         className={`grid place-items-center size-11 rounded-2xl border backdrop-blur-md transition ${
           atBottom
