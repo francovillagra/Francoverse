@@ -4,60 +4,49 @@ import { useEffect, useMemo, useState } from "react";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 
 const SECTION_IDS = ["home", "about", "projects", "skills", "contact"] as const;
-
 type SectionId = (typeof SECTION_IDS)[number];
+
+function getCurrentSection(): SectionId {
+  const scrollY = window.scrollY;
+  const viewportHeight = window.innerHeight;
+  const docHeight = document.documentElement.scrollHeight;
+
+  if (scrollY <= 8) return "home";
+  if (scrollY + viewportHeight >= docHeight - 8) return "contact";
+
+  const anchor = scrollY + 140;
+
+  let current: SectionId = "home";
+
+  for (const id of SECTION_IDS) {
+    const el = document.getElementById(id);
+    if (!el) continue;
+
+    if (anchor >= el.offsetTop) {
+      current = id;
+    } else {
+      break;
+    }
+  }
+
+  return current;
+}
 
 export default function ScrollNavigator() {
   const [activeSection, setActiveSection] = useState<SectionId>("home");
 
   useEffect(() => {
-    const getSections = () =>
-      SECTION_IDS.map((id) => ({
-        id,
-        element: document.getElementById(id),
-      })).filter(
-        (section): section is { id: SectionId; element: HTMLElement } =>
-          section.element !== null
-      );
-
-    const updateActiveSection = () => {
-      const scrollY = window.scrollY;
-      const viewportHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-
-      if (scrollY <= 8) {
-        setActiveSection("home");
-        return;
-      }
-
-      if (scrollY + viewportHeight >= documentHeight - 8) {
-        setActiveSection("contact");
-        return;
-      }
-
-      const viewportMiddle = scrollY + viewportHeight / 2;
-      const sections = getSections();
-
-      for (const section of sections) {
-        const top = section.element.offsetTop;
-        const height = section.element.offsetHeight;
-        const bottom = top + height;
-
-        if (viewportMiddle >= top && viewportMiddle < bottom) {
-          setActiveSection(section.id);
-          return;
-        }
-      }
+    const update = () => {
+      setActiveSection(getCurrentSection());
     };
 
-    updateActiveSection();
-
-    window.addEventListener("scroll", updateActiveSection, { passive: true });
-    window.addEventListener("resize", updateActiveSection);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
 
     return () => {
-      window.removeEventListener("scroll", updateActiveSection);
-      window.removeEventListener("resize", updateActiveSection);
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
     };
   }, []);
 
@@ -77,13 +66,17 @@ export default function ScrollNavigator() {
   };
 
   const goUp = () => {
-    if (currentIndex <= 0) return;
-    goToSection(SECTION_IDS[currentIndex - 1]);
+    const current = getCurrentSection();
+    const index = SECTION_IDS.findIndex((id) => id === current);
+    if (index <= 0) return;
+    goToSection(SECTION_IDS[index - 1]);
   };
 
   const goDown = () => {
-    if (currentIndex >= SECTION_IDS.length - 1) return;
-    goToSection(SECTION_IDS[currentIndex + 1]);
+    const current = getCurrentSection();
+    const index = SECTION_IDS.findIndex((id) => id === current);
+    if (index >= SECTION_IDS.length - 1) return;
+    goToSection(SECTION_IDS[index + 1]);
   };
 
   const atTop = currentIndex <= 0;
