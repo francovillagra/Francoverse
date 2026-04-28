@@ -39,6 +39,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {/* ScrollNavigator */}
           <ScrollNavigator />
 
+          <div className="relative z-10">
+            <ClientWrapper>{children}</ClientWrapper>
+          </div>
+
           {/* Contenido */}
        <div className="relative z-10">
   <ClientWrapper>{children}</ClientWrapper>
