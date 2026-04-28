@@ -10,33 +10,34 @@ type SectionId = (typeof SECTION_IDS)[number];
 export default function ScrollNavigator() {
   const [activeSection, setActiveSection] = useState<SectionId>("home");
 
-  useEffect(() => {
-    const observers: IntersectionObserver[] = [];
+useEffect(() => {
+  const observers: IntersectionObserver[] = [];
 
-    SECTION_IDS.forEach((id) => {
-      const element = document.getElementById(id);
-      if (!element) return;
+  SECTION_IDS.forEach((id) => {
+    const element = document.getElementById(id);
+    if (!element) return;
 
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setActiveSection(id);
-          }
-        },
-        {
-          root: null,
-          threshold: 0.2,
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setActiveSection(id);
         }
-      );
+      },
+      {
+        root: null,
+        threshold: 0.2,
+        rootMargin: "-10% 0px -35% 0px",
+      }
+    );
 
-      observer.observe(element);
-      observers.push(observer);
-    });
+   observer.observe(element);
+    observers.push(observer);
+  });
 
-    return () => {
-      observers.forEach((observer) => observer.disconnect());
-    };
-  }, []);
+  return () => {
+    observers.forEach((observer) => observer.disconnect());
+  };
+}, []);
 
   const currentIndex = useMemo(
     () => SECTION_IDS.findIndex((id) => id === activeSection),
