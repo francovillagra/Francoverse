@@ -25,7 +25,7 @@ export default function ScrollNavigator() {
         },
         {
           root: null,
-          threshold: 0.45,
+          threshold: 0.2,
         }
       );
 
