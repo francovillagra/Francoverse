@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 
 const SECTION_IDS = ["home", "about", "projects", "skills", "contact"] as const;
+
 type SectionId = (typeof SECTION_IDS)[number];
 
 type SectionData = {
@@ -36,7 +37,6 @@ function getVisibleSectionIndex(sections: SectionData[]): number {
   }
 
   const offset = viewportHeight * 0.35;
-
   let currentIndex = 0;
 
   for (let i = 0; i < sections.length; i++) {
@@ -61,11 +61,6 @@ export default function ScrollNavigator() {
 
     const updateActive = () => {
       const sections = getSections();
-
-      console.log(
-    "ScrollNavigator sections:",
-    sections.map((section) => section.id)
-  );
 
       setSectionsCount(sections.length);
       setActiveIndex(getVisibleSectionIndex(sections));
@@ -99,11 +94,9 @@ export default function ScrollNavigator() {
 
     if (!target) return;
 
-    const top = getElementTop(target.element);
-
-    window.scrollTo({
-      top,
+    target.element.scrollIntoView({
       behavior: "smooth",
+      block: "start",
     });
   };
 
