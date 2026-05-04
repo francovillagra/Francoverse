@@ -19,10 +19,6 @@ function getSections(): SectionData[] {
   }).filter((item): item is SectionData => item !== null);
 }
 
-function getElementTop(element: HTMLElement): number {
-  return element.getBoundingClientRect().top + window.scrollY;
-}
-
 function getVisibleSectionIndex(sections: SectionData[]): number {
   if (!sections.length) return 0;
 
@@ -40,7 +36,8 @@ function getVisibleSectionIndex(sections: SectionData[]): number {
   let currentIndex = 0;
 
   for (let i = 0; i < sections.length; i++) {
-    const sectionTop = getElementTop(sections[i].element);
+    const sectionTop =
+      sections[i].element.getBoundingClientRect().top + window.scrollY;
 
     if (scrollY + offset >= sectionTop) {
       currentIndex = i;
@@ -92,6 +89,12 @@ export default function ScrollNavigator() {
     const sections = getSections();
     const target = sections[index];
 
+    console.log("ScrollNavigator click:", {
+      index,
+      sectionsFound: sections.map((section) => section.id),
+      target: target?.id,
+    });
+
     if (!target) return;
 
     target.element.scrollIntoView({
@@ -104,6 +107,11 @@ export default function ScrollNavigator() {
     const sections = getSections();
     const current = getVisibleSectionIndex(sections);
 
+    console.log("goUp:", {
+      current,
+      sectionsFound: sections.map((section) => section.id),
+    });
+
     if (current <= 0) return;
 
     scrollToIndex(current - 1);
@@ -113,6 +121,11 @@ export default function ScrollNavigator() {
     const sections = getSections();
     const current = getVisibleSectionIndex(sections);
 
+    console.log("goDown:", {
+      current,
+      sectionsFound: sections.map((section) => section.id),
+    });
+
     if (current >= sections.length - 1) return;
 
     scrollToIndex(current + 1);
@@ -121,23 +134,32 @@ export default function ScrollNavigator() {
   const atTop = activeIndex <= 0;
   const atBottom = activeIndex >= sectionsCount - 1;
 
+  const buttonBaseClass =
+    "grid place-items-center size-11 rounded-2xl border backdrop-blur-md transition-all duration-300 outline-none";
+
+  const buttonEnabledClass =
+    "border-white/10 bg-white/[0.05] text-white/75 hover:border-cyan-300/60 hover:text-white hover:shadow-[0_0_22px_rgba(103,232,249,0.35)] hover:ring-1 hover:ring-cyan-300/30 focus-visible:border-cyan-300/70 focus-visible:shadow-[0_0_24px_rgba(103,232,249,0.45)]";
+
+  const buttonDisabledClass =
+    "border-white/5 bg-white/[0.03] text-white/25 cursor-default";
+
   return (
-    <div className="hidden lg:flex fixed right-5 top-1/2 -translate-y-1/2 z-30 flex-col items-center gap-3">
+    <div className="hidden lg:flex fixed right-5 top-1/2 -translate-y-1/2 z-50 flex-col items-center gap-3">
       <button
         type="button"
         onClick={goUp}
         disabled={atTop}
         aria-label="Ir a la sección anterior"
-        className={`grid place-items-center size-11 rounded-2xl border backdrop-blur-md transition ${
+        className={`${buttonBaseClass} ${
           atTop
-            ? "border-white/5 bg-white/[0.03] text-white/25 cursor-default"
-            : "border-white/10 bg-white/[0.05] text-white/75 hover:border-white/25 hover:text-white hover:-translate-y-0.5"
+            ? buttonDisabledClass
+            : `${buttonEnabledClass} hover:-translate-y-0.5`
         }`}
       >
         <FaChevronUp size={14} />
       </button>
 
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col items-center gap-2 rounded-full border border-white/10 bg-black/10 px-2 py-3 backdrop-blur-md transition-all duration-300 hover:border-cyan-300/50 hover:shadow-[0_0_24px_rgba(103,232,249,0.25)]">
         {SECTION_IDS.map((id, index) => {
           const isActive = index === activeIndex;
 
@@ -147,10 +169,10 @@ export default function ScrollNavigator() {
               type="button"
               onClick={() => scrollToIndex(index)}
               aria-label={`Ir a ${id}`}
-              className={`rounded-full transition-all ${
+              className={`rounded-full transition-all duration-300 outline-none ${
                 isActive
-                  ? "h-8 w-2 bg-white/85"
-                  : "h-2.5 w-2.5 bg-white/25 hover:bg-white/55"
+                  ? "h-8 w-2 bg-white/85 shadow-[0_0_14px_rgba(255,255,255,0.45)]"
+                  : "h-2.5 w-2.5 bg-white/25 hover:bg-cyan-200/80 hover:shadow-[0_0_14px_rgba(103,232,249,0.55)] focus-visible:bg-cyan-200/80"
               }`}
             />
           );
@@ -162,10 +184,10 @@ export default function ScrollNavigator() {
         onClick={goDown}
         disabled={atBottom}
         aria-label="Ir a la siguiente sección"
-        className={`grid place-items-center size-11 rounded-2xl border backdrop-blur-md transition ${
+        className={`${buttonBaseClass} ${
           atBottom
-            ? "border-white/5 bg-white/[0.03] text-white/25 cursor-default"
-            : "border-white/10 bg-white/[0.05] text-white/75 hover:border-white/25 hover:text-white hover:translate-y-0.5"
+            ? buttonDisabledClass
+            : `${buttonEnabledClass} hover:translate-y-0.5`
         }`}
       >
         <FaChevronDown size={14} />

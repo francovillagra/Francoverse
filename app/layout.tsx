@@ -2,7 +2,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-
 import ScrollNavigator from "@/components/ui/ScrollNavigator";
 import SpaceBackground from "@/components/ui/SpaceBackground";
 import ClientWrapper from "@/components/layout/ClientWrapper";
