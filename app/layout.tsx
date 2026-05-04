@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+
 import ScrollNavigator from "@/components/ui/ScrollNavigator";
 import SpaceBackground from "@/components/ui/SpaceBackground";
 import ClientWrapper from "@/components/layout/ClientWrapper";
@@ -22,12 +23,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${inter.className} relative min-h-dvh isolate`}>
         <ThemeProvider>
           {/* Fondo espacial global */}
-          <div className="fixed inset-0 z-[5] pointer-events-none opacity-100">
-  <SpaceBackground />
-</div>
+          <div className="fixed inset-0 z-[1] pointer-events-none opacity-100">
+            <SpaceBackground />
+          </div>
 
-          {/* Capa de polvo (se activa en el commit 2) */}
-          <div className="fixed inset-0 z-[1] pointer-events-none opacity-40">
+          {/* Capa de polvo */}
+          <div className="fixed inset-0 z-[2] pointer-events-none opacity-40">
             <DustParticlesBackground />
           </div>
 
@@ -36,17 +37,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <TopNav />
           </div>
 
-          {/* ScrollNavigator */}
-          <ScrollNavigator />
-
+          {/* Contenido */}
           <div className="relative z-10">
             <ClientWrapper>{children}</ClientWrapper>
           </div>
 
-          {/* Contenido */}
-       <div className="relative z-10">
-  <ClientWrapper>{children}</ClientWrapper>
-</div>
+          {/* ScrollNavigator */}
+          <ScrollNavigator />
         </ThemeProvider>
       </body>
     </html>
