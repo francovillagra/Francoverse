@@ -9,6 +9,7 @@ export default function Home() {
     <main className="relative z-10 w-full">
       {/* HERO */}
       <section
+        id="home"
         className="relative min-h-dvh overflow-hidden grid place-items-center px-4 pt-24 md:px-6 md:pt-28 scroll-mt-24"
       >
         <div className="w-full max-w-[22rem] sm:max-w-2xl md:max-w-5xl mx-auto text-center">
@@ -34,19 +35,23 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="scroll-mt-24">
+      {/* ABOUT */}
+      <section id="about" className="relative min-h-dvh scroll-mt-24">
         <AboutSection />
       </section>
 
-      <section className="scroll-mt-24">
+      {/* PROJECTS */}
+      <section id="projects" className="relative min-h-dvh scroll-mt-24">
         <ProjectsSectionServer featuredOnly limit={6} showViewAll />
       </section>
 
-      <section className="scroll-mt-24">
+      {/* SKILLS */}
+      <section id="skills" className="relative min-h-dvh scroll-mt-24">
         <SkillsSectionServer />
       </section>
 
-      <section className="scroll-mt-24">
+      {/* CONTACT */}
+      <section id="contact" className="relative min-h-dvh scroll-mt-24">
         <ContactSection />
       </section>
     </main>
