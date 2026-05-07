@@ -22,31 +22,23 @@ function getSections(): SectionData[] {
 function getVisibleSectionIndex(sections: SectionData[]): number {
   if (!sections.length) return 0;
 
-  const scrollY = window.scrollY;
-  const viewportHeight = window.innerHeight;
-  const docHeight = document.documentElement.scrollHeight;
+  const viewportCenter = window.innerHeight / 2;
 
-  if (scrollY <= 8) return 0;
+  let closestIndex = 0;
+  let closestDistance = Number.POSITIVE_INFINITY;
 
-  if (scrollY + viewportHeight >= docHeight - 8) {
-    return sections.length - 1;
-  }
+  sections.forEach((section, index) => {
+    const rect = section.element.getBoundingClientRect();
+    const sectionCenter = rect.top + rect.height / 2;
+    const distance = Math.abs(sectionCenter - viewportCenter);
 
-  const offset = viewportHeight * 0.35;
-  let currentIndex = 0;
-
-  for (let i = 0; i < sections.length; i++) {
-    const sectionTop =
-      sections[i].element.getBoundingClientRect().top + window.scrollY;
-
-    if (scrollY + offset >= sectionTop) {
-      currentIndex = i;
-    } else {
-      break;
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      closestIndex = index;
     }
-  }
+  });
 
-  return currentIndex;
+  return closestIndex;
 }
 
 export default function ScrollNavigator() {
