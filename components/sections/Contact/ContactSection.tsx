@@ -1,25 +1,25 @@
 "use client";
 
-import { FaEnvelope, FaLinkedin, FaGithub } from "react-icons/fa";
+import { Mail, Linkedin, Github } from "lucide-react";
 
 const contactItems = [
   {
     label: "Email",
     value: "fr4nconv@gmail.com",
     href: "mailto:fr4nconv@gmail.com",
-    icon: FaEnvelope,
+    icon: Mail,
   },
   {
     label: "GitHub",
     value: "github.com/francovillagra",
     href: "https://github.com/francovillagra",
-    icon: FaGithub,
+    icon: Github,
   },
   {
     label: "LinkedIn",
     value: "linkedin.com/in/franco-villagra",
     href: "https://linkedin.com/in/franco-villagra",
-    icon: FaLinkedin,
+    icon: Linkedin,
   },
 ];
 

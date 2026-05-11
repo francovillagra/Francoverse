@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { Menu, X } from 'lucide-react';
 
 export default function MobileNavigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +16,7 @@ export default function MobileNavigation() {
         onClick={toggleMenu}
         className="text-2xl p-2 focus:outline-none"
       >
-        {isOpen ? <FaTimes /> : <FaBars />}
+        {isOpen ? <X /> : <Menu />}
       </button>
 
       {isOpen && (

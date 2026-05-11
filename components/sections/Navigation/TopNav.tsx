@@ -4,16 +4,16 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { FaHome, FaUser, FaCode, FaTools, FaBars, FaTimes, FaEnvelope } from "react-icons/fa";
+import { Home, User, Code, Wrench, Menu, X, Mail } from "lucide-react";
 
 type NavItem = { href: string; label: string; icon: React.ReactNode };
 
 const LINKS: NavItem[] = [
-  { href: "/#home", label: "Inicio", icon: <FaHome /> },
-  { href: "/#about", label: "Sobre mí", icon: <FaUser /> },
-  { href: "/#projects", label: "Proyectos", icon: <FaCode /> },
-  { href: "/#skills", label: "Habilidades", icon: <FaTools /> },
-  { href: "/#contact", label: "Contacto", icon: <FaEnvelope /> },
+  { href: "/#home", label: "Inicio", icon: <Home /> },
+  { href: "/#about", label: "Sobre mí", icon: <User /> },
+  { href: "/#projects", label: "Proyectos", icon: <Code /> },
+  { href: "/#skills", label: "Habilidades", icon: <Wrench /> },
+  { href: "/#contact", label: "Contacto", icon: <Mail /> },
 ];
 
 export default function TopNav() {
@@ -142,7 +142,7 @@ export default function TopNav() {
             aria-label={openMobile ? "Cerrar navegación" : "Abrir navegación"}
             aria-expanded={openMobile}
           >
-            {openMobile ? <FaTimes /> : <FaBars />}
+            {openMobile ? <X /> : <Menu />}
           </button>
         </div>
       </div>

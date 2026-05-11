@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { slideInFromTop, slideInFromLeft, slideInFromRight } from "@/utils/motion";
-import { SparklesIcon } from "@heroicons/react/24/solid";
+import { Sparkles } from "lucide-react";
 import Image from "next/image";
 import Button from "@/components/ui/Button";
 import Title from "@/components/ui/Title";
@@ -28,7 +28,7 @@ const HeroSection = () => {
                        bg-white/40 dark:bg-white/5 backdrop-blur
                        Welcome-box"
           >
-            <SparklesIcon className="mr-2 h-4 w-4 text-violet-500 dark:text-[#b49bff]" />
+            <Sparkles className="mr-2 h-4 w-4 text-violet-500 dark:text-[#b49bff]" />
             <Paragraph size="xs" className="font-medium uppercase tracking-tight font-sans
                                            text-neutral-800 dark:text-white/90">
               Portfolio Desarrollador Fullstack

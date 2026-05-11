@@ -33,7 +33,6 @@
 ---------------------------- */
 .Welcome-text {
   @apply text-[20px] whitespace-nowrap;
-  font-family: var(--font-cedarville), cursive;
   background:
     linear-gradient(0deg, rgba(225, 255, 255, 0.4), rgba(255, 255, 255, 0.4)),
     linear-gradient(90.01deg, #e59cff 0.01%, #9cb2ff 100%);

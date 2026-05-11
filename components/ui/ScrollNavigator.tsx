@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { FaChevronUp, FaChevronDown } from "react-icons/fa";
+import { ChevronUp, ChevronDown } from "lucide-react";
 
 const SECTION_IDS = ["home", "about", "projects", "skills", "contact"] as const;
 
@@ -148,7 +148,7 @@ export default function ScrollNavigator() {
             : `${buttonEnabledClass} hover:-translate-y-0.5`
         }`}
       >
-        <FaChevronUp size={14} />
+        <ChevronUp size={14} />
       </button>
 
       <div className="flex flex-col items-center gap-2 rounded-full border border-white/10 bg-black/10 px-2 py-3 backdrop-blur-md transition-all duration-300 hover:border-cyan-300/50 hover:shadow-[0_0_24px_rgba(103,232,249,0.25)]">
@@ -182,7 +182,7 @@ export default function ScrollNavigator() {
             : `${buttonEnabledClass} hover:translate-y-0.5`
         }`}
       >
-        <FaChevronDown size={14} />
+        <ChevronDown size={14} />
       </button>
     </div>
   );

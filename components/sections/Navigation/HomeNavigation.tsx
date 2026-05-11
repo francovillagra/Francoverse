@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { Menu, X } from "lucide-react";
 // Menú existente (se mantiene)
 import NavigationMenu from "./NavigationMenu";
 import NavigationItem from "./NavigationItem";
@@ -76,7 +76,7 @@ export default function HomeNavigation({ setActiveSection }: Props) {
 
         {/* Botón hamburguesa (móvil) */}
         <Button onClick={toggleMenu} variant="icon" className="md:hidden text-2xl p-2">
-          {isOpen ? <FaTimes /> : <FaBars />}
+          {isOpen ? <X /> : <Menu />}
         </Button>
 
         {/* Menú Mobile */}

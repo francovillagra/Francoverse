@@ -7,11 +7,7 @@ module.exports = {
     "./utils/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {
-      fontFamily: {
-        cedarville: ['var(--font-cedarville)', 'cursive'],
-      },
-    },
+    extend: {},
   },
   plugins: [],
 }

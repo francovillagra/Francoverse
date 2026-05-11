@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { slideInFromLeft, slideInFromRight, slideInFromTop } from '@/utils/motion';
-import { SparklesIcon } from '@heroicons/react/24/solid';
+import { Sparkles } from 'lucide-react';
 
 const SkillText = () => {
   return (
@@ -12,7 +12,7 @@ const SkillText = () => {
         variants={slideInFromTop(0.5)}
         className="skills-intro-box py-2 px-1 border border-[#7042f88b] opacity-90 flex items-center"
       >
-        <SparklesIcon className="text-[#b49bff] mr-1 h-3 w-3" />
+        <Sparkles className="text-[#b49bff] mr-1 h-3 w-3" />
         <span className="text-[10px] text-white font-medium uppercase tracking-tight font-sans">
           Lleva tu desarrollo al siguiente nivel con Next.js 13
         </span>
