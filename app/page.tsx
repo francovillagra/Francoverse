@@ -57,7 +57,7 @@ export default function Home() {
       </section>
 
       {/* CONTACT */}
-      <section id="contact" className="relative min-h-dvh scroll-mt-24">
+      <section id="contact" className="relative min-h-dvh scroll-mt-24 flex flex-col">
         <ContactSection />
       </section>
     </main>

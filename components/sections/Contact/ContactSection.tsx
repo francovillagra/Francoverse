@@ -25,44 +25,42 @@ const contactItems = [
 
 export default function ContactSection() {
   return (
-    <section
-      id="contact"
-      aria-label="Contacto"
-      className="w-full px-6 pt-20 pb-20 scroll-mt-24 flex flex-col justify-end"
-    >
-      <div className="mx-auto max-w-5xl">
-        <div className="max-w-3xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-white">Contacto</h2>
-          <p className="mt-4 text-white/70 text-base md:text-lg leading-relaxed">
-            Si te interesa mi perfil, querés conocer más sobre mis proyectos o
-            explorar una oportunidad de trabajo, podés contactarme a través de
-            estos canales.
-          </p>
-        </div>
+    <div className="flex-1 flex flex-col justify-end px-6 pb-12 max-w-5xl mx-auto">
 
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
-          {contactItems.map(({ label, value, href, icon: Icon }) => (
-            <a
-              key={label}
-              href={href}
-              target={href.startsWith("http") ? "_blank" : undefined}
-              rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-              className="group rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-md p-5 transition-all duration-300 hover:border-white/25 hover:bg-white/[0.06]"
-            >
-              <div className="flex items-center gap-3">
-                <Icon className="text-xl text-white/85 transition group-hover:scale-110" />
-                <span className="text-sm uppercase tracking-[0.18em] text-white/45">
-                  {label}
-                </span>
-              </div>
-
-              <p className="mt-4 text-sm md:text-base text-white/80 break-words">
-                {value}
-              </p>
-            </a>
-          ))}
-        </div>
+      <div className="max-w-3xl mb-10">
+        <h2 className="text-3xl md:text-4xl font-light tracking-wide text-fg/95">
+          Contacto
+        </h2>
+        <p className="mt-4 text-fg/60 text-base leading-relaxed">
+          Si te interesa mi perfil, querés conocer más sobre mis proyectos o
+          explorar una oportunidad de trabajo, podés contactarme a través de
+          estos canales.
+        </p>
       </div>
-    </section>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {contactItems.map(({ label, value, href, icon: Icon }) => (
+          <a
+            key={label}
+            href={href}
+            target={href.startsWith("http") ? "_blank" : undefined}
+            rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+            className="group border border-line rounded-lg p-5 transition-colors hover:border-line-strong"
+          >
+            <div className="flex items-center gap-3">
+              <Icon size={16} className="text-fg/50 group-hover:text-fg/70 transition-colors" />
+              <span className="text-xs font-mono tracking-widest uppercase text-fg/40">
+                {label}
+              </span>
+            </div>
+
+            <p className="mt-4 text-sm text-fg/70 group-hover:text-fg/90 transition-colors break-words">
+              {value}
+            </p>
+          </a>
+        ))}
+      </div>
+
+    </div>
   );
 }
