@@ -25,7 +25,7 @@ const contactItems = [
 
 export default function ContactSection() {
   return (
-    <div className="flex-1 flex flex-col justify-end px-6 pb-12 max-w-5xl mx-auto">
+    <div className="flex flex-col px-6 py-20 max-w-5xl mx-auto">
 
       <div className="max-w-3xl mb-10">
         <h2 className="text-3xl md:text-4xl font-light tracking-wide text-fg/95">

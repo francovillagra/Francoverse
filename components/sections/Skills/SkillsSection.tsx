@@ -13,7 +13,7 @@ export default function SkillsSection() {
   ];
 
   return (
-    <div className="min-h-dvh flex flex-col justify-center px-6 py-20 max-w-5xl mx-auto">
+    <div className="flex flex-col justify-center px-6 py-20 max-w-5xl mx-auto">
 
       {/* Header */}
       <div className="mb-16 text-center max-w-2xl mx-auto">

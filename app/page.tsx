@@ -52,12 +52,12 @@ export default function Home() {
       </section>
 
       {/* SKILLS */}
-      <section id="skills" className="relative min-h-dvh scroll-mt-24">
+      <section id="skills" className="relative scroll-mt-24">
         <SkillsSection />
       </section>
 
       {/* CONTACT */}
-      <section id="contact" className="relative min-h-dvh scroll-mt-24 flex flex-col">
+      <section id="contact" className="relative scroll-mt-24">
         <ContactSection />
       </section>
     </main>
