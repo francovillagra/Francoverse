@@ -1,6 +1,6 @@
 import Link from "next/link";
 import HeroSection from "@/components/sections/Hero/HeroSection";
-import ProjectsSectionServer from "@/components/sections/Projects/ProjectsSectionServer";
+import ProjectsSection from "@/components/sections/Projects/ProjectsSection";
 import SkillsSection from "@/components/sections/Skills/SkillsSection";
 import AboutSection from "@/components/sections/About/AboutSection";
 
@@ -60,7 +60,7 @@ export default async function SectionPage({ params }: Props) {
         >
           <BackHome />
           <div className="mx-auto max-w-6xl h-full flex items-center">
-            <ProjectsSectionServer />
+            <ProjectsSection />
           </div>
         </main>
       );

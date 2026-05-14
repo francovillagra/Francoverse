@@ -1,89 +1,100 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { motion } from "framer-motion";
-import ProjectCard, { Project } from "./ProjectCard";
+import { ExternalLink, Github } from 'lucide-react';
 
-type ProjectsSectionProps = {
-  projects: Project[];
-  isStandalone?: boolean;
-  limit?: number;
-  showViewAll?: boolean;
-};
-
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1, ease: "easeOut" as const },
-  },
-};
-
-export default function ProjectsSection({
-  projects,
-  isStandalone = false,
-  limit,
-  showViewAll = false,
-}: ProjectsSectionProps) {
-  const visibleProjects = typeof limit === "number" ? projects.slice(0, limit) : projects;
-
-  return (
-    <section
-      id="projects"
-      aria-label="Sección de Proyectos"
-      aria-labelledby="projects-title"
-      className={`w-full flex flex-col items-center justify-center px-6 py-16 gap-10 ${
-        isStandalone ? "h-dvh" : ""
-      }`}
-    >
-      <div className="mx-auto w-full max-w-6xl">
-        <div className="flex items-end justify-between gap-4">
-          <motion.h2
-            id="projects-title"
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            className="text-3xl md:text-4xl font-extrabold tracking-tight"
-          >
-            Proyectos
-          </motion.h2>
-
-          {showViewAll && (
-            <Link
-              href="/sections/projects"
-              className="hidden md:inline-flex rounded-lg border border-white/20 px-4 py-2 text-sm text-white/80 transition hover:border-white/40 hover:text-white"
-            >
-              Ver todos
-            </Link>
-          )}
-        </div>
-
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-          className="mt-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5"
-        >
-          {visibleProjects.map((project) => (
-            <ProjectCard key={project.title} {...project} />
-          ))}
-        </motion.div>
-
-        {showViewAll && (
-          <div className="mt-8 md:hidden">
-            <Link
-              href="/sections/projects"
-              className="inline-flex rounded-lg border border-white/20 px-4 py-2 text-sm text-white/80 transition hover:border-white/40 hover:text-white"
-            >
-              Ver todos
-            </Link>
-          </div>
-        )}
-      </div>
-    </section>
-  );
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  image?: string;
+  demoUrl?: string;
+  repoUrl?: string;
 }
 
-export { ProjectsSection };
+const projects: Project[] = [
+  {
+    id: '1',
+    title: 'Francoverse',
+    description: 'Portfolio personal diseñado para presentar mis proyectos, tecnologías y evolución profesional de una forma visual, moderna e interactiva.',
+    image: '/projects/francoverse.jpg',
+    demoUrl: '#',
+    repoUrl: 'https://github.com/francovillagra',
+  },
+  {
+    id: '2',
+    title: 'Challenge Telecom X',
+    description: 'Proyecto de análisis de datos orientado a estudiar la evasión de clientes, detectar patrones y transformar datos en información útil para la toma de decisiones.',
+    image: '/projects/telecom.jpg',
+    repoUrl: 'https://github.com/francovillagra',
+  },
+];
+
+export default function ProjectsSection() {
+  return (
+    <div className="min-h-dvh flex flex-col justify-center px-6 py-20 max-w-6xl mx-auto">
+
+      <div className="flex items-center justify-between mb-12">
+        <h2 className="text-3xl md:text-4xl font-light tracking-wide text-fg/95">
+          Proyectos
+        </h2>
+        <button className="text-xs font-mono tracking-wider uppercase text-fg/50 hover:text-fg/80 transition-colors border border-line px-4 py-2 rounded">
+          Ver todos
+        </button>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {projects.map((project) => (
+          <div
+            key={project.id}
+            className="border border-line bg-transparent rounded-lg overflow-hidden hover:border-line-strong transition-colors group"
+          >
+            {project.image && (
+              <div className="aspect-video bg-bg-elevated overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover opacity-80 group-hover:opacity-90 transition-opacity"
+                />
+              </div>
+            )}
+
+            <div className="p-6">
+              <h3 className="text-lg font-medium text-fg/90 mb-3">
+                {project.title}
+              </h3>
+              <p className="text-sm text-fg/60 leading-relaxed mb-6">
+                {project.description}
+              </p>
+
+              <div className="flex items-center gap-3">
+                {project.demoUrl && (
+                  <a
+                    href={project.demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-xs font-mono tracking-wider uppercase text-fg/70 hover:text-fg/95 transition-colors"
+                  >
+                    <ExternalLink size={14} />
+                    Demo
+                  </a>
+                )}
+                {project.repoUrl && (
+                  <a
+                    href={project.repoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-xs font-mono tracking-wider uppercase text-fg/70 hover:text-fg/95 transition-colors"
+                  >
+                    <Github size={14} />
+                    Repo
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  );
+}
