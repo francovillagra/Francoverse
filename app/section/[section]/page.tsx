@@ -1,7 +1,7 @@
 import Link from "next/link";
 import HeroSection from "@/components/sections/Hero/HeroSection";
 import ProjectsSectionServer from "@/components/sections/Projects/ProjectsSectionServer";
-import SkillsSectionServer from "@/components/sections/Skills/SkillsSectionServer";
+import SkillsSection from "@/components/sections/Skills/SkillsSection";
 import AboutSection from "@/components/sections/About/AboutSection";
 
 type SectionKey = "hero" | "about" | "projects" | "skills" | "cv";
@@ -74,7 +74,7 @@ export default async function SectionPage({ params }: Props) {
         >
           <BackHome />
           <div className="w-full max-w-6xl">
-            <SkillsSectionServer />
+            <SkillsSection />
           </div>
         </main>
       );
