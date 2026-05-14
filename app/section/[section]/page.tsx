@@ -1,11 +1,11 @@
 import Link from "next/link";
 import HeroSection from "@/components/sections/Hero/HeroSection";
-import ProjectsSection from "@/components/sections/Projects/ProjectsSection";
-import SkillsSection from "@/components/sections/Skills/SkillsSection";
+import ProjectsSectionServer from "@/components/sections/Projects/ProjectsSectionServer";
+import SkillsSectionServer from "@/components/sections/Skills/SkillsSectionServer";
 import AboutSection from "@/components/sections/About/AboutSection";
 
 type SectionKey = "hero" | "about" | "projects" | "skills" | "cv";
-type Props = { params: { section: string } };
+type Props = { params: Promise<{ section: string }> };
 
 function BackHome() {
   return (
@@ -22,8 +22,8 @@ function BackHome() {
   );
 }
 
-export default function SectionPage({ params }: Props) {
-  const { section } = params;
+export default async function SectionPage({ params }: Props) {
+  const { section } = await params;
 
   switch (section as SectionKey) {
     case "hero":
@@ -60,7 +60,7 @@ export default function SectionPage({ params }: Props) {
         >
           <BackHome />
           <div className="mx-auto max-w-6xl h-full flex items-center">
-            <ProjectsSection isStandalone />
+            <ProjectsSectionServer />
           </div>
         </main>
       );
@@ -74,7 +74,7 @@ export default function SectionPage({ params }: Props) {
         >
           <BackHome />
           <div className="w-full max-w-6xl">
-            <SkillsSection />
+            <SkillsSectionServer />
           </div>
         </main>
       );

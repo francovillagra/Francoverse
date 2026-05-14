@@ -12,25 +12,31 @@ export default function Home() {
         id="home"
         className="relative min-h-dvh overflow-hidden grid place-items-center px-4 pt-24 md:px-6 md:pt-28 scroll-mt-24"
       >
-        <div className="w-full max-w-[22rem] sm:max-w-2xl md:max-w-5xl mx-auto text-center">
-          <h1 className="text-2xl sm:text-4xl md:text-7xl font-semibold tracking-[0.04em] sm:tracking-[0.12em] md:tracking-[0.22em] uppercase leading-tight break-words">
+        <div className="w-full max-w-2xl mx-auto text-center">
+
+          {/* Position label */}
+          <p className="text-[11px] font-mono tracking-ultra uppercase text-fg/40 mb-9">
+            Desarrollador &middot; Ciberseguridad
+          </p>
+
+          {/* Name */}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-wider uppercase leading-tight text-fg/95 mb-10">
             Franco Villagra
           </h1>
 
-          <p className="mt-4 text-[10px] sm:text-xs md:text-sm tracking-[0.16em] sm:tracking-[0.3em] md:tracking-[0.45em] uppercase text-white/70">
-            Desarrollador Fullstack
+          {/* Phrase */}
+          <p className="text-base md:text-lg text-fg/70 leading-relaxed mb-14 max-w-lg mx-auto">
+            Construyo software. Aprendo a defenderlo.
           </p>
 
-          <p className="mt-3 text-sm sm:text-lg md:text-2xl text-white/80">
-            — Creando soluciones con tecnología
-          </p>
-
-          <div className="mt-8 md:mt-14">
+          {/* Tech icons */}
+          <div className="mt-14">
             <TechMarquee />
           </div>
 
-          <p className="mt-5 md:mt-8 text-white/60 text-xs sm:text-sm">
-            Navegá por las secciones desde la barra superior.
+          {/* Scroll cue */}
+          <p className="mt-12 text-fg/30 text-[11px] font-mono tracking-widest">
+            ↓ SCROLL
           </p>
         </div>
       </section>

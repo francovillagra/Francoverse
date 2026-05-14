@@ -16,8 +16,7 @@
     overflow-y: auto;
     scroll-behavior: smooth;
 
-    /* 🎨 Tema por clase (Tailwind darkMode: 'class') */
-    @apply antialiased m-0 p-0 bg-white text-neutral-900 dark:bg-[#030014] dark:text-white;
+    @apply m-0 p-0;
   }
 }
 

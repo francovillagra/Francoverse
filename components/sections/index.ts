@@ -3,5 +3,4 @@ export * from './Contact';
 export * from './Hero';
 export * from './Navigation';
 export * from './Projects';
-export * from './SectionLayouts';
 export * from './Skills';

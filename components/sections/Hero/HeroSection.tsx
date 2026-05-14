@@ -7,7 +7,6 @@ import { Sparkles } from "lucide-react";
 import Image from "next/image";
 import Button from "@/components/ui/Button";
 import Title from "@/components/ui/Title";
-import Paragraph from "@/components/ui/Paragraph";
 
 const HeroSection = () => {
   return (
@@ -29,10 +28,9 @@ const HeroSection = () => {
                        Welcome-box"
           >
             <Sparkles className="mr-2 h-4 w-4 text-violet-500 dark:text-[#b49bff]" />
-            <Paragraph size="xs" className="font-medium uppercase tracking-tight font-sans
-                                           text-neutral-800 dark:text-white/90">
+            <p className="text-xs font-medium uppercase tracking-tight font-sans text-neutral-800 dark:text-white/90">
               Portfolio Desarrollador Fullstack
-            </Paragraph>
+            </p>
           </div>
         </motion.div>
 
@@ -52,11 +50,11 @@ const HeroSection = () => {
 
         {/* Descripción */}
         <motion.div variants={slideInFromLeft(0.8)}>
-          <Paragraph className="my-5 max-w-[600px] text-lg text-neutral-600 dark:text-neutral-300">
+          <p className="my-5 max-w-[600px] text-lg text-white/80 leading-relaxed text-neutral-600 dark:text-neutral-300">
             Bienvenido a mi laboratorio digital, donde experimento con ideas, construyo soluciones
             y aprendo cada día. Me interesa resolver problemas y transformar ideas en soluciones
             funcionales. Te invito a conocer mis proyectos.
-          </Paragraph>
+          </p>
         </motion.div>
 
         {/* Botón */}
