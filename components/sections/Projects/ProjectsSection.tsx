@@ -13,20 +13,13 @@ interface Project {
 const projects: Project[] = [
   {
     id: '1',
-    title: 'Francoverse',
-    description: 'Portfolio personal diseñado para presentar mis proyectos, tecnologías y evolución profesional de una forma visual, moderna e interactiva.',
-    image: '/projects/francoverse.jpg',
-    repoUrl: 'https://github.com/francovillagra',
-  },
-  {
-    id: '2',
     title: 'Challenge Telecom X',
     description: 'Proyecto de análisis de datos orientado a estudiar la evasión de clientes, detectar patrones y transformar datos en información útil para la toma de decisiones.',
     image: '/projects/telecom.jpg',
-    repoUrl: 'https://github.com/francovillagra',
+    repoUrl: 'https://github.com/francovillagra/ChallengeTelecomX',
   },
   {
-    id: '3',
+    id: '2',
     title: 'Somos Equipo',
     description: 'Plataforma colaborativa diseñada para facilitar la gestión de equipos, proyectos y comunicación interna de forma eficiente y escalable.',
     image: '/projects/somosequipo.svg',
