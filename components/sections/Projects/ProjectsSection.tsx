@@ -15,14 +15,14 @@ const projects: Project[] = [
     id: '1',
     title: 'Challenge Telecom X',
     description: 'Proyecto de análisis de datos orientado a estudiar la evasión de clientes, detectar patrones y transformar datos en información útil para la toma de decisiones.',
-    image: '/projects/telecom.jpg',
+    image: '/projects/telecomtower.jpg',
     repoUrl: 'https://github.com/francovillagra/ChallengeTelecomX',
   },
   {
     id: '2',
     title: 'Somos Equipo',
     description: 'Plataforma colaborativa diseñada para facilitar la gestión de equipos, proyectos y comunicación interna de forma eficiente y escalable.',
-    image: '/projects/somosequipo.svg',
+    image: '/projects/somosequipo.jpg',
     repoUrl: 'https://github.com/francovillagra/somosequipo',
   },
 ];
