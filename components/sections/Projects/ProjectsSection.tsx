@@ -25,6 +25,13 @@ const projects: Project[] = [
     image: '/projects/telecom.jpg',
     repoUrl: 'https://github.com/francovillagra',
   },
+  {
+    id: '3',
+    title: 'Somos Equipo',
+    description: 'Plataforma colaborativa diseñada para facilitar la gestión de equipos, proyectos y comunicación interna de forma eficiente y escalable.',
+    image: '/projects/somosequipo.svg',
+    repoUrl: 'https://github.com/francovillagra/somosequipo',
+  },
 ];
 
 export default function ProjectsSection() {
