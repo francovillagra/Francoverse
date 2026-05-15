@@ -4,16 +4,12 @@
 
 @layer base {
   :root {
-    height: 100%;
-    color-scheme: light dark; /* ayuda a formularios/UA */
+    color-scheme: light dark;
   }
 
   html,
   body {
-    height: 100%;
-    min-height: 100%;
     overflow-x: hidden;
-    overflow-y: auto;
     scroll-behavior: smooth;
 
     @apply m-0 p-0;
