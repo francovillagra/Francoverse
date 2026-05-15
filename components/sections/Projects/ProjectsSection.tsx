@@ -1,13 +1,12 @@
 'use client';
 
-import { ExternalLink, Github } from 'lucide-react';
+import { Github } from 'lucide-react';
 
 interface Project {
   id: string;
   title: string;
   description: string;
   image?: string;
-  demoUrl?: string;
   repoUrl?: string;
 }
 
@@ -17,7 +16,6 @@ const projects: Project[] = [
     title: 'Francoverse',
     description: 'Portfolio personal diseñado para presentar mis proyectos, tecnologías y evolución profesional de una forma visual, moderna e interactiva.',
     image: '/projects/francoverse.jpg',
-    demoUrl: '#',
     repoUrl: 'https://github.com/francovillagra',
   },
   {
@@ -42,7 +40,7 @@ export default function ProjectsSection() {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project) => (
           <div
             key={project.id}
@@ -67,17 +65,6 @@ export default function ProjectsSection() {
               </p>
 
               <div className="flex items-center gap-3">
-                {project.demoUrl && (
-                  <a
-                    href={project.demoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-xs font-mono tracking-wider uppercase text-fg/70 hover:text-fg/95 transition-colors"
-                  >
-                    <ExternalLink size={14} />
-                    Demo
-                  </a>
-                )}
                 {project.repoUrl && (
                   <a
                     href={project.repoUrl}
