@@ -29,7 +29,7 @@ export default function TopNav() {
         </button>
 
         {/* Nav links */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center justify-center md:justify-end gap-4 md:gap-6">
           {sections.map((section) => (
             <button
               key={section.id}
