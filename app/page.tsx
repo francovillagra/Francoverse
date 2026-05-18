@@ -10,22 +10,22 @@ export default function Home() {
       {/* HERO */}
       <section
         id="home"
-        className="relative min-h-dvh overflow-hidden grid place-items-center px-4 pt-24 md:px-6 md:pt-28 scroll-mt-24"
+        className="relative min-h-dvh grid place-items-center px-6 pt-24 md:pt-28 scroll-mt-24"
       >
         <div className="w-full max-w-2xl mx-auto text-center">
 
           {/* Position label */}
-          <p className="text-[11px] font-mono tracking-widest md:tracking-ultra uppercase text-fg/40 mb-9">
+          <p className="text-[9px] md:text-[11px] font-mono tracking-normal md:tracking-ultra uppercase text-fg/40 mb-9">
             Desarrollador &middot; Ciberseguridad
           </p>
 
           {/* Name */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-wide md:tracking-wider uppercase leading-tight text-fg/95 mb-10">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-light tracking-tight md:tracking-wider uppercase leading-tight text-fg/95 mb-10">
             Franco Villagra
           </h1>
 
           {/* Phrase */}
-          <p className="text-base md:text-lg text-fg/70 leading-relaxed mb-14 max-w-lg mx-auto px-4 md:px-0">
+          <p className="text-sm md:text-lg text-fg/70 leading-relaxed mb-14 max-w-lg mx-auto px-4 md:px-0">
             Construyo software. Aprendo a defenderlo.
           </p>
 
