@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import Button from '@/components/ui/Button';
 
 export default function Hero() {
   return (
@@ -49,13 +48,9 @@ export default function Hero() {
         >
           {/* CTA principal → Projects */}
           <Link href="/section/projects" aria-label="Ver proyectos">
-            <Button
-              className="px-6 py-2 font-semibold
-                         bg-black text-white hover:opacity-90
-                         dark:bg-white dark:text-black transition"
-            >
+            <span className="px-6 py-2 font-semibold bg-black text-white hover:opacity-90 dark:bg-white dark:text-black transition inline-block rounded">
               Ver proyectos
-            </Button>
+            </span>
           </Link>
 
           {/* Descargar CV */}
@@ -65,14 +60,9 @@ export default function Hero() {
             rel="noopener noreferrer"
             aria-label="Descargar CV"
           >
-            <Button
-              variant="outline"
-              className="px-6 py-2 font-semibold
-                         border border-black/20 text-neutral-900 hover:bg-black/[0.05]
-                         dark:border-white/30 dark:text-white dark:hover:bg-white/10 transition"
-            >
+            <span className="px-6 py-2 font-semibold border border-black/20 text-neutral-900 hover:bg-black/[0.05] dark:border-white/30 dark:text-white dark:hover:bg-white/10 transition inline-block rounded">
               Descargar CV
-            </Button>
+            </span>
           </a>
         </motion.div>
       </div>
