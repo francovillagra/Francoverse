@@ -9,8 +9,6 @@ import NavigationItem from "./NavigationItem";
 // Botón animado nuevo
 import NavigationButton from "./NavigationButtons";
 
-// Si Button no existe, reemplazalo por un <button> nativo
-import Button from "@/components/ui/Button";
 
 type SectionKey = "home" | "about" | "skills" | "projects" | "contact" | "hero";
 
