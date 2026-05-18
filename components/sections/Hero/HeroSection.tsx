@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { slideInFromTop, slideInFromLeft, slideInFromRight } from "@/utils/motion";
 import { Sparkles } from "lucide-react";
 import Image from "next/image";
-import Button from "@/components/ui/Button";
 import Title from "@/components/ui/Title";
 
 const HeroSection = () => {
@@ -57,16 +56,6 @@ const HeroSection = () => {
           </p>
         </motion.div>
 
-        {/* Botón */}
-        <motion.div variants={slideInFromLeft(1)}>
-          <Button
-            variant="primary"
-            className="max-w-[200px] bg-black text-white hover:opacity-90
-                       dark:bg-white dark:text-black transition"
-          >
-            Saber más!
-          </Button>
-        </motion.div>
       </div>
 
       {/* Imagen derecha */}
