@@ -72,10 +72,12 @@ export default function HomeNavigation({ setActiveSection }: Props) {
           </NavigationMenu>
         </nav>
 
-        {/* Botón hamburguesa (móvil) */}
-        <Button onClick={toggleMenu} variant="icon" className="md:hidden text-2xl p-2">
-          {isOpen ? <X /> : <Menu />}
-        </Button>
+       <button 
+            onClick={toggleMenu} 
+            className="md:hidden text-2xl p-2 bg-transparent border-none text-fg hover:opacity-70 transition-opacity"
+          >
+              {isOpen ? <X /> : <Menu />}
+      </button>
 
         {/* Menú Mobile */}
         {isOpen && (
