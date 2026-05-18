@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { Github } from 'lucide-react';
 
 interface Project {
@@ -47,11 +48,12 @@ export default function ProjectsSection() {
             className="border border-line bg-transparent rounded-lg overflow-hidden hover:border-line-strong transition-colors group"
           >
             {project.image && (
-              <div className="aspect-video bg-bg-elevated overflow-hidden">
-                <img
+              <div className="relative aspect-video bg-bg-elevated overflow-hidden">
+                <Image
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover opacity-80 group-hover:opacity-90 transition-opacity"
+                  fill
+                  className="object-cover opacity-80 group-hover:opacity-90 transition-opacity"
                 />
               </div>
             )}
