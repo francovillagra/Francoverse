@@ -11,7 +11,7 @@ export default function TechMarquee() {
   ];
 
   return (
-    <div className="flex justify-center items-center gap-7 md:gap-9">
+    <div className="flex flex-wrap justify-center items-center gap-8 md:gap-9">
       {techs.map((tech) => (
         <div
           key={tech.name}
