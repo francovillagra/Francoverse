@@ -20,8 +20,55 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Francoverse",
-  description: "Portafolio de Franco Villagra",
+  title: 'Franco Villagra — Desarrollador Full Stack & Ciberseguridad',
+  description: 'Portfolio profesional de Franco Villagra: desarrollo web con Next.js, React, TypeScript, y especialización en ciberseguridad. Proyectos destacados y CV disponible.',
+  keywords: [
+    'Franco Villagra',
+    'desarrollador',
+    'full stack',
+    'ciberseguridad',
+    'Next.js',
+    'React',
+    'TypeScript',
+    'portfolio',
+    'developer',
+    'Buenos Aires',
+    'Argentina',
+  ],
+  authors: [{ name: 'Franco Villagra' }],
+  creator: 'Franco Villagra',
+  publisher: 'Franco Villagra',
+  metadataBase: new URL('https://francoverse.vercel.app'),
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: 'Franco Villagra — Desarrollador Full Stack & Ciberseguridad',
+    description: 'Portfolio profesional: desarrollo web y ciberseguridad',
+    url: 'https://francoverse.vercel.app',
+    siteName: 'Franco Villagra Portfolio',
+    locale: 'es_AR',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Franco Villagra — Desarrollador Full Stack',
+    description: 'Portfolio profesional: desarrollo web y ciberseguridad',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: 'google-site-verification-code',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
