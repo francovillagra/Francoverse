@@ -38,7 +38,7 @@ export default function ContactSection() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {contactItems.map(({ label, value, href, icon: Icon }) => (
           <a
             key={label}
@@ -59,11 +59,14 @@ export default function ContactSection() {
             </p>
           </a>
         ))}
+      </div>
 
+      {/* CV - Segunda fila */}
+      <div className="mt-6 max-w-md mx-auto w-full">
         <a
           href="/cv-franco-villagra.pdf"
           download="CV-Franco-Villagra.pdf"
-          className="border border-line bg-transparent rounded-lg p-6 hover:border-fg/30 hover:bg-fg/5 transition-all flex flex-col items-center text-center group"
+          className="border border-line bg-transparent rounded-lg p-6 hover:border-fg/30 hover:bg-fg/5 transition-all flex flex-col items-center text-center group w-full"
         >
           <svg
             width="32"
