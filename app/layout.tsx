@@ -49,11 +49,13 @@ export const metadata: Metadata = {
     siteName: 'Franco Villagra Portfolio',
     locale: 'es_AR',
     type: 'website',
+    // images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Franco Villagra — Desarrollador Full Stack' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Franco Villagra — Desarrollador Full Stack',
     description: 'Portfolio profesional: desarrollo web y ciberseguridad',
+    // images: ['/og-image.jpg'],
   },
   robots: {
     index: true,
