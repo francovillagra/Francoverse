@@ -38,7 +38,7 @@ export default function ContactSection() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         {contactItems.map(({ label, value, href, icon: Icon }) => (
           <a
             key={label}
@@ -59,6 +59,32 @@ export default function ContactSection() {
             </p>
           </a>
         ))}
+
+        <a
+          href="/cv-franco-villagra.pdf"
+          download="CV-Franco-Villagra.pdf"
+          className="border border-line bg-transparent rounded-lg p-6 hover:border-fg/30 hover:bg-fg/5 transition-all flex flex-col items-center text-center group"
+        >
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="mb-4 text-fg/60 group-hover:text-fg transition-colors"
+          >
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <polyline points="14 2 14 8 20 8" />
+            <line x1="16" y1="13" x2="8" y2="13" />
+            <line x1="16" y1="17" x2="8" y2="17" />
+            <polyline points="10 9 9 9 8 9" />
+          </svg>
+          <h3 className="font-semibold text-lg mb-1">Curriculum Vitae</h3>
+          <p className="text-fg/60 text-sm">Descargar PDF</p>
+        </a>
       </div>
 
     </div>
