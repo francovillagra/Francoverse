@@ -15,13 +15,6 @@ interface Project {
 
 const projects: Project[] = [
   {
-    id: '2',
-    title: 'Somos Equipo',
-    description: 'Plataforma colaborativa diseñada para facilitar la gestión de equipos, proyectos y comunicación interna de forma eficiente y escalable.',
-    image: '/projects/somosequipo.jpg',
-    repoUrl: 'https://github.com/francovillagra/somosequipo',
-  },
-  {
     id: '3',
     title: 'API REST Securizada',
     description: 'API REST con autenticación JWT, rate limiting, security headers y logging. PostgreSQL + Upstash Redis.',
