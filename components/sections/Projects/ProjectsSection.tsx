@@ -25,7 +25,7 @@ const projects: Project[] = [
     id: '3',
     title: 'API REST Securizada',
     description: 'API REST con autenticación JWT, rate limiting, security headers y logging. PostgreSQL + Upstash Redis.',
-    image: '/projects/api-security.jpg',
+    image: '/api-security.png',
     repoUrl: 'https://github.com/francovillagra/auth-api-security',
     demoUrl: 'https://auth-api-production.vercel.app',
     stack: ['Next.js 16', 'TypeScript', 'Prisma', 'PostgreSQL', 'JWT', 'Upstash Redis'],
