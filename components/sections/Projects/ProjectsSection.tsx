@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Github } from 'lucide-react';
+import { Github, ExternalLink } from 'lucide-react';
 
 interface Project {
   id: string;
@@ -9,6 +9,8 @@ interface Project {
   description: string;
   image?: string;
   repoUrl?: string;
+  demoUrl?: string;
+  stack?: string[];
 }
 
 const projects: Project[] = [
@@ -25,6 +27,14 @@ const projects: Project[] = [
     description: 'Plataforma colaborativa diseñada para facilitar la gestión de equipos, proyectos y comunicación interna de forma eficiente y escalable.',
     image: '/projects/somosequipo.jpg',
     repoUrl: 'https://github.com/francovillagra/somosequipo',
+  },
+  {
+    id: '3',
+    title: 'API REST Securizada',
+    description: 'API REST con autenticación JWT, rate limiting, security headers y logging. PostgreSQL + Upstash Redis.',
+    repoUrl: 'https://github.com/francovillagra/auth-api-security',
+    demoUrl: 'https://auth-api-production.vercel.app',
+    stack: ['Next.js 16', 'TypeScript', 'Prisma', 'PostgreSQL', 'JWT', 'Upstash Redis'],
   },
 ];
 
@@ -62,11 +72,24 @@ export default function ProjectsSection() {
               <h3 className="text-lg font-medium text-fg/90 mb-3">
                 {project.title}
               </h3>
-              <p className="text-sm text-fg/60 leading-relaxed mb-6">
+              <p className="text-sm text-fg/60 leading-relaxed mb-4">
                 {project.description}
               </p>
 
-              <div className="flex items-center gap-3">
+              {project.stack && (
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {project.stack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-xs font-mono text-fg/50 border border-line px-2 py-0.5 rounded"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              <div className="flex items-center gap-4">
                 {project.repoUrl && (
                   <a
                     href={project.repoUrl}
@@ -76,6 +99,17 @@ export default function ProjectsSection() {
                   >
                     <Github size={14} />
                     Repo
+                  </a>
+                )}
+                {project.demoUrl && (
+                  <a
+                    href={project.demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-xs font-mono tracking-wider uppercase text-fg/70 hover:text-fg/95 transition-colors"
+                  >
+                    <ExternalLink size={14} />
+                    Demo
                   </a>
                 )}
               </div>
