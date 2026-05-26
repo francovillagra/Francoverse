@@ -1,56 +1,113 @@
-🌌 Francoverse
----
-¡Hola! Bienvenido a mi Portfolio web, donde podés explorar mis proyectos, stack tecnológico y experiencia como Desarrollador.
----
+# 🌌 Francoverse — Portfolio
 
-## 🌐 Tecnologías utilizadas
+Mi portfolio personal como desarrollador fullstack con foco en ciberseguridad. Construido con un stack moderno, animaciones fluidas y diseño minimalista.
 
-Este proyecto está construido con un stack tecnológico robusto y actualizado para crear una experiencia web fluida y escalable:
-
-- **Next.js (v15.3.x)** — framework React con App Router, SSR/SSG y Turbopack.
-- **React (v19.1.0)** — librería base para construir interfaces reactivas.
-- **TypeScript (v5)** — tipado estático para mayor calidad y mantenibilidad.
-- **Tailwind CSS (v3.4.1)** — utilidades CSS para un diseño responsivo y consistente.
-- **Framer Motion** — animaciones declarativas y transiciones suaves.
-- **React-tsparticles / tsparticles** — partículas interactivas como fondo dinámico.
-- **Three.js, React Three Fiber y Drei** — base para integrar gráficos y efectos 3D (en expansión futura).
-- **React Icons, Heroicons, Ionicons** — íconos SVG para enriquecer la interfaz.
-- **Emotion** — estilos dinámicos por componente (CSS-in-JS).
-- **Immer** — manejo simple de estados inmutables.
-- **React Intersection Observer** — optimización de carga y animaciones según visibilidad.
+🔗 **[francoverse.vercel.app](https://francoverse.vercel.app)**
 
 ---
 
-## 🛠️ Herramientas de desarrollo y calidad
+## ✨ Secciones
 
-- **ESLint** con reglas para TypeScript + Next.js, asegurando código limpio.
-- **PostCSS y Autoprefixer** para procesamiento y compatibilidad CSS cross-browser.
-- **Yarn (v4.9.1)** como gestor de paquetes moderno y veloz.
+- **Hero** — Presentación con descarga de CV
+- **Sobre mí** — Estadísticas y experiencia
+- **Proyectos** — Cards de proyectos con imagen, stack y links
+- **Skills** — Stack tecnológico con marquee animado
+- **Contacto** — Formulario y redes sociales
 
 ---
 
-## 📜 Scripts disponibles
+## 🛠️ Stack tecnológico
 
-Iniciar el servidor de desarrollo con Turbopack:
+| Tecnología | Uso |
+|------------|-----|
+| **Next.js 16** | Framework fullstack con App Router |
+| **React 19** | UI con hooks y componentes funcionales |
+| **TypeScript** | Tipado estático en todo el proyecto |
+| **Tailwind CSS 3** | Estilos utilitarios y diseño responsivo |
+| **Framer Motion** | Animaciones declarativas y transiciones |
+| **Lucide React** | Íconos SVG |
+| **React Icons** | Íconos adicionales |
+| **next-themes** | Soporte de tema claro/oscuro |
+| **React Intersection Observer** | Animaciones al entrar en viewport |
+| **Vercel** | Deploy y hosting en producción |
 
-```
+---
+
+## 💻 Correr localmente
+
+### Prerequisitos
+
+- Node.js 18+
+- yarn
+
+### Instalación
+
+```bash
+# 1. Clonar el repositorio
+git clone https://github.com/francovillagra/Francoverse.git
+cd Francoverse
+
+# 2. Instalar dependencias
+yarn install
+
+# 3. Correr en modo desarrollo
 yarn dev
 ```
----
 
-Para construir el proyecto para producción:
-```
+Abrí [http://localhost:3000](http://localhost:3000) en tu browser.
+
+### Build de producción
+
+```bash
 yarn build
-```
-Para iniciar la aplicación en modo producción:
-```
 yarn start
 ```
-Para ejecutar el linter y verificar la calidad del código:
-```
-yarn lint
-```
+
 ---
 
-Desarrollador por Franco Villagra - Desarrollador Fullstack
-**"Creando Soluciones con tecnología"**
+## 📁 Estructura del proyecto
+
+```
+Francoverse/
+├── app/
+│   ├── page.tsx                  # Página principal
+│   └── layout.tsx                # Layout global
+├── components/
+│   ├── sections/
+│   │   ├── About/                # Sección "Sobre mí"
+│   │   ├── Projects/             # Sección de proyectos
+│   │   │   ├── ProjectsSection.tsx
+│   │   │   └── ProjectCard.tsx
+│   │   ├── Skills/               # Sección de skills
+│   │   └── Contact/              # Sección de contacto
+│   └── ui/                       # Componentes reutilizables
+├── data/
+│   └── projects.ts               # Lista de proyectos y tipo Project
+├── lib/                          # Utilidades y helpers
+├── public/                       # Assets estáticos
+└── types/                        # Tipos TypeScript globales
+```
+
+---
+
+## 📈 Proyectos destacados
+
+| Proyecto | Stack | Demo |
+|----------|-------|------|
+| **API REST Securizada** | Node.js, Express, JWT, bcrypt | [Ver](https://auth-api-production.vercel.app) |
+| **Web Vulnerability Scanner** | Next.js, TypeScript, Axios, Recharts | [Ver](https://web-vulnerability-scanner-red.vercel.app) |
+
+---
+
+## 👨‍💻 Autor
+
+**Franco Villagra** — Desarrollador Fullstack · Ciberseguridad
+
+- Portfolio: [francoverse.vercel.app](https://francoverse.vercel.app)
+- GitHub: [@francovillagra](https://github.com/francovillagra)
+
+---
+
+## 📄 Licencia
+
+MIT — libre para usar, modificar y distribuir.
