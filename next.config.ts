@@ -1,4 +1,4 @@
-const nextConfig = {
+export default {
   // 1. Desactiva temporalmente las optimizaciones problemáticas
   experimental: {
     turbo: {
