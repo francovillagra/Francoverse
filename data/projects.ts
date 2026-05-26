@@ -16,7 +16,7 @@ const projects: Project[] = [
     technologies: ["Node.js", "Express", "JWT", "bcrypt", "Railway", "Vercel"],
     liveUrl: "https://auth-api-production.vercel.app",
     githubUrl: "https://github.com/francovillagra/auth-api",
-    image: "/projects/auth-api.png",
+    image: "/api-security.png",
   },
   {
     id: "p2",
