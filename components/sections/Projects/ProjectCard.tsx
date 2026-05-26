@@ -3,16 +3,8 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Github, ExternalLink } from "lucide-react";
-import { useEffect, useState } from "react";
-
-export type Project = {
-  title: string;
-  description: string;
-  imageUrl: string;
-  techStack: string[];
-  demoUrl?: string;
-  repoUrl?: string;
-};
+import { useState } from "react";
+import type { Project } from "@/data/projects";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -23,20 +15,8 @@ const cardVariants = {
   },
 };
 
-export default function ProjectCard({
-  title,
-  description,
-  imageUrl,
-  demoUrl,
-  repoUrl,
-}: Project) {
-  const [src, setSrc] = useState(imageUrl);
-  const [, setLoading] = useState(true);
-
-  useEffect(() => {
-    setSrc(imageUrl);
-    setLoading(true);
-  }, [imageUrl]);
+export default function ProjectCard({ title, description, image, technologies, liveUrl, githubUrl }: Project) {
+  const [src, setSrc] = useState(image ?? "/projects/placeholder.jpg");
 
   return (
     <motion.article
@@ -56,12 +36,7 @@ export default function ProjectCard({
           className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           sizes="(min-width: 1280px) 25vw, (min-width: 768px) 33vw, 100vw"
           priority={false}
-          onLoad={() => setLoading(false)}
-          onError={() => {
-            console.warn(`[ProjectCard] Falló cargar "${src}" → uso placeholder`);
-            setSrc("/projects/placeholder.jpg");
-            setLoading(false);
-          }}
+          onError={() => setSrc("/projects/placeholder.jpg")}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
       </div>
@@ -71,16 +46,28 @@ export default function ProjectCard({
           <h3 className="text-base md:text-lg font-semibold tracking-tight text-white">
             {title}
           </h3>
-
           <p className="text-sm leading-relaxed text-white/70 line-clamp-3">
             {description}
           </p>
         </div>
 
+        {technologies.length > 0 && (
+          <div className="mt-3 flex flex-wrap gap-2">
+            {technologies.map((tech) => (
+              <span
+                key={tech}
+                className="text-xs font-mono text-white/50 border border-white/10 px-2 py-0.5 rounded"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        )}
+
         <div className="mt-4 flex flex-wrap items-center gap-2">
-          {demoUrl && (
+          {liveUrl && (
             <a
-              href={demoUrl}
+              href={liveUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-2 text-xs md:text-sm font-semibold text-black transition hover:opacity-90"
@@ -89,10 +76,9 @@ export default function ProjectCard({
               Demo
             </a>
           )}
-
-          {repoUrl && (
+          {githubUrl && (
             <a
-              href={repoUrl}
+              href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg border border-white/20 px-3 py-2 text-xs md:text-sm font-medium text-white/90 transition hover:border-white/45 hover:text-white"

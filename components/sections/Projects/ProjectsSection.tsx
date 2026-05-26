@@ -1,29 +1,7 @@
 'use client';
 
-import Image from 'next/image';
-import { Github, ExternalLink } from 'lucide-react';
-
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  image?: string;
-  repoUrl?: string;
-  demoUrl?: string;
-  stack?: string[];
-}
-
-const projects: Project[] = [
-  {
-    id: '3',
-    title: 'API REST Securizada',
-    description: 'API REST con autenticación JWT, rate limiting, security headers y logging. PostgreSQL + Upstash Redis.',
-    image: '/api-security.png',
-    repoUrl: 'https://github.com/francovillagra/auth-api-security',
-    demoUrl: 'https://auth-api-production.vercel.app',
-    stack: ['Next.js 16', 'TypeScript', 'Prisma', 'PostgreSQL', 'JWT', 'Upstash Redis'],
-  },
-];
+import projects from "@/data/projects";
+import ProjectCard from "./ProjectCard";
 
 export default function ProjectsSection() {
   return (
@@ -40,68 +18,7 @@ export default function ProjectsSection() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project) => (
-          <div
-            key={project.id}
-            className="border border-line bg-transparent rounded-lg overflow-hidden hover:border-line-strong transition-colors group"
-          >
-            {project.image && (
-              <div className="relative aspect-video bg-bg-elevated overflow-hidden">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover opacity-80 group-hover:opacity-90 transition-opacity"
-                />
-              </div>
-            )}
-
-            <div className="p-6">
-              <h3 className="text-lg font-medium text-fg/90 mb-3">
-                {project.title}
-              </h3>
-              <p className="text-sm text-fg/60 leading-relaxed mb-4">
-                {project.description}
-              </p>
-
-              {project.stack && (
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.stack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="text-xs font-mono text-fg/50 border border-line px-2 py-0.5 rounded"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              )}
-
-              <div className="flex items-center gap-4">
-                {project.repoUrl && (
-                  <a
-                    href={project.repoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-xs font-mono tracking-wider uppercase text-fg/70 hover:text-fg/95 transition-colors"
-                  >
-                    <Github size={14} />
-                    Repo
-                  </a>
-                )}
-                {project.demoUrl && (
-                  <a
-                    href={project.demoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-xs font-mono tracking-wider uppercase text-fg/70 hover:text-fg/95 transition-colors"
-                  >
-                    <ExternalLink size={14} />
-                    Demo
-                  </a>
-                )}
-              </div>
-            </div>
-          </div>
+          <ProjectCard key={project.id} {...project} />
         ))}
       </div>
 

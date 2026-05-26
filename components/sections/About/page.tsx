@@ -1,7 +1,7 @@
 // app/section/about/page.tsx
 
 import Stats from "@/components/sections/About/Stats";
-import { projects } from "@/data/projects";
+import projects from "@/data/projects";
 
 
 export default function Page() {
