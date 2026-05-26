@@ -25,7 +25,7 @@ const projects: Project[] = [
     technologies: ["Next.js", "TypeScript", "Axios", "Tailwind CSS", "Zod", "Recharts", "Vercel"],
     liveUrl: "https://web-vulnerability-scanner-red.vercel.app",
     githubUrl: "https://github.com/francovillagra/web-vulnerability-scanner",
-    image: "/projects/vulnerability-scanner.png",
+    image: "/projects/vulnerability-scanner.jpeg",
   },
 ];
 
