@@ -34,7 +34,7 @@ const projects: Project[] = [
     technologies: ["Next.js", "TypeScript", "FastAPI", "Python", "PostgreSQL", "Supabase", "Railway", "Recharts", "Tailwind CSS"],
     liveUrl: "https://recon-scope.vercel.app",
     githubUrl: "https://github.com/francovillagra/recon-scope",
-    image: "/projects/recon-scope.png",
+    image: "/projects/recon_scope_card_v3.svg",
   },
 ];
 
