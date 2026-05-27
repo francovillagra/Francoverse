@@ -1,4 +1,4 @@
-![Francoverse banner](https://raw.githubusercontent.com/francovillagra/Francoverse/main/public/projects/recon-scope.jpeg)
+![Francoverse banner](banner.jpeg)
 
 # Francoverse — Portfolio
 
