@@ -27,6 +27,15 @@ const projects: Project[] = [
     githubUrl: "https://github.com/francovillagra/web-vulnerability-scanner",
     image: "/projects/vulnerability-scanner.jpeg",
   },
+  {
+    id: "p3",
+    title: "recon-scope",
+    description: "Plataforma de reconocimiento automatizado para assessments de seguridad autorizados. Enumera subdominios, escanea puertos y detecta tecnologías con verificación de propiedad de dominio obligatoria antes de cualquier scan.",
+    technologies: ["Next.js", "TypeScript", "FastAPI", "Python", "PostgreSQL", "Supabase", "Railway", "Recharts", "Tailwind CSS"],
+    liveUrl: "https://recon-scope.vercel.app",
+    githubUrl: "https://github.com/francovillagra/recon-scope",
+    image: "/projects/recon-scope.png",
+  },
 ];
 
 export default projects;
