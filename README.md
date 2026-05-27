@@ -1,113 +1,115 @@
-# 🌌 Francoverse — Portfolio
+![Francoverse banner](public/projects/recon-scope.jpeg)
 
-Mi portfolio personal como desarrollador fullstack con foco en ciberseguridad. Construido con un stack moderno, animaciones fluidas y diseño minimalista.
+# Francoverse — Portfolio
+
+Mi portfolio personal como desarrollador con foco en ciberseguridad. Construido con un stack moderno, animaciones fluidas y diseño minimalista oscuro.
 
 🔗 **[francoverse.vercel.app](https://francoverse.vercel.app)**
 
 ---
 
-## ✨ Secciones
+## Secciones
 
-- **Hero** — Presentación con descarga de CV
+- **Hero** — Presentación con descarga de CV y marquee de tecnologías
 - **Sobre mí** — Estadísticas y experiencia
-- **Proyectos** — Cards de proyectos con imagen, stack y links
-- **Skills** — Stack tecnológico con marquee animado
+- **Proyectos** — Cards con imagen, stack tecnológico y links a demo/repo
+- **Skills** — Stack tecnológico con animación de marquee
 - **Contacto** — Formulario y redes sociales
 
 ---
 
-## 🛠️ Stack tecnológico
+## Stack tecnológico
 
 | Tecnología | Uso |
-|------------|-----|
-| **Next.js 16** | Framework fullstack con App Router |
+|---|---|
+| **Next.js** | Framework fullstack con App Router |
 | **React 19** | UI con hooks y componentes funcionales |
 | **TypeScript** | Tipado estático en todo el proyecto |
-| **Tailwind CSS 3** | Estilos utilitarios y diseño responsivo |
-| **Framer Motion** | Animaciones declarativas y transiciones |
+| **Tailwind CSS** | Estilos utilitarios y diseño responsivo |
+| **Framer Motion** | Animaciones declarativas y transiciones de ruta |
 | **Lucide React** | Íconos SVG |
-| **React Icons** | Íconos adicionales |
 | **next-themes** | Soporte de tema claro/oscuro |
 | **React Intersection Observer** | Animaciones al entrar en viewport |
 | **Vercel** | Deploy y hosting en producción |
 
 ---
 
-## 💻 Correr localmente
+## Proyectos incluidos
 
-### Prerequisitos
+| Proyecto | Stack | Links |
+|---|---|---|
+| **API REST Securizada** | Node.js, Express, JWT, bcrypt, Railway | [Demo](https://auth-api-production.vercel.app) · [Repo](https://github.com/francovillagra/auth-api) |
+| **Web Vulnerability Scanner** | Next.js, TypeScript, Axios, Recharts, Zod | [Demo](https://web-vulnerability-scanner-red.vercel.app) · [Repo](https://github.com/francovillagra/web-vulnerability-scanner) |
+| **recon-scope** | Next.js, FastAPI, Python, PostgreSQL, Recharts | [Repo](https://github.com/francovillagra/recon-scope) |
 
-- Node.js 18+
-- yarn
+---
 
-### Instalación
+## Correr localmente
+
+**Prerequisitos:** Node.js 18+ y yarn
 
 ```bash
-# 1. Clonar el repositorio
+# Clonar el repositorio
 git clone https://github.com/francovillagra/Francoverse.git
 cd Francoverse
 
-# 2. Instalar dependencias
+# Instalar dependencias
 yarn install
 
-# 3. Correr en modo desarrollo
+# Modo desarrollo
 yarn dev
 ```
 
 Abrí [http://localhost:3000](http://localhost:3000) en tu browser.
 
-### Build de producción
-
 ```bash
+# Build de producción
 yarn build
 yarn start
 ```
 
 ---
 
-## 📁 Estructura del proyecto
+## Estructura del proyecto
 
 ```
 Francoverse/
 ├── app/
-│   ├── page.tsx                  # Página principal
-│   └── layout.tsx                # Layout global
+│   ├── page.tsx                  # Página principal (Hero + secciones)
+│   ├── layout.tsx                # Layout global
+│   └── section/[section]/        # Ruta dinámica por sección
 ├── components/
 │   ├── sections/
-│   │   ├── About/                # Sección "Sobre mí"
-│   │   ├── Projects/             # Sección de proyectos
-│   │   │   ├── ProjectsSection.tsx
-│   │   │   └── ProjectCard.tsx
-│   │   ├── Skills/               # Sección de skills
-│   │   └── Contact/              # Sección de contacto
-│   └── ui/                       # Componentes reutilizables
+│   │   ├── Hero/                 # Sección hero
+│   │   ├── About/                # Sobre mí y estadísticas
+│   │   ├── Projects/             # ProjectsSection + ProjectCard
+│   │   ├── Skills/               # SkillsSection + marquee
+│   │   ├── Contact/              # Formulario y redes
+│   │   └── Navigation/           # TopNav, menú móvil, ThemeToggle
+│   ├── layout/                   # MainLayout, SectionContainer, wrappers
+│   └── ui/                       # Button, Title, TechMarquee, ScrollNavigator, etc.
 ├── data/
-│   └── projects.ts               # Lista de proyectos y tipo Project
-├── lib/                          # Utilidades y helpers
-├── public/                       # Assets estáticos
+│   └── projects.ts               # Array de proyectos y tipo Project
+├── constants/
+│   ├── skillsData.ts             # Skills y tecnologías
+│   └── socialsData.ts            # Links a redes sociales
+├── lib/                          # Utilidades, helpers de GitHub y proyectos
+├── public/
+│   └── projects/                 # Imágenes de los proyectos
 └── types/                        # Tipos TypeScript globales
 ```
 
 ---
 
-## 📈 Proyectos destacados
+## Autor
 
-| Proyecto | Stack | Demo |
-|----------|-------|------|
-| **API REST Securizada** | Node.js, Express, JWT, bcrypt | [Ver](https://auth-api-production.vercel.app) |
-| **Web Vulnerability Scanner** | Next.js, TypeScript, Axios, Recharts | [Ver](https://web-vulnerability-scanner-red.vercel.app) |
-
----
-
-## 👨‍💻 Autor
-
-**Franco Villagra** — Desarrollador Fullstack · Ciberseguridad
+**Franco Villagra** — Desarrollador · Ciberseguridad
 
 - Portfolio: [francoverse.vercel.app](https://francoverse.vercel.app)
 - GitHub: [@francovillagra](https://github.com/francovillagra)
 
 ---
 
-## 📄 Licencia
+## Licencia
 
 MIT — libre para usar, modificar y distribuir.
