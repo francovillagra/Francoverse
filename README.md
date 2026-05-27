@@ -1,5 +1,3 @@
-![Francoverse banner](banner.jpeg)
-
 # Francoverse — Portfolio
 
 Mi portfolio personal como desarrollador con foco en ciberseguridad. Construido con un stack moderno, animaciones fluidas y diseño minimalista oscuro.
