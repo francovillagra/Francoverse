@@ -1,6 +1,6 @@
 # Francoverse — Portfolio
 
-Mi portfolio personal como desarrollador con foco en ciberseguridad. Construido con un stack moderno, animaciones fluidas y diseño minimalista oscuro.
+Mi Portfolio personal — Proyectos en producción que combinan desarrollo (TypeScript/Next.js · Python/FastAPI) con seguridad aplicada: autenticación hardened, escaneo de vulnerabilidades y reconocimiento automatizado.
 
 🔗 **[francoverse.vercel.app](https://francoverse.vercel.app)**
 
