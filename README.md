@@ -111,4 +111,3 @@ Francoverse/
 ## Licencia
 
 MIT — libre para usar, modificar y distribuir.
-# trigger
