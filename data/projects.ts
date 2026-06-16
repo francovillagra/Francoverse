@@ -10,6 +10,15 @@ export interface Project {
 
 const projects: Project[] = [
   {
+    id: "p4",
+    title: "log-sentinel",
+    description: "SIEM-lite de Blue Team: ingiere logs, detecta patrones de ataque en tiempo real (fuerza bruta, SQLi, path traversal, XSS, scanners) y transmite alertas a un dashboard live vía WebSocket.",
+    liveUrl: "https://log-sentinel-eta.vercel.app",
+    githubUrl: "https://github.com/francovillagra/log-sentinel",
+    technologies: ["Python", "FastAPI", "Next.js", "TypeScript", "Redis", "Supabase", "WebSocket", "JWT"],
+    image: "/images/log-sentinel-banner.svg",
+  },
+  {
     id: "p1",
     title: "API REST Securizada",
     description: "API REST con autenticación JWT, refresh tokens, rate limiting y bcrypt. Endpoints de registro, login y rutas protegidas. Documentación completa con ejemplos de uso.",
