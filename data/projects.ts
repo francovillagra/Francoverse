@@ -42,7 +42,7 @@ const projects: Project[] = [
     technologies: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "JWT", "Redis", "Zod"],
     liveUrl: "https://auth-api-production.vercel.app",
     githubUrl: "https://github.com/francovillagra/auth-api-security",
-    image: "/api-security.png",
+    image: "/projects/auth-api-card.svg",
   },
   {
     id: "p2",

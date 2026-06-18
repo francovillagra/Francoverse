@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1d24"/>
+      <stop offset="100%" stop-color="#0f1117"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#bg)" rx="16"/>
+
+  <g transform="translate(356, 62)">
+    <rect x="0" y="0" width="88" height="88" rx="12" fill="#241e0a" opacity="0.95"/>
+    <rect x="14" y="44" width="60" height="36" rx="5" fill="#e8a812"/>
+    <path d="M26 44 L26 34 C26 24 34 16 44 16 C54 16 62 24 62 34 L62 44 Z" fill="#c8920a"/>
+    <path d="M30 44 L30 34 C30 27 36 22 44 22 C52 22 58 27 58 34 L58 44 Z" fill="#1a1507"/>
+    <circle cx="44" cy="62" r="5" fill="#9a6e08"/>
+    <rect x="42" y="62" width="4" height="9" rx="2" fill="#9a6e08"/>
+    <rect x="65" y="12" width="11" height="7" rx="3" fill="#f0d060"/>
+    <rect x="69" y="16" width="7" height="16" rx="3" fill="#f0d060"/>
+  </g>
+
+  <text x="400" y="202" font-family="'Inter','SF Pro Display',-apple-system,sans-serif" font-size="40" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="-0.5">Authentication &amp; Authorization API</text>
+
+  <text x="400" y="244" font-family="'Inter',-apple-system,sans-serif" font-size="16" font-weight="400" fill="#8b9099" text-anchor="middle">JWT · Rate Limiting · Security Headers · bcrypt</text>
+
+  <line x1="190" y1="280" x2="610" y2="280" stroke="#2a2d35" stroke-width="1"/>
+
+  <g transform="translate(145,300)">
+    <rect width="80" height="28" rx="6" fill="#1e2028" stroke="#2e3038" stroke-width="1"/>
+    <text x="40" y="19" font-family="'Inter',monospace" font-size="12" fill="#8b9099" text-anchor="middle">Next.js</text>
+  </g>
+  <g transform="translate(239,300)">
+    <rect width="104" height="28" rx="6" fill="#1e2028" stroke="#2e3038" stroke-width="1"/>
+    <text x="52" y="19" font-family="'Inter',monospace" font-size="12" fill="#8b9099" text-anchor="middle">TypeScript</text>
+  </g>
+  <g transform="translate(357,300)">
+    <rect width="76" height="28" rx="6" fill="#1e2028" stroke="#2e3038" stroke-width="1"/>
+    <text x="38" y="19" font-family="'Inter',monospace" font-size="12" fill="#8b9099" text-anchor="middle">Prisma</text>
+  </g>
+  <g transform="translate(447,300)">
+    <rect width="104" height="28" rx="6" fill="#1e2028" stroke="#2e3038" stroke-width="1"/>
+    <text x="52" y="19" font-family="'Inter',monospace" font-size="12" fill="#8b9099" text-anchor="middle">PostgreSQL</text>
+  </g>
+  <g transform="translate(565,300)">
+    <rect width="54" height="28" rx="6" fill="#1e2028" stroke="#2e3038" stroke-width="1"/>
+    <text x="27" y="19" font-family="'Inter',monospace" font-size="12" fill="#8b9099" text-anchor="middle">JWT</text>
+  </g>
+
+  <rect x="1" y="1" width="798" height="448" rx="16" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1"/>
+</svg>
