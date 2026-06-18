@@ -10,7 +10,7 @@ import NavigationItem from "./NavigationItem";
 import NavigationButton from "./NavigationButtons";
 
 
-type SectionKey = "home" | "about" | "skills" | "projects" | "contact" | "hero";
+type SectionKey = "home" | "about" | "projects" | "contact" | "hero";
 
 interface Props {
   /** Si está presente, el nav actúa en modo SPA interno (setea sección). Si no, navega por rutas /section/* */
@@ -19,7 +19,6 @@ interface Props {
 
 const LINKS = [
   { section: "about" as const,   label: "Sobre mí",    icon: "user",   route: "/section/about" },
-  { section: "skills" as const,  label: "Habilidades", icon: "tools",  route: "/section/skills" },
   { section: "projects" as const,label: "Proyectos",   icon: "code",   route: "/section/projects" },
   { section: "contact" as const, label: "Contacto",    icon: "mail",   route: "/#contact" },
 ];

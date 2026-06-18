@@ -5,7 +5,6 @@ export default function TopNav() {
     { id: 'home',     label: 'HOME' },
     { id: 'about',    label: 'SOBRE MÍ' },
     { id: 'projects', label: 'PROYECTOS' },
-    { id: 'skills',   label: 'HABILIDADES' },
     { id: 'contact',  label: 'CONTACTO' },
   ];
 

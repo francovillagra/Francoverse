@@ -1,13 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { skills } from '@/data/skills';
 import projects from '@/data/projects';
 import ProjectCard from '@/components/sections/Projects/ProjectCard';
 
-// Icon glyphs: text/symbol — no component library to keep system coherent.
-// FastAPI → 'FA', JWT → 'JWT' (same pattern as 'TS', 'Py').
 const ICONS: Record<string, string> = {
   'Next.js':    '▲',
   'TypeScript': 'TS',
@@ -18,9 +17,12 @@ const ICONS: Record<string, string> = {
   'JWT':        'JWT',
 };
 
-export default function SkillsSection() {
+type SortOrder = 'featured' | 'recent';
+
+export default function ProyectosPage() {
   const [active, setActive]   = useState<string | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
+  const [sort, setSort]       = useState<SortOrder>('featured');
   const shouldReduceMotion    = useReducedMotion();
 
   const toggle = (name: string) =>
@@ -29,20 +31,53 @@ export default function SkillsSection() {
   const activeSkill = skills.find(s => s.name === active) ?? null;
 
   const filtered = activeSkill
-    ? projects.filter(p => p.technologies.some(t => activeSkill.match.includes(t)))
-    : projects;
+    ? projects.filter(p => activeSkill.match.some(m => p.technologies.includes(m)))
+    : [...projects];
+
+  const displayed = sort === 'featured'
+    ? [...filtered].sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0))
+    : filtered;
 
   return (
-    <section className="px-6 py-20 max-w-5xl mx-auto" id="habilidades">
+    <main className="relative min-h-dvh px-6 py-20 max-w-5xl mx-auto">
+
+      {/* Back */}
+      <div className="mb-10">
+        <Link
+          href="/#projects"
+          className="text-xs font-mono tracking-wider uppercase text-fg/50 hover:text-fg/80 transition-colors"
+        >
+          ← Volver
+        </Link>
+      </div>
 
       {/* Header */}
-      <div className="mb-16 text-center max-w-2xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-light tracking-wide text-zinc-50 mb-6">
-          Habilidades
-        </h2>
-        <p className="text-base text-zinc-400 leading-relaxed">
-          Explorá tecnologías y descubrí en qué proyectos las apliqué.
-        </p>
+      <div className="flex items-center justify-between mb-12">
+        <h1 className="text-3xl md:text-4xl font-light tracking-wide text-fg/95">
+          Todos los proyectos
+        </h1>
+        <div className="flex items-center gap-2 text-[10px] font-mono tracking-wider uppercase">
+          <button
+            onClick={() => setSort('featured')}
+            className={`px-3 py-1.5 rounded border transition-colors ${
+              sort === 'featured'
+                ? 'border-fg/40 text-fg/90'
+                : 'border-line text-fg/40 hover:text-fg/70'
+            }`}
+          >
+            Destacados primero
+          </button>
+          <button
+            onClick={() => setSort('recent')}
+            className={`px-3 py-1.5 rounded border transition-colors ${
+              sort === 'recent'
+                ? 'border-fg/40 text-fg/90'
+                : 'border-line text-fg/40 hover:text-fg/70'
+            }`}
+          >
+            Más recientes
+          </button>
+        </div>
       </div>
 
       {/* Skill tiles */}
@@ -81,7 +116,7 @@ export default function SkillsSection() {
                 {skill.name}
               </span>
               <span
-                className="text-[9px] font-mono transition-colors duration-200"
+                className="text-[9px] font-mono"
                 style={{ color: 'rgb(161,161,170)' }}
               >
                 {count}
@@ -98,8 +133,8 @@ export default function SkillsSection() {
             <span className="text-zinc-400">
               <span style={{ color: `rgb(${activeSkill.color})` }}>{activeSkill.name}</span>
               {' '}· usada en{' '}
-              <span className="text-zinc-300">{filtered.length}</span>
-              {' '}{filtered.length === 1 ? 'proyecto' : 'proyectos'}
+              <span className="text-zinc-300">{displayed.length}</span>
+              {' '}{displayed.length === 1 ? 'proyecto' : 'proyectos'}
             </span>
             <button
               onClick={() => setActive(null)}
@@ -110,7 +145,7 @@ export default function SkillsSection() {
           </>
         ) : (
           <span className="text-zinc-400">
-            Todos los proyectos · <span className="text-zinc-300">{projects.length}</span>
+            Todos los proyectos · <span className="text-zinc-300">{displayed.length}</span>
           </span>
         )}
       </div>
@@ -118,10 +153,10 @@ export default function SkillsSection() {
       {/* Results grid */}
       <motion.div
         layout={!shouldReduceMotion}
-        className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6"
+        className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
       >
         <AnimatePresence mode="popLayout">
-          {filtered.map(project => (
+          {displayed.map(project => (
             <motion.div
               key={project.id}
               layout={!shouldReduceMotion}
@@ -140,6 +175,6 @@ export default function SkillsSection() {
         </AnimatePresence>
       </motion.div>
 
-    </section>
+    </main>
   );
 }

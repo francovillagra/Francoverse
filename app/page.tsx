@@ -1,7 +1,6 @@
 import TechMarquee from "@/components/ui/TechMarquee";
 import AboutSection from "@/components/sections/About/AboutSection";
 import ProjectsSection from "@/components/sections/Projects/ProjectsSection";
-import SkillsSection from "@/components/sections/Skills/SkillsSection";
 import ContactSection from "@/components/sections/Contact/ContactSection";
 
 export default function Home() {
@@ -71,11 +70,6 @@ export default function Home() {
       {/* PROJECTS */}
       <section id="projects" className="relative min-h-dvh scroll-mt-24">
         <ProjectsSection />
-      </section>
-
-      {/* SKILLS */}
-      <section id="skills" className="relative scroll-mt-24">
-        <SkillsSection />
       </section>
 
       {/* CONTACT */}
