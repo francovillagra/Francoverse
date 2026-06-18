@@ -23,28 +23,28 @@ export default function AboutSection() {
 
         <div className="border border-line bg-transparent rounded-lg p-6">
           <h3 className="text-sm font-mono tracking-widest uppercase text-fg/60 mb-3">
-            Base técnica
+            Formación
           </h3>
           <p className="text-sm text-fg/70 leading-relaxed">
-            Formación en desarrollo full stack, arquitectura de aplicaciones y tecnologías modernas para construir soluciones web funcionales y escalables.
+            Desarrollo Full Stack (UTN). Lic. en Ciberdefensa en curso (FADENA).
           </p>
         </div>
 
         <div className="border border-line bg-transparent rounded-lg p-6">
           <h3 className="text-sm font-mono tracking-widest uppercase text-fg/60 mb-3">
-            Especialización
+            Stack
           </h3>
           <p className="text-sm text-fg/70 leading-relaxed">
-            Orientación hacia la ciberseguridad aplicada: exponer vulnerabilidades construyendo herramientas ofensivas para después neutralizarlas en el diseño del software.
+            TypeScript y Next.js en web; Python y FastAPI en backend y tooling de seguridad.
           </p>
         </div>
 
         <div className="border border-line bg-transparent rounded-lg p-6">
           <h3 className="text-sm font-mono tracking-widest uppercase text-fg/60 mb-3">
-            Proyección
+            Foco
           </h3>
           <p className="text-sm text-fg/70 leading-relaxed">
-            Aplicar seguridad en todo el ciclo de vida del software (SDLC). Proyectos reales, desplegados en producción, construidos con estándares profesionales de seguridad.
+            Seguridad en todo el SDLC: de la herramienta ofensiva al deploy.
           </p>
         </div>
 
