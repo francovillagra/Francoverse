@@ -21,7 +21,7 @@ const LINKS = [
   { section: "about" as const,   label: "Sobre mí",    icon: "user",   route: "/section/about" },
   { section: "skills" as const,  label: "Habilidades", icon: "tools",  route: "/section/skills" },
   { section: "projects" as const,label: "Proyectos",   icon: "code",   route: "/section/projects" },
-  { section: "contact" as const, label: "Contacto",    icon: "mail",   route: "/section/contact" },
+  { section: "contact" as const, label: "Contacto",    icon: "mail",   route: "/#contact" },
 ];
 
 export default function HomeNavigation({ setActiveSection }: Props) {
@@ -33,13 +33,16 @@ export default function HomeNavigation({ setActiveSection }: Props) {
 
   const go = (section: SectionKey, route: string) => {
     if (setActiveSection) {
-      // 🔁 MODO SECCIONES (SPA interno)
       setActiveSection(section);
       setIsOpen(false);
       return;
     }
-    // 🌐 MODO RUTAS (Next.js)
-    if (pathname === route || pathname.startsWith(route + "/")) return; // evita doble push
+    if (route.startsWith("/#")) {
+      window.location.hash = route.slice(1);
+      setIsOpen(false);
+      return;
+    }
+    if (pathname === route || pathname.startsWith(route + "/")) return;
     router.push(route);
     setIsOpen(false);
   };
