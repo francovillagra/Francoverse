@@ -18,6 +18,7 @@ export function mapRepoToProject(repo: GitHubRepo): Project {
       "Proyecto sin descripción publicada todavía.",
     image: meta?.imageUrl || "/projects/placeholder.jpg",
     featured: false,
+    completedAt: '',
     technologies: meta?.techStack || fallbackTechnologies(repo),
     liveUrl: repo.homepage || undefined,
     githubUrl: repo.html_url,

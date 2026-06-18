@@ -36,7 +36,7 @@ export default function ProyectosPage() {
 
   const displayed = sort === 'featured'
     ? [...filtered].sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0))
-    : filtered;
+    : [...filtered].sort((a, b) => b.completedAt.localeCompare(a.completedAt));
 
   return (
     <main className="relative min-h-dvh px-6 py-20 max-w-5xl mx-auto">
