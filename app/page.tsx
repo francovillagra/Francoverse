@@ -16,7 +16,7 @@ export default function Home() {
 
           {/* Position label */}
           <p className="text-[9px] md:text-[11px] font-mono tracking-normal md:tracking-ultra uppercase text-fg/40 mb-9">
-            Desarrollador &middot; Ciberseguridad
+            Full Stack Developer &middot; Seguridad Aplicada
           </p>
 
           {/* Name */}
@@ -26,7 +26,7 @@ export default function Home() {
 
           {/* Phrase */}
           <p className="text-sm md:text-lg text-fg/70 leading-relaxed mb-6 max-w-lg mx-auto px-4 md:px-0">
-            Construyo software. Aprendo a defenderlo.
+            Construyo software. Lo defiendo.
           </p>
 
           <a

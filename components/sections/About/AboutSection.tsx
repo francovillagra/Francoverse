@@ -14,13 +14,7 @@ export default function AboutSection() {
       {/* Bio */}
       <div className="mb-16 max-w-3xl mx-auto space-y-6">
         <p className="text-base md:text-lg text-fg/70 leading-relaxed">
-          Soy <span className="text-fg/90 font-medium">Franco Villagra</span>, desarrollador fullstack con formación en sistemas, desarrollo de software y arquitectura de aplicaciones, con una proyección cada vez más orientada a la Seguridad Informática.
-        </p>
-        <p className="text-base md:text-lg text-fg/70 leading-relaxed">
-          Mi perfil combina una base sólida en <span className="text-fg/90">JavaScript, TypeScript, React, Next.js, Node.js, Python y bases de datos</span>, junto con un interés profundo por comprender cómo funcionan los sistemas, cómo se protegen y cómo pueden evolucionar de forma segura.
-        </p>
-        <p className="text-base md:text-lg text-fg/70 leading-relaxed">
-          Actualmente continúo mi camino en ciberdefensa e inteligencia artificial aplicada, explorando la intersección entre desarrollo, automatización, análisis y seguridad para construir soluciones modernas, confiables y con propósito.
+          Soy <span className="text-fg/90 font-medium">Desarrollador Full Stack</span>: construyo aplicaciones web aplicando ciberseguridad desde el diseño. Expongo vulnerabilidades construyendo herramientas ofensivas, para neutralizarlas. Combino desarrollo en <span className="text-fg/90">TypeScript/Next.js y Python/FastAPI</span> con seguridad a lo largo de todo el ciclo de vida del software (SDLC). Actualmente estudio la Licenciatura en Ciberdefensa (FADENA), con base sólida en Desarrollo Full Stack (UTN). Todos mis proyectos están desplegados en producción, construidos con estándares profesionales de seguridad.
         </p>
       </div>
 
@@ -41,7 +35,7 @@ export default function AboutSection() {
             Especialización
           </h3>
           <p className="text-sm text-fg/65 leading-relaxed">
-            Orientación hacia Seguridad Informática, con interés en comprender, proteger y fortalecer sistemas, procesos y entornos digitales.
+            Orientación hacia la ciberseguridad aplicada: exponer vulnerabilidades construyendo herramientas ofensivas para después neutralizarlas en el diseño del software.
           </p>
         </div>
 
@@ -50,7 +44,7 @@ export default function AboutSection() {
             Proyección
           </h3>
           <p className="text-sm text-fg/65 leading-relaxed">
-            Evolución constante en ciberdefensa, inteligencia artificial aplicada y cloud, integrando desarrollo, análisis y seguridad en un mismo camino profesional.
+            Aplicar seguridad en todo el ciclo de vida del software (SDLC). Proyectos reales, desplegados en producción, construidos con estándares profesionales de seguridad.
           </p>
         </div>
 

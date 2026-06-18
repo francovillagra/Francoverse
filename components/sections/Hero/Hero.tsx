@@ -28,7 +28,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.6 }}
         >
-          Desarrollador Fullstack | Explorando tecnologías modernas
+          Full Stack Developer · Seguridad Aplicada
         </motion.h2>
 
         <motion.p

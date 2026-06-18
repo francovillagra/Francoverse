@@ -5,8 +5,8 @@ import { Mail, Linkedin, Github } from "lucide-react";
 const contactItems = [
   {
     label: "Email",
-    value: "fr4nconv@gmail.com",
-    href: "mailto:fr4nconv@gmail.com",
+    value: "fvillagra.dev@gmail.com",
+    href: "mailto:fvillagra.dev@gmail.com",
     icon: Mail,
   },
   {

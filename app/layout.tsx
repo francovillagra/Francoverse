@@ -20,7 +20,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Franco Villagra — Desarrollador Full Stack & Ciberseguridad',
+  title: 'Franco Villagra — Full Stack Developer · Seguridad Aplicada',
   description: 'Portfolio profesional de Franco Villagra: desarrollo web con Next.js, React, TypeScript, y especialización en ciberseguridad. Proyectos destacados y CV disponible.',
   keywords: [
     'Franco Villagra',
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: 'Franco Villagra — Desarrollador Full Stack & Ciberseguridad',
+    title: 'Franco Villagra — Full Stack Developer · Seguridad Aplicada',
     description: 'Portfolio profesional: desarrollo web y ciberseguridad',
     url: 'https://francoverse.vercel.app',
     siteName: 'Franco Villagra Portfolio',
@@ -54,13 +54,13 @@ export const metadata: Metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Franco Villagra — Desarrollador Full Stack',
+        alt: 'Franco Villagra — Full Stack Developer',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Franco Villagra — Desarrollador Full Stack',
+    title: 'Franco Villagra — Full Stack Developer · Seguridad Aplicada',
     description: 'Portfolio profesional: desarrollo web y ciberseguridad',
     images: ['/og-image.png'],
   },

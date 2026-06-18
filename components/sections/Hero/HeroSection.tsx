@@ -28,7 +28,7 @@ const HeroSection = () => {
           >
             <Sparkles className="mr-2 h-4 w-4 text-violet-500 dark:text-[#b49bff]" />
             <p className="text-xs font-medium uppercase tracking-tight font-sans text-neutral-800 dark:text-white/90">
-              Portfolio Desarrollador Fullstack
+              Full Stack Developer · Seguridad Aplicada
             </p>
           </div>
         </motion.div>

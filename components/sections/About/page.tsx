@@ -9,7 +9,7 @@ export default function Page() {
     <section className="mx-auto max-w-6xl px-4 py-10">
       <h1 className="text-3xl font-bold">Sobre mí</h1>
       <p className="mt-3 opacity-90">
-        Soy Franco Villagra, desarrollador fullstack con foco en crear soluciones de alto impacto…
+        Soy Franco Villagra, Full Stack Developer que aplica ciberseguridad desde el diseño.
       </p>
 
       <Stats

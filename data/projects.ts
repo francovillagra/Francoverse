@@ -10,8 +10,17 @@ export interface Project {
 
 const projects: Project[] = [
   {
+    id: "p3",
+    title: "Recon Scope",
+    description: "Plataforma de reconocimiento automatizado para assessments de seguridad autorizados. Enumera subdominios, escanea puertos y detecta tecnologías con verificación de propiedad de dominio obligatoria antes de cualquier scan.",
+    technologies: ["Next.js", "TypeScript", "FastAPI", "Python", "PostgreSQL", "Supabase", "Railway", "Recharts", "Tailwind CSS"],
+    liveUrl: "https://recon-scope.vercel.app",
+    githubUrl: "https://github.com/francovillagra/recon-scope",
+    image: "/projects/recon_scope_card_v3.svg",
+  },
+  {
     id: "p4",
-    title: "log-sentinel",
+    title: "Log-Sentinel",
     description: "SIEM-lite de Blue Team: ingiere logs, detecta patrones de ataque en tiempo real (fuerza bruta, SQLi, path traversal, XSS, scanners) y transmite alertas a un dashboard live vía WebSocket.",
     liveUrl: "https://log-sentinel-eta.vercel.app",
     githubUrl: "https://github.com/francovillagra/log-sentinel",
@@ -20,11 +29,11 @@ const projects: Project[] = [
   },
   {
     id: "p1",
-    title: "API REST Securizada",
+    title: "Authentication & Authorization API",
     description: "API REST con autenticación JWT, refresh tokens, rate limiting y bcrypt. Endpoints de registro, login y rutas protegidas. Documentación completa con ejemplos de uso.",
-    technologies: ["Node.js", "Express", "JWT", "bcrypt", "Railway", "Vercel"],
+    technologies: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "JWT", "Upstash Redis", "Zod"],
     liveUrl: "https://auth-api-production.vercel.app",
-    githubUrl: "https://github.com/francovillagra/auth-api",
+    githubUrl: "https://github.com/francovillagra/auth-api-security",
     image: "/api-security.png",
   },
   {
@@ -35,15 +44,6 @@ const projects: Project[] = [
     liveUrl: "https://web-vulnerability-scanner-red.vercel.app",
     githubUrl: "https://github.com/francovillagra/web-vulnerability-scanner",
     image: "/projects/vulnerability-scanner.jpeg",
-  },
-  {
-    id: "p3",
-    title: "recon-scope",
-    description: "Plataforma de reconocimiento automatizado para assessments de seguridad autorizados. Enumera subdominios, escanea puertos y detecta tecnologías con verificación de propiedad de dominio obligatoria antes de cualquier scan.",
-    technologies: ["Next.js", "TypeScript", "FastAPI", "Python", "PostgreSQL", "Supabase", "Railway", "Recharts", "Tailwind CSS"],
-    liveUrl: "https://recon-scope.vercel.app",
-    githubUrl: "https://github.com/francovillagra/recon-scope",
-    image: "/projects/recon_scope_card_v3.svg",
   },
 ];
 
