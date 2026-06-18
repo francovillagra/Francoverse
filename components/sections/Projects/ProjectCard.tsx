@@ -15,7 +15,12 @@ const cardVariants = {
   },
 };
 
-export default function ProjectCard({ title, description, image, technologies, liveUrl, githubUrl }: Project) {
+type ProjectCardProps = Project & {
+  highlightTechs?: string[];
+  highlightColor?: string;
+};
+
+export default function ProjectCard({ title, description, image, technologies, liveUrl, githubUrl, highlightTechs, highlightColor }: ProjectCardProps) {
   const [src, setSrc] = useState(image ?? "/projects/placeholder.jpg");
 
   return (
@@ -53,14 +58,18 @@ export default function ProjectCard({ title, description, image, technologies, l
 
         {technologies.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-2">
-            {technologies.map((tech) => (
-              <span
-                key={tech}
-                className="text-xs font-mono text-white/50 border border-white/10 px-2 py-0.5 rounded"
-              >
-                {tech}
-              </span>
-            ))}
+            {technologies.map((tech) => {
+              const lit = highlightTechs?.includes(tech) && !!highlightColor;
+              return (
+                <span
+                  key={tech}
+                  style={lit ? { borderColor: `rgba(${highlightColor},0.5)`, color: `rgb(${highlightColor})` } : undefined}
+                  className="text-xs font-mono text-white/50 border border-white/10 px-2 py-0.5 rounded transition-colors duration-200"
+                >
+                  {tech}
+                </span>
+              );
+            })}
           </div>
         )}
 

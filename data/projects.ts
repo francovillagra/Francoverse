@@ -31,7 +31,7 @@ const projects: Project[] = [
     id: "p1",
     title: "Authentication & Authorization API",
     description: "API REST con autenticación JWT, refresh tokens, rate limiting y bcrypt. Endpoints de registro, login y rutas protegidas. Documentación completa con ejemplos de uso.",
-    technologies: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "JWT", "Upstash Redis", "Zod"],
+    technologies: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "JWT", "Redis", "Zod"],
     liveUrl: "https://auth-api-production.vercel.app",
     githubUrl: "https://github.com/francovillagra/auth-api-security",
     image: "/api-security.png",
