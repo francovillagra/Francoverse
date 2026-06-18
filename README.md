@@ -1,6 +1,8 @@
 # Francoverse — Portfolio
 
-Mi Portfolio personal — Proyectos en producción que combinan desarrollo (TypeScript/Next.js · Python/FastAPI) con seguridad aplicada: autenticación hardened, escaneo de vulnerabilidades y reconocimiento automatizado.
+Portfolio personal de Franco Villagra — Full Stack Developer · Seguridad Aplicada.
+
+Proyectos en producción que combinan desarrollo (TypeScript/Next.js · Python/FastAPI) con seguridad aplicada: autenticación hardened, escaneo de vulnerabilidades, reconocimiento automatizado y monitoreo de logs de seguridad.
 
 🔗 **[francoverse.vercel.app](https://francoverse.vercel.app)**
 
@@ -8,11 +10,10 @@ Mi Portfolio personal — Proyectos en producción que combinan desarrollo (Type
 
 ## Secciones
 
-- **Hero** — Presentación con descarga de CV y marquee de tecnologías
-- **Sobre mí** — Estadísticas y experiencia
-- **Proyectos** — Cards con imagen, stack tecnológico y links a demo/repo
-- **Skills** — Stack tecnológico con animación de marquee
-- **Contacto** — Formulario y redes sociales
+- **Hero** — Presentación con tagline, descarga de CV y marquee de tecnologías con color de marca
+- **Sobre mí** — Bio + ficha rápida (Formación / Stack / Foco)
+- **Proyectos** — Filtro interactivo por tecnología + cards con imagen, stack y links. Vista completa en `/proyectos`
+- **Contacto** — Email y redes sociales
 
 ---
 
@@ -20,14 +21,12 @@ Mi Portfolio personal — Proyectos en producción que combinan desarrollo (Type
 
 | Tecnología | Uso |
 |---|---|
-| **Next.js** | Framework fullstack con App Router |
+| **Next.js 15** | Framework fullstack con App Router |
 | **React 19** | UI con hooks y componentes funcionales |
 | **TypeScript** | Tipado estático en todo el proyecto |
 | **Tailwind CSS** | Estilos utilitarios y diseño responsivo |
-| **Framer Motion** | Animaciones declarativas y transiciones de ruta |
+| **Framer Motion** | Animaciones declarativas, AnimatePresence, useReducedMotion |
 | **Lucide React** | Íconos SVG |
-| **next-themes** | Soporte de tema claro/oscuro |
-| **React Intersection Observer** | Animaciones al entrar en viewport |
 | **Vercel** | Deploy y hosting en producción |
 
 ---
@@ -36,9 +35,10 @@ Mi Portfolio personal — Proyectos en producción que combinan desarrollo (Type
 
 | Proyecto | Stack | Links |
 |---|---|---|
-| **API REST Securizada** | Node.js, Express, JWT, bcrypt, Railway | [Demo](https://auth-api-production.vercel.app) · [Repo](https://github.com/francovillagra/auth-api) |
-| **Web Vulnerability Scanner** | Next.js, TypeScript, Axios, Recharts, Zod | [Demo](https://web-vulnerability-scanner-red.vercel.app) · [Repo](https://github.com/francovillagra/web-vulnerability-scanner) |
-| **recon-scope** | Next.js, FastAPI, Python, PostgreSQL, Recharts | [Repo](https://github.com/francovillagra/recon-scope) |
+| **Recon Scope** | Next.js · TypeScript · FastAPI · Python · PostgreSQL · Supabase · Railway · Recharts · Tailwind CSS | [Demo](https://recon-scope.vercel.app) · [Repo](https://github.com/francovillagra/recon-scope) |
+| **Log-Sentinel** | Python · FastAPI · Next.js · TypeScript · Redis · Supabase · WebSocket · JWT | [Demo](https://log-sentinel-eta.vercel.app) · [Repo](https://github.com/francovillagra/log-sentinel) |
+| **Authentication & Authorization API** | Next.js · TypeScript · Prisma · PostgreSQL · JWT · Redis · Zod | [Demo](https://auth-api-production.vercel.app) · [Repo](https://github.com/francovillagra/auth-api-security) |
+| **Web Vulnerability Scanner** | Next.js · TypeScript · Axios · Tailwind CSS · Zod · Recharts · Vercel | [Demo](https://web-vulnerability-scanner-red.vercel.app) · [Repo](https://github.com/francovillagra/web-vulnerability-scanner) |
 
 ---
 
@@ -74,24 +74,23 @@ yarn start
 Francoverse/
 ├── app/
 │   ├── page.tsx                  # Página principal (Hero + secciones)
-│   ├── layout.tsx                # Layout global
-│   └── section/[section]/        # Ruta dinámica por sección
+│   ├── layout.tsx                # Layout global y metadata SEO/OG
+│   ├── proyectos/
+│   │   └── page.tsx              # Vista completa de proyectos con sort
+│   └── section/[section]/        # Rutas dinámicas: about, projects, cv
 ├── components/
 │   ├── sections/
-│   │   ├── Hero/                 # Sección hero
-│   │   ├── About/                # Sobre mí y estadísticas
-│   │   ├── Projects/             # ProjectsSection + ProjectCard
-│   │   ├── Skills/               # SkillsSection + marquee
-│   │   ├── Contact/              # Formulario y redes
-│   │   └── Navigation/           # TopNav, menú móvil, ThemeToggle
+│   │   ├── Hero/                 # HeroSection + TechMarquee
+│   │   ├── About/                # AboutSection (bio + cards Formación/Stack/Foco)
+│   │   ├── Projects/             # ProjectsSection (filtro + grilla) + ProjectCard
+│   │   ├── Contact/              # ContactSection
+│   │   └── Navigation/           # TopNav, menú móvil, ScrollNavigator
 │   ├── layout/                   # MainLayout, SectionContainer, wrappers
-│   └── ui/                       # Button, Title, TechMarquee, ScrollNavigator, etc.
+│   └── ui/                       # Button, Title, ScrollNavigator, etc.
 ├── data/
-│   └── projects.ts               # Array de proyectos y tipo Project
-├── constants/
-│   ├── skillsData.ts             # Skills y tecnologías
-│   └── socialsData.ts            # Links a redes sociales
-├── lib/                          # Utilidades, helpers de GitHub y proyectos
+│   ├── projects.ts               # Array de proyectos (featured, completedAt, technologies)
+│   ├── skills.ts                 # 7 tiles curados con match[] y color
+│   └── techColors.ts             # Fuente única de color por tecnología (rgb)
 ├── public/
 │   └── projects/                 # Imágenes de los proyectos
 └── types/                        # Tipos TypeScript globales
@@ -99,12 +98,27 @@ Francoverse/
 
 ---
 
+## Decisiones de arquitectura
+
+**Una sola fuente de verdad por concepto:**
+- Colores de tecnología → `data/techColors.ts` (usados en TechMarquee y SkillTiles)
+- Stack de cada proyecto → `data/projects.ts` campo `technologies[]`
+- Tiles de habilidades → `data/skills.ts` con `match[]` que puente hacia `technologies[]`
+
+**Habilidades data-driven:** los tiles de la sección Proyectos derivan su conteo y filtrado del array de proyectos en tiempo de render. Agregar un proyecto nuevo con su `technologies[]` lo hace aparecer automáticamente bajo cada tile que matchee — sin tocar el componente.
+
+**Contraste monocromático:** escala de grises basada en `fg` (blanco puro) con opacidad: `fg/95` primario · `fg/70` cuerpo · `fg/60` secundario (piso) · `fg/50` hints decorativos únicamente.
+
+---
+
 ## Autor
 
-**Franco Villagra** — Desarrollador · Ciberseguridad
+**Franco Villagra** — Full Stack Developer · Seguridad Aplicada
 
 - Portfolio: [francoverse.vercel.app](https://francoverse.vercel.app)
 - GitHub: [@francovillagra](https://github.com/francovillagra)
+- LinkedIn: [linkedin.com/in/franco-villagra](https://linkedin.com/in/franco-villagra)
+- Email: fvillagra.dev@gmail.com
 
 ---
 
