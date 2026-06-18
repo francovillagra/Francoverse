@@ -15,7 +15,7 @@ export default function Home() {
         <div className="w-full max-w-2xl text-center">
 
           {/* Position label */}
-          <p className="text-[9px] md:text-[11px] font-mono tracking-normal md:tracking-ultra uppercase text-fg/40 mb-9">
+          <p className="text-[9px] md:text-[11px] font-mono tracking-normal md:tracking-ultra uppercase text-fg/60 mb-9">
             Full Stack Developer &middot; Seguridad Aplicada
           </p>
 

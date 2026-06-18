@@ -31,7 +31,7 @@ export default function ContactSection() {
         <h2 className="text-3xl md:text-4xl font-light tracking-wide text-fg/95">
           Contacto
         </h2>
-        <p className="mt-4 text-fg/60 text-base leading-relaxed">
+        <p className="mt-4 text-fg/70 text-base leading-relaxed">
           Si te interesa mi perfil, querés conocer más sobre mis proyectos o
           explorar una oportunidad de trabajo, podés contactarme a través de
           estos canales.
@@ -48,8 +48,8 @@ export default function ContactSection() {
             className="group border border-line rounded-lg p-5 transition-colors hover:border-line-strong"
           >
             <div className="flex items-center gap-3">
-              <Icon size={16} className="text-fg/50 group-hover:text-fg/70 transition-colors" />
-              <span className="text-xs font-mono tracking-widest uppercase text-fg/40">
+              <Icon size={16} className="text-fg/60 group-hover:text-fg/90 transition-colors" />
+              <span className="text-xs font-mono tracking-widest uppercase text-fg/60">
                 {label}
               </span>
             </div>
@@ -86,7 +86,7 @@ export default function ContactSection() {
             <polyline points="10 9 9 9 8 9" />
           </svg>
           <h3 className="font-semibold text-lg mb-1">Curriculum Vitae</h3>
-          <p className="text-fg/60 text-sm">Descargar PDF</p>
+          <p className="text-fg/70 text-sm">Descargar PDF</p>
         </a>
       </div>
 

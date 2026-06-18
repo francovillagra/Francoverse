@@ -82,7 +82,7 @@ export default function SkillsSection() {
               </span>
               <span
                 className="text-[9px] font-mono transition-colors duration-200"
-                style={{ color: isActive ? 'rgb(161,161,170)' : 'rgb(113,113,122)' }}
+                style={{ color: 'rgb(161,161,170)' }}
               >
                 {count}
               </span>
@@ -103,7 +103,7 @@ export default function SkillsSection() {
             </span>
             <button
               onClick={() => setActive(null)}
-              className="text-zinc-500 hover:text-zinc-300 transition-colors underline underline-offset-2"
+              className="text-zinc-400 hover:text-zinc-200 transition-colors underline underline-offset-2"
             >
               Limpiar
             </button>

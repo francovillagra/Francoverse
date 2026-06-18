@@ -22,28 +22,28 @@ export default function AboutSection() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
 
         <div className="border border-line bg-transparent rounded-lg p-6">
-          <h3 className="text-sm font-mono tracking-widest uppercase text-fg/50 mb-3">
+          <h3 className="text-sm font-mono tracking-widest uppercase text-fg/60 mb-3">
             Base técnica
           </h3>
-          <p className="text-sm text-fg/65 leading-relaxed">
+          <p className="text-sm text-fg/70 leading-relaxed">
             Formación en desarrollo full stack, arquitectura de aplicaciones y tecnologías modernas para construir soluciones web funcionales y escalables.
           </p>
         </div>
 
         <div className="border border-line bg-transparent rounded-lg p-6">
-          <h3 className="text-sm font-mono tracking-widest uppercase text-fg/50 mb-3">
+          <h3 className="text-sm font-mono tracking-widest uppercase text-fg/60 mb-3">
             Especialización
           </h3>
-          <p className="text-sm text-fg/65 leading-relaxed">
+          <p className="text-sm text-fg/70 leading-relaxed">
             Orientación hacia la ciberseguridad aplicada: exponer vulnerabilidades construyendo herramientas ofensivas para después neutralizarlas en el diseño del software.
           </p>
         </div>
 
         <div className="border border-line bg-transparent rounded-lg p-6">
-          <h3 className="text-sm font-mono tracking-widest uppercase text-fg/50 mb-3">
+          <h3 className="text-sm font-mono tracking-widest uppercase text-fg/60 mb-3">
             Proyección
           </h3>
-          <p className="text-sm text-fg/65 leading-relaxed">
+          <p className="text-sm text-fg/70 leading-relaxed">
             Aplicar seguridad en todo el ciclo de vida del software (SDLC). Proyectos reales, desplegados en producción, construidos con estándares profesionales de seguridad.
           </p>
         </div>

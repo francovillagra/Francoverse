@@ -64,7 +64,7 @@ export default function ProjectCard({ title, description, image, technologies, l
                 <span
                   key={tech}
                   style={lit ? { borderColor: `rgba(${highlightColor},0.5)`, color: `rgb(${highlightColor})` } : undefined}
-                  className="text-xs font-mono text-white/50 border border-white/10 px-2 py-0.5 rounded transition-colors duration-200"
+                  className="text-xs font-mono text-white/70 border border-white/10 px-2 py-0.5 rounded transition-colors duration-200"
                 >
                   {tech}
                 </span>
