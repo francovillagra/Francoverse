@@ -14,7 +14,7 @@ export default function AboutSection() {
       {/* Bio */}
       <div className="mb-16 max-w-3xl mx-auto space-y-6">
         <p className="text-base md:text-lg text-fg/70 leading-relaxed">
-          Soy <span className="text-fg/90 font-medium">Desarrollador Full Stack</span>: construyo aplicaciones web aplicando ciberseguridad desde el diseño. Expongo vulnerabilidades construyendo herramientas ofensivas, para neutralizarlas. Combino desarrollo en <span className="text-fg/90">TypeScript/Next.js y Python/FastAPI</span> con seguridad a lo largo de todo el ciclo de vida del software (SDLC). Actualmente estudio la Licenciatura en Ciberdefensa (FADENA), con base sólida en Desarrollo Full Stack (UTN). Todos mis proyectos están desplegados en producción, construidos con estándares profesionales de seguridad.
+          Soy <span className="text-fg/90 font-medium">Desarrollador Full Stack</span>: construyo aplicaciones web aplicando ciberseguridad desde el diseño. Expongo vulnerabilidades construyendo herramientas ofensivas, para neutralizarlas. Combino desarrollo en <span className="text-fg/90">TypeScript/Next.js y Python/FastAPI</span> con seguridad a lo largo de todo el ciclo de vida del software (SDLC). Actualmente estudio la Licenciatura en Ciberdefensa (FADENA), con base sólida en Desarrollo Full Stack (UTN). Mis proyectos son públicos en GitHub, con el código a la vista.
         </p>
       </div>
 
