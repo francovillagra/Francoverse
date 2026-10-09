@@ -1,6 +1,7 @@
 // app/layout.tsx
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import ScrollNavigator from "@/components/ui/ScrollNavigator";
 import ClientWrapper from "@/components/layout/ClientWrapper";
@@ -21,7 +22,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: 'Franco Villagra — Full Stack Developer · Seguridad Aplicada',
-  description: 'Portfolio profesional de Franco Villagra: desarrollo web con Next.js, React, TypeScript, y especialización en ciberseguridad. Proyectos destacados y CV disponible.',
+  description: 'Portfolio de Franco Villagra: desarrollo web con Next.js, React y TypeScript, y seguridad aplicada. Revisiones de seguridad para aplicaciones web, proyectos y CV.',
   keywords: [
     'Franco Villagra',
     'desarrollador',
@@ -98,6 +99,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {/* ScrollNavigator */}
           <ScrollNavigator />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
