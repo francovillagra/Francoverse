@@ -29,7 +29,7 @@ Proyectos públicos que combinan desarrollo (TypeScript/Next.js · Python/FastAP
 | **Framer Motion** | Animaciones declarativas, AnimatePresence, useReducedMotion |
 | **Lucide React** | Íconos SVG |
 | **Vercel** | Deploy y hosting |
-| **Vercel Web Analytics** | Conteo de visitas (hay que habilitarlo en el proyecto de Vercel) |
+| **Vercel Web Analytics** | Conteo de visitas, solo en el despliegue de Vercel (hay que habilitarlo en el proyecto) |
 
 ---
 
@@ -56,7 +56,7 @@ Así el portfolio no promete nada que no responda. Para reactivar una demo, alca
 
 ## Seguridad del sitio
 
-Los headers se definen en `lib/security-headers.ts` y se aplican a todas las rutas desde `next.config.ts`:
+Los headers se definen en `lib/security-headers.ts` y se aplican a todas las rutas desde `next.config.ts`. En el modo estático (ver más abajo) salen de `public/_headers`, que tiene que decir lo mismo:
 
 - `Content-Security-Policy` (solo en producción; en desarrollo React Refresh necesita `eval`)
 - `Strict-Transport-Security`, `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`
@@ -90,6 +90,21 @@ Abrí [http://localhost:3000](http://localhost:3000) en tu browser.
 yarn build
 yarn start
 ```
+
+---
+
+## Publicar como sitio estático (Cloudflare Pages, Netlify)
+
+El sitio no usa funciones de servidor, así que se puede generar como archivos estáticos y alojarlo gratis, también para uso comercial (el plan Hobby de Vercel es solo para uso no comercial).
+
+```bash
+NEXT_PUBLIC_STATIC_EXPORT=1 yarn build   # genera la carpeta out/
+```
+
+- Variables del hosting: `NEXT_PUBLIC_STATIC_EXPORT=1` y, si cambia el dominio, `NEXT_PUBLIC_SITE_URL=https://tu-dominio` (se usa en el sitemap, `robots.txt` y los metadatos).
+- Las cabeceras de seguridad salen de `public/_headers`; Cloudflare Pages y Netlify lo leen solos.
+- En este modo no se carga Vercel Web Analytics ni se muestra su aviso.
+- En Cloudflare Pages: conectar el repositorio, comando de build `corepack enable && yarn install --immutable && yarn build`, carpeta de salida `out` y la variable `NODE_VERSION=22`.
 
 ---
 

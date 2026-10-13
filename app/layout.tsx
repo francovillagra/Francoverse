@@ -7,6 +7,7 @@ import ScrollNavigator from "@/components/ui/ScrollNavigator";
 import ClientWrapper from "@/components/layout/ClientWrapper";
 import ThemeProvider from "@/components/providers/ThemeProvider";
 import TopNav from "@/components/sections/Navigation/TopNav";
+import { SITE_URL, STATIC_EXPORT } from "@/lib/site-url";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -39,14 +40,14 @@ export const metadata: Metadata = {
   authors: [{ name: 'Franco Villagra' }],
   creator: 'Franco Villagra',
   publisher: 'Franco Villagra',
-  metadataBase: new URL('https://francoverse.vercel.app'),
+  metadataBase: new URL(SITE_URL),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     title: 'Franco Villagra — Full Stack Developer · Seguridad Aplicada',
     description: 'Portfolio profesional: desarrollo web y ciberseguridad',
-    url: 'https://francoverse.vercel.app',
+    url: SITE_URL,
     siteName: 'Franco Villagra Portfolio',
     locale: 'es_AR',
     type: 'website',
@@ -99,7 +100,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {/* ScrollNavigator */}
           <ScrollNavigator />
         </ThemeProvider>
-        <Analytics />
+        {/* Vercel Web Analytics solo existe en Vercel: en el sitio estático no se carga. */}
+        {!STATIC_EXPORT && <Analytics />}
       </body>
     </html>
   );

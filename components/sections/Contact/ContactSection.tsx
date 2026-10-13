@@ -2,6 +2,7 @@
 
 import { Mail, Linkedin, Github } from "lucide-react";
 import { CONTACT_EMAIL } from "@/lib/contact";
+import { STATIC_EXPORT } from "@/lib/site-url";
 
 const contactItems = [
   {
@@ -91,9 +92,11 @@ export default function ContactSection() {
         </a>
       </div>
 
-      <p className="mt-12 text-center text-xs text-fg/60">
-        Este sitio usa Vercel Web Analytics para contar visitas.
-      </p>
+      {!STATIC_EXPORT && (
+        <p className="mt-12 text-center text-xs text-fg/60">
+          Este sitio usa Vercel Web Analytics para contar visitas.
+        </p>
+      )}
 
     </div>
   );

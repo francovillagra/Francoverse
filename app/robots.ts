@@ -1,4 +1,7 @@
 import { MetadataRoute } from 'next';
+import { SITE_URL } from '@/lib/site-url';
+
+export const dynamic = 'force-static';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -9,6 +12,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/api/', '/_next/'],
       },
     ],
-    sitemap: 'https://francoverse.vercel.app/sitemap.xml',
+    sitemap: `${SITE_URL}/sitemap.xml`,
   };
 }
