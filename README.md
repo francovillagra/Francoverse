@@ -4,7 +4,7 @@ Portfolio personal de Franco Villagra — Full Stack Developer · Seguridad Apli
 
 Proyectos públicos que combinan desarrollo (TypeScript/Next.js · Python/FastAPI) con seguridad aplicada: autenticación, escaneo de vulnerabilidades, reconocimiento automatizado y monitoreo de logs de seguridad. También ofrece revisiones de seguridad para aplicaciones web (sección Servicios).
 
-🔗 **[francoverse.vercel.app](https://francoverse.vercel.app)**
+🔗 **[francoverse.fvillagra-dev.workers.dev](https://francoverse.fvillagra-dev.workers.dev)**
 
 ---
 
@@ -28,7 +28,7 @@ Proyectos públicos que combinan desarrollo (TypeScript/Next.js · Python/FastAP
 | **Tailwind CSS** | Estilos utilitarios y diseño responsivo |
 | **Framer Motion** | Animaciones declarativas, AnimatePresence, useReducedMotion |
 | **Lucide React** | Íconos SVG |
-| **Vercel** | Deploy y hosting |
+| **Cloudflare Workers** | Hosting del sitio como archivos estáticos (gratis, también para uso comercial) |
 | **Vercel Web Analytics** | Conteo de visitas, solo en el despliegue de Vercel (hay que habilitarlo en el proyecto) |
 
 ---
@@ -102,7 +102,7 @@ NEXT_PUBLIC_STATIC_EXPORT=1 yarn build   # genera la carpeta out/
 ```
 
 - El build exporta el sitio a `out/` cuando se define `NEXT_PUBLIC_STATIC_EXPORT=1` o cuando corre en Cloudflare Workers Builds, que define `WORKERS_CI=1` (no hace falta cargar nada en el panel). En cualquier otro caso se construye igual que antes (Vercel).
-- Variable opcional del hosting: `NEXT_PUBLIC_SITE_URL=https://<dirección-final-del-sitio>` (se usa en el sitemap, `robots.txt` y los metadatos; si no se define, apunta a la dirección anterior de Vercel).
+- Variable opcional del hosting: `NEXT_PUBLIC_SITE_URL=https://<dirección-final-del-sitio>` (se usa en el sitemap, `robots.txt` y los metadatos; si no se define, apunta a `https://francoverse.fvillagra-dev.workers.dev`).
 - Las cabeceras de seguridad salen de `public/_headers`; Cloudflare y Netlify lo leen solos.
 - En este modo no se carga Vercel Web Analytics ni se muestra su aviso.
 - **Cloudflare (Workers con archivos estáticos).** `wrangler.jsonc` indica que se publica la carpeta `out/`. En el panel: Workers & Pages → Create application → Import a repository → elegir el repositorio. Comando de build `yarn build`, comando de deploy `npx wrangler deploy` y, en Settings → Build → Branch control, la rama de producción. Sin `wrangler.jsonc`, Cloudflare intenta configurar el proyecto con OpenNext y el deploy falla.
@@ -162,7 +162,7 @@ Francoverse/
 
 **Franco Villagra** — Full Stack Developer · Seguridad Aplicada
 
-- Portfolio: [francoverse.vercel.app](https://francoverse.vercel.app)
+- Portfolio: [francoverse.fvillagra-dev.workers.dev](https://francoverse.fvillagra-dev.workers.dev)
 - GitHub: [@francovillagra](https://github.com/francovillagra)
 - LinkedIn: [linkedin.com/in/franco-villagra](https://linkedin.com/in/franco-villagra)
 - Email: fvillagra.dev@gmail.com

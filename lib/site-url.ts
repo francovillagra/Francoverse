@@ -2,7 +2,7 @@
  * URL pública del sitio. Para migrar de dominio sin tocar el código, definí
  * NEXT_PUBLIC_SITE_URL en el hosting (por ejemplo, https://tudominio.com).
  */
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://francoverse.vercel.app").replace(/\/$/, "");
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://francoverse.fvillagra-dev.workers.dev").replace(/\/$/, "");
 
 /**
  * true cuando el build genera un sitio 100 % estático (carpeta `out/`) para alojarlo en Cloudflare, Netlify u
