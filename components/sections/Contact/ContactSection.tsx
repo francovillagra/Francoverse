@@ -1,12 +1,14 @@
 "use client";
 
 import { Mail, Linkedin, Github } from "lucide-react";
+import { CONTACT_EMAIL } from "@/lib/contact";
+import { STATIC_EXPORT } from "@/lib/site-url";
 
 const contactItems = [
   {
     label: "Email",
-    value: "fvillagra.dev@gmail.com",
-    href: "mailto:fvillagra.dev@gmail.com",
+    value: CONTACT_EMAIL,
+    href: `mailto:${CONTACT_EMAIL}`,
     icon: Mail,
   },
   {
@@ -32,9 +34,9 @@ export default function ContactSection() {
           Contacto
         </h2>
         <p className="mt-4 text-fg/70 text-base leading-relaxed">
-          Si te interesa mi perfil, querés conocer más sobre mis proyectos o
-          explorar una oportunidad de trabajo, podés contactarme a través de
-          estos canales.
+          Si te interesa mi perfil, querés conocer más sobre mis proyectos,
+          explorar una oportunidad de trabajo o encargar una revisión de
+          seguridad, podés contactarme a través de estos canales.
         </p>
       </div>
 
@@ -89,6 +91,12 @@ export default function ContactSection() {
           <p className="text-fg/70 text-sm">Descargar PDF</p>
         </a>
       </div>
+
+      {!STATIC_EXPORT && (
+        <p className="mt-12 text-center text-xs text-fg/60">
+          Este sitio usa Vercel Web Analytics para contar visitas.
+        </p>
+      )}
 
     </div>
   );

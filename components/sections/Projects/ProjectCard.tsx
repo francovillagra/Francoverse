@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Github, ExternalLink } from "lucide-react";
+import { Github, ExternalLink, CirclePause } from "lucide-react";
 import { useState } from "react";
 import type { Project } from "@/data/projects";
 
@@ -20,7 +20,7 @@ type ProjectCardProps = Project & {
   highlightColor?: string;
 };
 
-export default function ProjectCard({ title, description, image, technologies, liveUrl, githubUrl, highlightTechs, highlightColor }: ProjectCardProps) {
+export default function ProjectCard({ title, description, image, technologies, demo, liveUrl, githubUrl, highlightTechs, highlightColor }: ProjectCardProps) {
   const [src, setSrc] = useState(image ?? "/projects/placeholder.jpg");
 
   return (
@@ -74,7 +74,7 @@ export default function ProjectCard({ title, description, image, technologies, l
         )}
 
         <div className="mt-4 flex flex-wrap items-center gap-2">
-          {liveUrl && (
+          {demo === "live" && liveUrl && (
             <a
               href={liveUrl}
               target="_blank"
@@ -84,6 +84,12 @@ export default function ProjectCard({ title, description, image, technologies, l
               <ExternalLink size={14} />
               Demo
             </a>
+          )}
+          {demo === "paused" && (
+            <span className="inline-flex items-center gap-2 rounded-lg border border-dashed border-white/25 px-3 py-2 text-xs md:text-sm text-white/70">
+              <CirclePause size={14} aria-hidden="true" />
+              Demo en pausa
+            </span>
           )}
           {githubUrl && (
             <a

@@ -20,6 +20,8 @@ export function mapRepoToProject(repo: GitHubRepo): Project {
     featured: false,
     completedAt: '',
     technologies: meta?.techStack || fallbackTechnologies(repo),
+    // El homepage del repo no garantiza que la demo responda: se muestra solo si hay una dirección.
+    demo: repo.homepage ? "live" : "none",
     liveUrl: repo.homepage || undefined,
     githubUrl: repo.html_url,
   };

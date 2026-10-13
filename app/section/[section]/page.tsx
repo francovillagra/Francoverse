@@ -5,6 +5,13 @@ import AboutSection from "@/components/sections/About/AboutSection";
 type SectionKey = "about" | "projects" | "cv";
 type Props = { params: Promise<{ section: string }> };
 
+// Las secciones válidas se generan al compilar (necesario para el modo estático) y cualquier otra
+// ruta devuelve 404.
+export const dynamicParams = false;
+export function generateStaticParams() {
+  return (["about", "projects", "cv"] as const).map((section) => ({ section }));
+}
+
 function BackHome() {
   return (
     <div className="absolute top-4 left-4 z-20">
@@ -60,7 +67,7 @@ export default async function SectionPage({ params }: Props) {
           <div className="text-center space-y-4">
             <h2 className="text-3xl md:text-4xl font-extrabold">CV</h2>
             <a
-              href="/cv/FrancoVillagra_CV.pdf"
+              href="/cv-franco-villagra.pdf"
               download
               className="inline-block rounded-2xl px-5 py-3
                          bg-black text-white dark:bg-white dark:text-black

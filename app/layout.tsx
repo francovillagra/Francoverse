@@ -1,11 +1,13 @@
 // app/layout.tsx
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import ScrollNavigator from "@/components/ui/ScrollNavigator";
 import ClientWrapper from "@/components/layout/ClientWrapper";
 import ThemeProvider from "@/components/providers/ThemeProvider";
 import TopNav from "@/components/sections/Navigation/TopNav";
+import { SITE_URL, STATIC_EXPORT } from "@/lib/site-url";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -21,7 +23,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: 'Franco Villagra — Full Stack Developer · Seguridad Aplicada',
-  description: 'Portfolio profesional de Franco Villagra: desarrollo web con Next.js, React, TypeScript, y especialización en ciberseguridad. Proyectos destacados y CV disponible.',
+  description: 'Portfolio de Franco Villagra: desarrollo web con Next.js, React y TypeScript, y seguridad aplicada. Revisiones de seguridad para aplicaciones web, proyectos y CV.',
   keywords: [
     'Franco Villagra',
     'desarrollador',
@@ -38,14 +40,14 @@ export const metadata: Metadata = {
   authors: [{ name: 'Franco Villagra' }],
   creator: 'Franco Villagra',
   publisher: 'Franco Villagra',
-  metadataBase: new URL('https://francoverse.vercel.app'),
+  metadataBase: new URL(SITE_URL),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     title: 'Franco Villagra — Full Stack Developer · Seguridad Aplicada',
     description: 'Portfolio profesional: desarrollo web y ciberseguridad',
-    url: 'https://francoverse.vercel.app',
+    url: SITE_URL,
     siteName: 'Franco Villagra Portfolio',
     locale: 'es_AR',
     type: 'website',
@@ -98,6 +100,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {/* ScrollNavigator */}
           <ScrollNavigator />
         </ThemeProvider>
+        {/* Vercel Web Analytics solo existe en Vercel: en el sitio estático no se carga. */}
+        {!STATIC_EXPORT && <Analytics />}
       </body>
     </html>
   );
