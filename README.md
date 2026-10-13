@@ -1,6 +1,6 @@
 # Francoverse — Portfolio
 
-Portfolio personal de Franco Villagra — Full Stack Developer · Seguridad Aplicada.
+Portfolio personal de Franco Villagra — Full Stack Developer · Seguridad de Aplicaciones Web.
 
 Proyectos públicos que combinan desarrollo (TypeScript/Next.js · Python/FastAPI) con seguridad aplicada: autenticación, escaneo de vulnerabilidades, reconocimiento automatizado y monitoreo de logs de seguridad. También ofrece revisiones de seguridad para aplicaciones web (sección Servicios).
 
@@ -160,7 +160,7 @@ Francoverse/
 
 ## Autor
 
-**Franco Villagra** — Full Stack Developer · Seguridad Aplicada
+**Franco Villagra** — Full Stack Developer · Seguridad de Aplicaciones Web
 
 - Portfolio: [francoverse.fvillagra-dev.workers.dev](https://francoverse.fvillagra-dev.workers.dev)
 - GitHub: [@francovillagra](https://github.com/francovillagra)

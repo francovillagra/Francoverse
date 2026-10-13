@@ -22,13 +22,16 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Franco Villagra — Full Stack Developer · Seguridad Aplicada',
-  description: 'Portfolio de Franco Villagra: desarrollo web con Next.js, React y TypeScript, y seguridad aplicada. Revisiones de seguridad para aplicaciones web, proyectos y CV.',
+  title: 'Franco Villagra — Full Stack · Seguridad de Aplicaciones Web',
+  description: 'Franco Villagra, desarrollador Full Stack especializado en seguridad de aplicaciones web. Pentesting web, revisiones de seguridad para Next.js, proyectos y CV.',
   keywords: [
     'Franco Villagra',
     'desarrollador',
     'full stack',
     'ciberseguridad',
+    'seguridad de aplicaciones web',
+    'pentesting web',
+    'AppSec',
     'Next.js',
     'React',
     'TypeScript',
@@ -45,8 +48,8 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: 'Franco Villagra — Full Stack Developer · Seguridad Aplicada',
-    description: 'Portfolio profesional: desarrollo web y ciberseguridad',
+    title: 'Franco Villagra — Full Stack · Seguridad de Aplicaciones Web',
+    description: 'Desarrollador Full Stack especializado en seguridad de aplicaciones web: pentesting web, revisiones de seguridad y proyectos.',
     url: SITE_URL,
     siteName: 'Franco Villagra Portfolio',
     locale: 'es_AR',
@@ -62,8 +65,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Franco Villagra — Full Stack Developer · Seguridad Aplicada',
-    description: 'Portfolio profesional: desarrollo web y ciberseguridad',
+    title: 'Franco Villagra — Full Stack · Seguridad de Aplicaciones Web',
+    description: 'Desarrollador Full Stack especializado en seguridad de aplicaciones web: pentesting web, revisiones de seguridad y proyectos.',
     images: ['/og-image.png'],
   },
   robots: {

@@ -16,7 +16,7 @@ export default function Home() {
 
           {/* Position label */}
           <p className="text-[9px] md:text-[11px] font-mono tracking-normal md:tracking-ultra uppercase text-fg/60 mb-9">
-            Full Stack Developer &middot; Seguridad Aplicada
+            Full Stack Developer &middot; Seguridad de Aplicaciones Web
           </p>
 
           {/* Name */}
@@ -25,8 +25,13 @@ export default function Home() {
           </h1>
 
           {/* Phrase */}
-          <p className="text-sm md:text-lg text-fg/70 leading-relaxed mb-6 max-w-lg mx-auto px-4 md:px-0">
-            Construyo software. Lo defiendo.
+          <p className="text-sm md:text-lg text-fg/70 leading-relaxed mb-3 max-w-lg mx-auto px-4 md:px-0">
+            Construyo software. Lo pruebo como un atacante. Lo defiendo.
+          </p>
+
+          {/* Focus */}
+          <p className="text-xs md:text-sm text-fg/60 leading-relaxed mb-6 max-w-lg mx-auto px-4 md:px-0">
+            Foco en pentesting web, con evidencia y corrección en el código.
           </p>
 
           <a
