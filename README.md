@@ -93,7 +93,7 @@ yarn start
 
 ---
 
-## Publicar como sitio estático (Cloudflare Pages, Netlify)
+## Publicar como sitio estático (Cloudflare, Netlify)
 
 El sitio no usa funciones de servidor, así que se puede generar como archivos estáticos y alojarlo gratis, también para uso comercial (el plan Hobby de Vercel es solo para uso no comercial).
 
@@ -101,10 +101,12 @@ El sitio no usa funciones de servidor, así que se puede generar como archivos e
 NEXT_PUBLIC_STATIC_EXPORT=1 yarn build   # genera la carpeta out/
 ```
 
-- Variables del hosting: `NEXT_PUBLIC_STATIC_EXPORT=1` y `NEXT_PUBLIC_SITE_URL=https://<dirección-final-del-sitio>` (se usa en el sitemap, `robots.txt` y los metadatos; si no se define, apunta a la dirección anterior de Vercel).
-- Las cabeceras de seguridad salen de `public/_headers`; Cloudflare Pages y Netlify lo leen solos.
+- El build exporta el sitio a `out/` cuando se define `NEXT_PUBLIC_STATIC_EXPORT=1` o cuando corre en Cloudflare Workers Builds, que define `WORKERS_CI=1` (no hace falta cargar nada en el panel). En cualquier otro caso se construye igual que antes (Vercel).
+- Variable opcional del hosting: `NEXT_PUBLIC_SITE_URL=https://<dirección-final-del-sitio>` (se usa en el sitemap, `robots.txt` y los metadatos; si no se define, apunta a la dirección anterior de Vercel).
+- Las cabeceras de seguridad salen de `public/_headers`; Cloudflare y Netlify lo leen solos.
 - En este modo no se carga Vercel Web Analytics ni se muestra su aviso.
-- En Cloudflare Pages: Workers & Pages → Create application → Pages → Connect to Git, elegir el repositorio, usar el preset «Next.js (Static HTML Export)» (comando `npx next build`, carpeta de salida `out`) y cargar las dos variables de arriba. Pages instala las dependencias solo y Yarn usa la versión incluida en `.yarn/releases`.
+- **Cloudflare (Workers con archivos estáticos).** `wrangler.jsonc` indica que se publica la carpeta `out/`. En el panel: Workers & Pages → Create application → Import a repository → elegir el repositorio. Comando de build `yarn build`, comando de deploy `npx wrangler deploy` y, en Settings → Build → Branch control, la rama de producción. Sin `wrangler.jsonc`, Cloudflare intenta configurar el proyecto con OpenNext y el deploy falla.
+- **Cloudflare Pages o Netlify.** Preset «Next.js (Static HTML Export)» (comando `npx next build`, carpeta de salida `out`) y la variable `NEXT_PUBLIC_STATIC_EXPORT=1`.
 
 ---
 

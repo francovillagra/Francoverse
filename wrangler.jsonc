@@ -1,0 +1,11 @@
+{
+  // Cloudflare publica la carpeta `out/`: el sitio estático que genera `yarn build` en Workers Builds
+  // (next.config.ts activa la exportación estática cuando WORKERS_CI=1). Las cabeceras de seguridad salen de
+  // `public/_headers`, que Next copia a `out/_headers`.
+  "name": "francoverse",
+  "compatibility_date": "2026-10-06",
+  "assets": {
+    "directory": "./out",
+    "not_found_handling": "404-page"
+  }
+}

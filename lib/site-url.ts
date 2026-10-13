@@ -5,8 +5,8 @@
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://francoverse.vercel.app").replace(/\/$/, "");
 
 /**
- * NEXT_PUBLIC_STATIC_EXPORT=1 genera un sitio 100 % estático (carpeta `out/`) para alojarlo en
- * Cloudflare Pages, Netlify u otro hosting de archivos. En ese modo no hay servidor: las cabeceras
- * salen de `public/_headers` y no se carga la analítica de Vercel.
+ * true cuando el build genera un sitio 100 % estático (carpeta `out/`) para alojarlo en Cloudflare, Netlify u
+ * otro hosting de archivos. Lo decide next.config.ts (NEXT_PUBLIC_STATIC_EXPORT=1, o WORKERS_CI=1 en Cloudflare).
+ * En ese modo no hay servidor: las cabeceras salen de `public/_headers` y no se carga la analítica de Vercel.
  */
-export const STATIC_EXPORT = process.env.NEXT_PUBLIC_STATIC_EXPORT === "1";
+export const STATIC_EXPORT = process.env.STATIC_EXPORT === "1";

@@ -1,12 +1,18 @@
 import type { NextConfig } from "next";
 import { securityHeaders } from "./lib/security-headers";
 
-// NEXT_PUBLIC_STATIC_EXPORT=1 genera `out/` (sitio estático, sin servidor) para Cloudflare Pages u otro
-// hosting de archivos. Sin la variable, el sitio se construye igual que antes (Vercel).
-const staticExport = process.env.NEXT_PUBLIC_STATIC_EXPORT === "1";
+// El sitio se exporta como archivos estáticos (`out/`, sin servidor) cuando:
+// - se define NEXT_PUBLIC_STATIC_EXPORT=1 (Netlify, Cloudflare Pages, pruebas locales), o
+// - el build corre en Cloudflare Workers Builds, que define WORKERS_CI=1 (no hace falta configurar nada en el panel).
+// En cualquier otro caso (Vercel) el sitio se construye igual que antes.
+const staticExport = process.env.NEXT_PUBLIC_STATIC_EXPORT === "1" || process.env.WORKERS_CI === "1";
 
 const nextConfig: NextConfig = {
   ...(staticExport ? { output: "export" as const, images: { unoptimized: true } } : {}),
+
+  // Next reemplaza `process.env.STATIC_EXPORT` por su valor durante el build, tanto en el servidor como en el
+  // navegador: así el código de la app (lib/site-url.ts) ve exactamente lo que se decidió acá.
+  env: { STATIC_EXPORT: staticExport ? "1" : "0" },
 
   // Un sitio de seguridad aplicada no debería anunciar con qué framework está hecho.
   poweredByHeader: false,
