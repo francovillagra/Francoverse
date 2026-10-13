@@ -101,10 +101,10 @@ El sitio no usa funciones de servidor, así que se puede generar como archivos e
 NEXT_PUBLIC_STATIC_EXPORT=1 yarn build   # genera la carpeta out/
 ```
 
-- Variables del hosting: `NEXT_PUBLIC_STATIC_EXPORT=1` y, si cambia el dominio, `NEXT_PUBLIC_SITE_URL=https://tu-dominio` (se usa en el sitemap, `robots.txt` y los metadatos).
+- Variables del hosting: `NEXT_PUBLIC_STATIC_EXPORT=1` y `NEXT_PUBLIC_SITE_URL=https://<dirección-final-del-sitio>` (se usa en el sitemap, `robots.txt` y los metadatos; si no se define, apunta a la dirección anterior de Vercel).
 - Las cabeceras de seguridad salen de `public/_headers`; Cloudflare Pages y Netlify lo leen solos.
 - En este modo no se carga Vercel Web Analytics ni se muestra su aviso.
-- En Cloudflare Pages: conectar el repositorio, comando de build `corepack enable && yarn install --immutable && yarn build`, carpeta de salida `out` y la variable `NODE_VERSION=22`.
+- En Cloudflare Pages: Workers & Pages → Create application → Pages → Connect to Git, elegir el repositorio, usar el preset «Next.js (Static HTML Export)» (comando `npx next build`, carpeta de salida `out`) y cargar las dos variables de arriba. Pages instala las dependencias solo y Yarn usa la versión incluida en `.yarn/releases`.
 
 ---
 
