@@ -24,14 +24,9 @@ export default function Home() {
             Franco Villagra
           </h1>
 
-          {/* Phrase */}
-          <p className="text-sm md:text-lg text-fg/70 leading-relaxed mb-3 max-w-lg mx-auto px-4 md:px-0">
-            Construyo software. Lo pruebo como un atacante. Lo defiendo.
-          </p>
-
-          {/* Focus */}
-          <p className="text-xs md:text-sm text-fg/60 leading-relaxed mb-6 max-w-lg mx-auto px-4 md:px-0">
-            Foco en pentesting web, con evidencia y corrección en el código.
+          {/* Slogan */}
+          <p className="text-base md:text-xl text-fg/75 leading-relaxed text-balance mb-6 max-w-lg mx-auto px-4 md:px-0">
+            La seguridad se demuestra.
           </p>
 
           <a
