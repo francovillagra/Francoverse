@@ -24,11 +24,6 @@ export default function Home() {
             Franco Villagra
           </h1>
 
-          {/* Slogan */}
-          <p className="text-base md:text-xl text-fg/75 leading-relaxed text-balance mb-6 max-w-lg mx-auto px-4 md:px-0">
-            La seguridad se demuestra.
-          </p>
-
           <a
             href="/cv-franco-villagra.pdf"
             download="CV-Franco-Villagra.pdf"
