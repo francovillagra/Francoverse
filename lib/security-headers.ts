@@ -8,12 +8,20 @@ export interface HeaderEntry {
   value: string;
 }
 
-export function contentSecurityPolicy(): string {
+/**
+ * Sin `scriptHashes` se permite `'unsafe-inline'` (Vercel y desarrollo). En el sitio estático el
+ * post-build (scripts/csp-hashes.mjs) pasa el hash SHA-256 de cada script en línea de cada página:
+ * solo corren esos scripts exactos y cualquier otro script inyectado queda bloqueado.
+ */
+export function contentSecurityPolicy(scriptHashes?: readonly string[]): string {
+  const scriptSrc = scriptHashes
+    ? ["'self'", ...scriptHashes.map((h) => `'${h}'`)].join(" ")
+    : "'self' 'unsafe-inline'";
   return [
     "default-src 'self'",
-    // Next.js y next-themes insertan scripts en línea (hidratación y tema inicial); una CSP con
-    // nonce exigiría renderizar todas las páginas de forma dinámica. Pendiente de mejorar.
-    "script-src 'self' 'unsafe-inline'",
+    // Next.js y next-themes insertan scripts en línea (hidratación y tema inicial). Con nonce habría
+    // que renderizar todas las páginas de forma dinámica; en un sitio estático se usan hashes.
+    `script-src ${scriptSrc}`,
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data:",
     "font-src 'self'",
@@ -36,6 +44,9 @@ export function securityHeaders(production: boolean): HeaderEntry[] {
     { key: "X-Content-Type-Options", value: "nosniff" },
     { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
     { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=(), usb=()" },
+    // Aíslan el sitio de otras ventanas y de incrustaciones de otros orígenes (no usa popups ni se incrusta en ningún lado).
+    { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
+    { key: "Cross-Origin-Resource-Policy", value: "same-origin" },
   ];
   if (production) headers.unshift({ key: "Content-Security-Policy", value: contentSecurityPolicy() });
   return headers;
