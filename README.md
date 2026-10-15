@@ -63,7 +63,9 @@ Los headers se definen en `lib/security-headers.ts` y se aplican a todas las rut
 - `Referrer-Policy` y `Permissions-Policy`
 - Se oculta el header `X-Powered-By`
 
-Limitación conocida: la CSP permite `'unsafe-inline'` en scripts y estilos, porque Next.js y `next-themes` insertan scripts en línea (hidratación y tema inicial). Endurecerla con nonces exigiría renderizar las páginas de forma dinámica; queda como mejora pendiente.
+Scripts: en la versión estática (Cloudflare), sin `'unsafe-inline'`. Next.js y `next-themes` insertan scripts en línea (hidratación y tema inicial); en cada build, `scripts/csp-hashes.mjs` calcula el hash SHA-256 de cada uno y escribe **una sola** CSP en `out/_headers` con esos hashes, así que un script inyectado queda bloqueado. Es una única política para todo el sitio a propósito: con una regla por página, Cloudflare mandó dos CSP en la home y el navegador las aplicó a la vez, bloqueando un script propio.
+
+Limitación conocida: los estilos siguen con `'unsafe-inline'` (Next y Tailwind los insertan), y en Vercel, que renderiza con servidor, los scripts en línea también. Endurecerlo con nonces exigiría renderizar las páginas de forma dinámica; queda como mejora pendiente.
 
 ---
 
