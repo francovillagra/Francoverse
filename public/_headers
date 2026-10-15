@@ -1,8 +1,10 @@
 # Cabeceras de seguridad para hosting estático (Cloudflare Pages / Workers Static Assets, Netlify).
 # Tienen que coincidir con securityHeaders(true) de lib/security-headers.ts: si cambiás una, cambiá la otra.
-# La CSP de acá permite scripts en línea; en cada build, scripts/csp-hashes.mjs la reemplaza en out/_headers por una CSP
-# con el hash de cada script en línea de cada página (sin 'unsafe-inline'). Si la exportación se publica sin ese paso,
-# esta CSP sigue siendo válida.
+# La CSP de acá permite scripts en línea; en cada build, scripts/csp-hashes.mjs la reemplaza en out/_headers por UNA
+# sola CSP con el hash de todos los scripts en línea del sitio (sin 'unsafe-inline'). Si la exportación se publica sin
+# ese paso, esta CSP sigue siendo válida.
+# No agregues otra regla que ponga la cabecera de CSP: Cloudflare combina las reglas que coinciden con una URL y el
+# navegador aplicaría todas las políticas a la vez (en producción la línea `!` para quitarla no alcanzó para evitarlo).
 /*
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
   Strict-Transport-Security: max-age=63072000; includeSubDomains
