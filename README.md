@@ -109,6 +109,7 @@ NEXT_PUBLIC_STATIC_EXPORT=1 yarn build   # genera la carpeta out/
 - En este modo no se carga Vercel Web Analytics ni se muestra su aviso.
 - **Cloudflare (Workers con archivos estáticos).** `wrangler.jsonc` indica que se publica la carpeta `out/`. En el panel: Workers & Pages → Create application → Import a repository → elegir el repositorio. Comando de build `yarn build`, comando de deploy `npx wrangler deploy` y, en Settings → Build → Branch control, la rama de producción. Sin `wrangler.jsonc`, Cloudflare intenta configurar el proyecto con OpenNext y el deploy falla.
 - **Cloudflare Pages o Netlify.** Preset «Next.js (Static HTML Export)» (comando `npx next build`, carpeta de salida `out`) y la variable `NEXT_PUBLIC_STATIC_EXPORT=1`.
+- **Vercel (portfolio anterior).** El proyecto `francoverse` de Vercel quedó solo como redirección permanente de `francoverse.vercel.app` al sitio de Cloudflare (`vercel.json`), para que los links viejos sigan funcionando. Solo redirige ese dominio: las vistas previas y los demás dominios del proyecto no se tocan.
 
 ---
 
