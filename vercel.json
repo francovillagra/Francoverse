@@ -1,9 +1,9 @@
 {
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/:path(.*)",
       "has": [{ "type": "host", "value": "francoverse.vercel.app" }],
-      "destination": "https://francoverse.fvillagra-dev.workers.dev/:path*",
+      "destination": "https://francoverse.fvillagra-dev.workers.dev/:path",
       "permanent": true
     }
   ]
