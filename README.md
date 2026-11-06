@@ -1,8 +1,8 @@
 # Francoverse — Portfolio
 
-Portfolio personal de Franco Villagra — Full Stack Developer · Seguridad de Aplicaciones Web.
+Portfolio personal de Franco Villagra, desarrollador orientado a ciberseguridad.
 
-Proyectos públicos que combinan desarrollo (TypeScript/Next.js · Python/FastAPI) con seguridad aplicada: autenticación, escaneo de vulnerabilidades, reconocimiento automatizado y monitoreo de logs de seguridad. También ofrece revisiones de seguridad para aplicaciones web (sección Servicios).
+Proyectos que combinan desarrollo (TypeScript/Next.js · Python/FastAPI) con seguridad aplicada: autenticación, escaneo de vulnerabilidades, reconocimiento automatizado y monitoreo de logs de seguridad. El código se comparte a pedido, bajo NDA. También ofrece revisiones de seguridad para aplicaciones web (sección Servicios).
 
 🔗 **[francoverse.fvillagra-dev.workers.dev](https://francoverse.fvillagra-dev.workers.dev)**
 
@@ -12,7 +12,7 @@ Proyectos públicos que combinan desarrollo (TypeScript/Next.js · Python/FastAP
 
 - **Hero** — Presentación con tagline, descarga de CV y marquee de tecnologías con color de marca
 - **Sobre mí** — Bio + ficha rápida (Formación / Stack / Foco)
-- **Proyectos** — Filtro interactivo por tecnología + cards con imagen, stack, links y estado de la demo. Vista completa en `/proyectos`
+- **Proyectos** — Filtro interactivo por tecnología + cards con imagen, stack, comprobaciones verificadas, estado de la demo y pedido de acceso al código. Vista completa en `/proyectos`
 - **Servicios** — Revisión de seguridad express para aplicaciones Next.js/Supabase/Vercel y seguridad automática en repositorios. El botón de contacto abre un correo con una plantilla para describir el sitio
 - **Contacto** — Email y redes sociales
 
@@ -37,20 +37,22 @@ Proyectos públicos que combinan desarrollo (TypeScript/Next.js · Python/FastAP
 
 | Proyecto | Stack | Demo | Código |
 |---|---|---|---|
-| **Web Vulnerability Scanner** | Next.js · TypeScript · Axios · Tailwind CSS · Zod · Vitest · Vercel | [En línea](https://web-vulnerability-scanner-red.vercel.app) | [Repo](https://github.com/francovillagra/web-vulnerability-scanner) |
-| **Recon Scope** | Next.js · TypeScript · FastAPI · Python · PostgreSQL · Supabase · Railway · Recharts · Tailwind CSS | En pausa | [Repo](https://github.com/francovillagra/recon-scope) |
-| **Log-Sentinel** | Python · FastAPI · Next.js · TypeScript · Redis · Supabase · WebSocket · JWT | En pausa | [Repo](https://github.com/francovillagra/log-sentinel) |
-| **Authentication & Authorization API** | Next.js · TypeScript · Prisma · PostgreSQL · JWT · Redis · Zod | Sin demo (API sin interfaz) | [Repo](https://github.com/francovillagra/auth-api-security) |
+| **Web Vulnerability Scanner** | Next.js · TypeScript · Axios · Tailwind CSS · Zod · Vitest · Vercel | [En línea](https://web-vulnerability-scanner-red.vercel.app) | A pedido, bajo NDA |
+| **Recon Scope** | Next.js · TypeScript · FastAPI · Python · PostgreSQL · Supabase · Railway · Recharts · Tailwind CSS | En pausa | A pedido, bajo NDA |
+| **Log-Sentinel** | Python · FastAPI · Next.js · TypeScript · Redis · Supabase · WebSocket · JWT | En pausa | A pedido, bajo NDA |
+| **Authentication & Authorization API** | Next.js · TypeScript · Prisma · PostgreSQL · JWT · Redis · Zod | Sin demo (API sin interfaz) | A pedido, bajo NDA |
 
 ### Estado de las demos
 
 Cada proyecto declara en `data/projects.ts` el campo `demo`:
 
-- `"live"` — responde hoy: la card muestra el botón **Demo** con `liveUrl`.
+- `"live"` — responde hoy: la card muestra el botón **Ver demo** con `liveUrl`.
 - `"paused"` — existe, pero su backend está detenido (por ejemplo, base de datos en el plan gratuito de Supabase, que se pausa tras una semana sin uso): la card muestra **Demo en pausa** y no enlaza nada.
-- `"none"` — no hay demo que mostrar: solo el código.
+- `"none"` — no hay demo que mostrar.
 
 Así el portfolio no promete nada que no responda. Para reactivar una demo, alcanza con restaurar el backend y cambiar `demo` a `"live"`.
+
+El código no se enlaza: cada card tiene el botón **Pedir acceso al código**, que abre un correo con el asunto y una plantilla ya escritos (`codeAccessMailto` en `lib/contact.ts`). La lista `proofs` de cada proyecto solo incluye lo que hoy se puede demostrar (pruebas, CI, controles verificados).
 
 ---
 
@@ -138,7 +140,7 @@ Francoverse/
 │   ├── skills.ts                 # 7 tiles curados con match[] y color
 │   └── techColors.ts             # Fuente única de color por tecnología (rgb)
 ├── lib/
-│   ├── contact.ts                # Email de contacto, URL del escáner y mailto de la revisión
+│   ├── contact.ts                # Email de contacto, URL del escáner y mailto de la revisión y del acceso al código
 │   └── security-headers.ts       # Headers de seguridad y CSP
 ├── public/
 │   └── projects/                 # Imágenes de los proyectos
@@ -152,7 +154,7 @@ Francoverse/
 **Una sola fuente de verdad por concepto:**
 - Colores de tecnología → `data/techColors.ts` (usados en TechMarquee y SkillTiles)
 - Stack y estado de la demo de cada proyecto → `data/projects.ts` (`technologies[]`, `demo`)
-- Datos de contacto → `lib/contact.ts` (usados por la sección Contacto y el botón de Servicios)
+- Datos de contacto → `lib/contact.ts` (usados por la sección Contacto, el botón de Servicios y el pedido de acceso al código)
 - Tiles de habilidades → `data/skills.ts` con `match[]` que puente hacia `technologies[]`
 
 **Habilidades data-driven:** los tiles de la sección Proyectos derivan su conteo y filtrado del array de proyectos en tiempo de render. Agregar un proyecto nuevo con su `technologies[]` lo hace aparecer automáticamente bajo cada tile que matchee — sin tocar el componente.
@@ -163,7 +165,7 @@ Francoverse/
 
 ## Autor
 
-**Franco Villagra** — Full Stack Developer · Seguridad de Aplicaciones Web
+**Franco Villagra** — Desarrollador orientado a Ciberseguridad
 
 - Portfolio: [francoverse.fvillagra-dev.workers.dev](https://francoverse.fvillagra-dev.workers.dev)
 - GitHub: [@francovillagra](https://github.com/francovillagra)

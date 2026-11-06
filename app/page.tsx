@@ -16,7 +16,7 @@ export default function Home() {
 
           {/* Position label */}
           <p className="text-[9px] md:text-[11px] font-mono tracking-normal md:tracking-ultra uppercase text-fg/60 mb-9">
-            Full Stack Developer &middot; Seguridad de Aplicaciones Web
+            Desarrollador orientado a Ciberseguridad
           </p>
 
           {/* Name */}

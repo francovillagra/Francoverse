@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Github, ExternalLink, CirclePause } from "lucide-react";
+import { Check, ExternalLink, CirclePause, Mail } from "lucide-react";
 import { useState } from "react";
 import type { Project } from "@/data/projects";
+import { codeAccessMailto } from "@/lib/contact";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -20,7 +21,7 @@ type ProjectCardProps = Project & {
   highlightColor?: string;
 };
 
-export default function ProjectCard({ title, description, image, technologies, demo, liveUrl, githubUrl, highlightTechs, highlightColor }: ProjectCardProps) {
+export default function ProjectCard({ title, description, image, technologies, demo, liveUrl, proofs, highlightTechs, highlightColor }: ProjectCardProps) {
   const [src, setSrc] = useState(image ?? "/projects/placeholder.jpg");
 
   return (
@@ -51,10 +52,24 @@ export default function ProjectCard({ title, description, image, technologies, d
           <h3 className="text-base md:text-lg font-semibold tracking-tight text-white">
             {title}
           </h3>
-          <p className="text-sm leading-relaxed text-white/70 line-clamp-3">
+          <p className="text-sm leading-relaxed text-white/70">
             {description}
           </p>
         </div>
+
+        {proofs && proofs.length > 0 && (
+          <ul className="mt-3 space-y-1.5">
+            {proofs.map((proof) => (
+              <li key={proof} className="flex items-start gap-2 text-xs leading-snug text-white/70">
+                <Check size={14} aria-hidden="true" className="mt-px shrink-0 text-white/50" />
+                <span>
+                  <span className="sr-only">Comprobado: </span>
+                  {proof}
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
 
         {technologies.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-2">
@@ -81,8 +96,8 @@ export default function ProjectCard({ title, description, image, technologies, d
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-2 text-xs md:text-sm font-semibold text-black transition hover:opacity-90"
             >
-              <ExternalLink size={14} />
-              Demo
+              <ExternalLink size={14} aria-hidden="true" />
+              Ver demo
             </a>
           )}
           {demo === "paused" && (
@@ -91,17 +106,13 @@ export default function ProjectCard({ title, description, image, technologies, d
               Demo en pausa
             </span>
           )}
-          {githubUrl && (
-            <a
-              href={githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-white/20 px-3 py-2 text-xs md:text-sm font-medium text-white/90 transition hover:border-white/45 hover:text-white"
-            >
-              <Github size={14} />
-              Repo
-            </a>
-          )}
+          <a
+            href={codeAccessMailto(title)}
+            className="inline-flex items-center gap-2 rounded-lg border border-white/20 px-3 py-2 text-xs md:text-sm font-medium text-white/90 transition hover:border-white/45 hover:text-white"
+          >
+            <Mail size={14} aria-hidden="true" />
+            Pedir acceso al código
+          </a>
         </div>
       </div>
     </motion.article>

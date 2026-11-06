@@ -1,9 +1,11 @@
 /**
  * Estado de la demo en línea:
- * - "live": funciona hoy; se muestra el botón Demo con `liveUrl`.
+ * - "live": funciona hoy; se muestra el botón Ver demo con `liveUrl`.
  * - "paused": existe pero su backend está detenido; se muestra "Demo en pausa" y no se enlaza.
- * - "none": no hay una demo que mostrar; solo el código.
- * Cambiar el estado en un solo lugar evita que el portfolio prometa algo que no responde.
+ * - "none": no hay una demo que mostrar.
+ * Cambiar el estado en un solo lugar evita que el portfolio prometa algo que no responda.
+ *
+ * El código de los proyectos no se enlaza: se comparte a pedido, bajo NDA (botón "Pedir acceso al código").
  */
 export type DemoStatus = "live" | "paused" | "none";
 
@@ -16,7 +18,8 @@ export interface Project {
   completedAt: string; // "YYYY-MM" of last commit
   demo: DemoStatus;
   liveUrl?: string; // solo se enlaza cuando demo === "live"
-  githubUrl?: string;
+  /** Comprobaciones verificadas en el código, el CI o producción. Solo lo que hoy se puede demostrar. */
+  proofs?: string[];
   image?: string;
 }
 
@@ -27,11 +30,15 @@ const projects: Project[] = [
     title: "Web Vulnerability Scanner",
     featured: true,
     completedAt: '2026-06',
-    description: "Chequeo básico de seguridad para un sitio web, sin registro: HTTPS y certificado TLS, headers, cookies e información expuesta, con recomendaciones en lenguaje claro. Protegido contra SSRF y abuso, con tests de regresión.",
+    description: "Chequeo básico de seguridad para un sitio web, sin registro: HTTPS y certificado TLS, headers, cookies e información expuesta, con recomendaciones en lenguaje claro.",
     technologies: ["Next.js", "TypeScript", "Axios", "Tailwind CSS", "Zod", "Vitest", "Vercel"],
     demo: "live",
     liveUrl: "https://web-vulnerability-scanner-red.vercel.app",
-    githubUrl: "https://github.com/francovillagra/web-vulnerability-scanner",
+    proofs: [
+      "218 pruebas automáticas",
+      "Integración continua con GitHub Actions",
+      "Defensa contra SSRF en varias capas, con pruebas de regresión",
+    ],
     image: "/projects/vulnerability-scanner.jpeg",
   },
   {
@@ -43,7 +50,11 @@ const projects: Project[] = [
     technologies: ["Next.js", "TypeScript", "FastAPI", "Python", "PostgreSQL", "Supabase", "Railway", "Recharts", "Tailwind CSS"],
     demo: "paused", // la base de datos (Supabase, plan gratuito) está en pausa
     liveUrl: "https://recon-scope.vercel.app",
-    githubUrl: "https://github.com/francovillagra/recon-scope",
+    proofs: [
+      "272 pruebas automáticas",
+      "Prueba de punta a punta con Docker Compose en el CI",
+      "Hallazgos de una revisión propia (SSRF, DoS, dependencias) corregidos y cubiertos por pruebas",
+    ],
     image: "/projects/recon_scope_card_v3.svg",
   },
   {
@@ -54,7 +65,11 @@ const projects: Project[] = [
     description: "SIEM-lite de Blue Team: ingiere logs, detecta patrones de ataque en tiempo real (fuerza bruta, SQLi, path traversal, XSS, scanners) y transmite alertas a un dashboard live vía WebSocket.",
     demo: "paused", // la base de datos (Supabase, plan gratuito) está en pausa
     liveUrl: "https://log-sentinel-eta.vercel.app",
-    githubUrl: "https://github.com/francovillagra/log-sentinel",
+    proofs: [
+      "760 pruebas automáticas",
+      "Hallazgos de una revisión propia (ReDoS, entradas sin límite) corregidos y cubiertos por pruebas",
+      "Imagen de contenedor sin root, construida en el CI",
+    ],
     technologies: ["Python", "FastAPI", "Next.js", "TypeScript", "Redis", "Supabase", "WebSocket", "JWT"],
     image: "/images/log-sentinel-banner.svg",
   },
@@ -63,11 +78,15 @@ const projects: Project[] = [
     title: "Authentication & Authorization API",
     featured: true,
     completedAt: '2026-06',
-    description: "API REST con autenticación JWT, refresh tokens, rate limiting y bcrypt. Endpoints de registro, login y rutas protegidas. Documentación completa con ejemplos de uso.",
+    description: "API REST con autenticación JWT, rate limiting y bcrypt. Registro, login, logout que revoca la sesión y rutas protegidas por rol. Documentación con ejemplos de uso.",
     technologies: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "JWT", "Redis", "Zod"],
     // Sin demo: es una API sin interfaz, y la dirección que se enlazaba antes no era la del proyecto.
     demo: "none",
-    githubUrl: "https://github.com/francovillagra/auth-api-security",
+    proofs: [
+      "Refresh tokens con rotación y detección de reuso",
+      "RLS activo en las 4 tablas de la base",
+      "Pruebas de integración contra PostgreSQL real en el CI",
+    ],
     image: "/projects/auth-api-card.svg",
   },
 ];
