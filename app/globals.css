@@ -2,286 +2,245 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    color-scheme: light dark;
-  }
+/* ==========================================================================
+   Colores
+   Dos paletas, día y noche. next-themes pone la clase `t-day` o `t-night` en <html> antes de que el
+   navegador pinte (por defecto, la del sistema), así que no hay destello. Sin JavaScript manda el
+   modo del sistema (bloque @media). El contraste de cada par de colores se midió sobre lo que dibuja
+   el navegador: texto de 4,5:1 o más y gráficos de 3:1 o más, en las dos paletas.
+   ========================================================================== */
+:root,
+html.t-day {
+  color-scheme: light;
+  --papel: #F5F7FA;
+  --papel2: #E8EDF4;
+  --barra: #E1EEE5;
+  --tinta: #17263D;
+  --tinta2: #4A5A72;
+  --accion: #2A59A8;
+  --sobre-accion: #F5F7FA;
+  --ok: #1F6B47;
+  --rojo: #B8302A;
+  --linea2: #BAC5D4;
+  --band-bg: #17263D;
+  --band-fg: #F5F7FA;
+  --band-fg2: #C5CEDA;
+  --band-linea: #36485F;
+  --band-btn-bg: #F5F7FA;
+  --band-btn-fg: #17263D;
+}
 
-  html,
-  body {
-    overflow-x: hidden;
+html.t-night {
+  color-scheme: dark;
+  --papel: #0F1621;
+  --papel2: #172131;
+  --barra: #14261F;
+  --tinta: #D3DAE6;
+  --tinta2: #9BA9BC;
+  --accion: #8DB2F0;
+  --sobre-accion: #0D1522;
+  --ok: #6CC99A;
+  --rojo: #F08C80;
+  --linea2: #34455E;
+  --band-bg: #0A0F17;
+  --band-fg: #D3DAE6;
+  --band-fg2: #A9B6C8;
+  --band-linea: #26354B;
+  --band-btn-bg: #8DB2F0;
+  --band-btn-fg: #0D1522;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.t-day):not(.t-night) {
+    color-scheme: dark;
+    --papel: #0F1621;
+    --papel2: #172131;
+    --barra: #14261F;
+    --tinta: #D3DAE6;
+    --tinta2: #9BA9BC;
+    --accion: #8DB2F0;
+    --sobre-accion: #0D1522;
+    --ok: #6CC99A;
+    --rojo: #F08C80;
+    --linea2: #34455E;
+    --band-bg: #0A0F17;
+    --band-fg: #D3DAE6;
+    --band-fg2: #A9B6C8;
+    --band-linea: #26354B;
+    --band-btn-bg: #8DB2F0;
+    --band-btn-fg: #0D1522;
+  }
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+html {
+  background: var(--papel);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
     scroll-behavior: smooth;
-
-    @apply m-0 p-0;
   }
 }
 
-/* ---------------------------
-   Fuentes personalizadas
----------------------------- */
-.font-barlow {
-  font-family: "Barlow Condensed", sans-serif;
+.fv {
+  margin: 0;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: var(--font-archivo), system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  font-stretch: 100%;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ---------------------------
-   Clases personalizadas
----------------------------- */
-.Welcome-text {
-  @apply text-[20px] whitespace-nowrap;
-  background:
-    linear-gradient(0deg, rgba(225, 255, 255, 0.4), rgba(255, 255, 255, 0.4)),
-    linear-gradient(90.01deg, #e59cff 0.01%, #9cb2ff 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  word-spacing: 4px;
-}
+/* El cambio de modo se anima; con "reducir movimiento" es instantáneo. */
+.fv, .fv * { transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, stroke 0.25s ease; }
+@media (prefers-reduced-motion: reduce) { .fv, .fv * { transition: none; } }
 
-/* Opción: atenuar un poco en light si querés contraste más suave */
-/*
-:root:not(.dark) .Welcome-text {
-  opacity: 0.9;
-}
-*/
+.fv * { box-sizing: border-box; }
+.fv :where(a) { color: inherit; }
+.fv :where(h1, h2, h3, p, ul, ol, pre) { margin: 0; }
+.fv :where(ul, ol) { padding: 0; list-style: none; }
+.fv a:focus-visible, .fv button:focus-visible { outline: 3px solid var(--accion); outline-offset: 3px; }
 
-.Welcome-box {
-  @apply relative overflow-hidden backdrop-blur-[8px] flex items-center w-max;
-  padding: 0.25rem 0.5rem;
-  margin-left: 2.5rem;
-  margin-top: 0.625rem;
-  border-radius: 1rem;
-  /* Sombra acorde a tema */
-  box-shadow: inset 0 -7px 11px #a48fff1f;
-  isolation: isolate;
-  transition: box-shadow 0.45s cubic-bezier(0.6, 0.6, 0, 1);
-}
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 4.7vw, 64px); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-/* ---------------------------
-   Animaciones globales
----------------------------- */
-@keyframes ripple {
-  0%,
-  100% {
-    transform: translate(-50%, -50%) scale(1);
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1.05);
-  }
-}
+/* Enlace para saltar directo al contenido: aparece solo al tabular. */
+.fv a.skip { position: absolute; left: 16px; top: -100px; z-index: 10; padding: 12px 18px; background: var(--accion); color: var(--sobre-accion); font-weight: 600; text-decoration: none; border-radius: 3px; }
+.fv a.skip:focus { top: 12px; }
 
-/* ---------------------------
-   Overrides específicos
----------------------------- */
-.transform-image-shift {
-  transform: translateY(-10px) translateX(60px);
-}
-.scale-90 {
-  transform: scale(0.9);
-}
+/* ==========================================================================
+   Barra superior
+   ========================================================================== */
+.nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 32px; padding: 18px 0; border-bottom: 1px solid var(--linea2); }
+.brand { font-size: 26px; font-weight: 800; font-stretch: 72%; letter-spacing: -0.005em; text-decoration: none; padding: 8px 0; }
+.nav-links { display: flex; flex-wrap: wrap; align-items: center; gap: 0 22px; }
+.nav-links a { font-size: 15px; font-weight: 500; text-decoration: none; padding: 12px 2px; }
+.nav-links a:hover { text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 5px; }
+.nav-links a.pill { border: 1.5px solid var(--tinta); border-radius: 3px; padding: 11px 16px; font-weight: 600; }
+.nav-links a.pill:hover { background: var(--accion); border-color: var(--accion); color: var(--sobre-accion); text-decoration: none; }
 
-@keyframes marquee-left {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
+/* Interruptor del modo nocturno. El estado se dibuja con la clase de <html>, no con JavaScript, para que sea
+   correcto desde el primer cuadro; `aria-pressed` lo refleja para los lectores de pantalla. */
+.theme { appearance: none; display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 4px; border: 0; background: transparent; color: var(--tinta); font-family: inherit; font-size: 15px; font-weight: 500; cursor: pointer; }
+.theme .track { position: relative; flex: none; width: 40px; height: 24px; border: 1.5px solid var(--tinta2); border-radius: 12px; }
+.theme .knob { position: absolute; top: 3px; left: 3px; width: 15px; height: 15px; border-radius: 50%; background: var(--tinta2); transition: transform 0.2s ease, background-color 0.25s ease; }
+html.t-night .theme .track { background: var(--accion); border-color: var(--accion); }
+html.t-night .theme .knob { transform: translateX(16px); background: var(--sobre-accion); }
+.theme:hover .label { text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 5px; }
 
-.marquee-mask {
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 8%,
-    black 92%,
-    transparent
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 8%,
-    black 92%,
-    transparent
-  );
-}
+/* ==========================================================================
+   Portada
+   ========================================================================== */
+.hero { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 56px 72px; padding-top: clamp(40px, 6vw, 72px); padding-bottom: clamp(48px, 6vw, 88px); }
+.hero-text { flex: 1 1 340px; max-width: 500px; min-width: 0; }
+.hero-panel { flex: 1.7 1 500px; min-width: 0; }
+.h1 { font-size: clamp(52px, 7.2vw, 88px); font-weight: 800; font-stretch: 68%; line-height: 0.94; letter-spacing: -0.012em; }
+.role { margin-top: 18px; font-size: 22px; font-weight: 500; font-stretch: 92%; line-height: 1.25; }
+.lead { margin-top: 28px; font-size: 19px; line-height: 1.55; max-width: 34em; }
+.acts { margin-top: 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 28px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 24px; background: var(--accion); color: var(--sobre-accion); font-size: 16px; font-weight: 600; text-decoration: none; border-radius: 3px; }
+.fv a.btn { color: var(--sobre-accion); }
+.btn:hover { filter: brightness(0.9); }
+html.t-night .btn:hover { filter: brightness(1.1); }
+.fv a.lnk { font-size: 16px; font-weight: 600; color: var(--accion); text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 4px; padding: 12px 0; }
+.fv a.lnk:hover { text-decoration-thickness: 3px; }
+.note { margin-top: 36px; font-size: 15px; line-height: 1.5; color: var(--tinta2); max-width: 30em; }
 
-.marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marquee-left 28s linear infinite;
-}
+/* Ejemplo de hallazgo, con el antes y el después. */
+.panel { background: var(--papel2); border: 1px solid var(--linea2); border-radius: 4px; }
+.panel-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 24px; padding: 12px 16px 12px 24px; border-bottom: 1px solid var(--linea2); }
+.panel-top p { font-size: 15px; font-weight: 600; }
+.seg { display: inline-flex; border: 1.5px solid var(--tinta2); border-radius: 3px; overflow: hidden; }
+.seg button { appearance: none; border: 0; background: transparent; color: var(--tinta); font-family: inherit; font-size: 15px; font-weight: 600; min-height: 44px; padding: 0 20px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--accion); color: var(--sobre-accion); }
+.panel-body { display: grid; grid-template-columns: 64px minmax(0, 1fr); }
+.margin { border-right: 1px solid var(--linea2); display: flex; justify-content: center; padding-top: 22px; }
+.margin svg { display: block; }
+.f { padding: 24px 24px 28px; min-height: 612px; }
+.f-title { font-size: 23px; font-weight: 700; font-stretch: 88%; line-height: 1.22; }
+.f-status { margin-top: 10px; font-size: 15px; font-weight: 600; }
+.is-before .f-status { color: var(--rojo); }
+.is-after .f-status { color: var(--ok); }
+.f-label { margin-top: 22px; font-size: 14px; font-weight: 600; color: var(--tinta2); }
+.f-text { margin-top: 4px; font-size: 16px; line-height: 1.5; max-width: 38em; }
+.code { margin-top: 8px; padding: 14px 16px; background: var(--papel); border: 1px solid var(--linea2); border-radius: 3px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size: 13px; line-height: 1.65; overflow-x: auto; white-space: pre-wrap; overflow-wrap: anywhere; color: var(--tinta); }
+.bad { text-decoration: underline; text-decoration-color: var(--rojo); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.panel-foot { margin-top: 14px; font-size: 14px; line-height: 1.5; color: var(--tinta2); }
 
-.marquee:hover .marquee-track {
-  animation-play-state: paused;
-}
+.is-before .only-after { display: none; }
+.is-after .only-before { display: none; }
 
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none;
-  }
-}
+/* Marcas: tilde (comprobado), cruz (abierto) y círculo punteado (no disponible). Siempre acompañadas de texto. */
+.mk path, .mk circle { fill: none; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.mk-ok path { stroke: var(--ok); }
+.mk-bad path { stroke: var(--rojo); }
+.mk-open circle { stroke: var(--tinta2); stroke-width: 2; stroke-dasharray: 3.2 3.2; }
+.tick path { stroke-width: 3.2; stroke-dasharray: 44; stroke-dashoffset: 44; }
+.is-after .tick path { animation: draw 0.6s ease-out 0.1s forwards; }
+@keyframes draw { from { stroke-dashoffset: 44; } to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) { .is-after .tick path { animation: none; stroke-dashoffset: 0; } }
 
-/* glow sutil al hover */
-.tech-chip {
-  transition:
-    transform 180ms ease,
-    filter 180ms ease,
-    opacity 180ms ease;
-}
+/* ==========================================================================
+   Secciones
+   ========================================================================== */
+.sec { padding: clamp(48px, 6.5vw, 88px) 0; }
+.band { background: var(--papel2); }
+.band-dark { background: var(--band-bg); color: var(--band-fg); }
+.band-dark .ct-main p { color: var(--band-fg2); }
+.fv .band-dark a.btn { background: var(--band-btn-bg); color: var(--band-btn-fg); }
+.fv .band-dark a.lnk, .fv .band-dark .ct-links a { color: var(--band-fg); }
+.fv .band-dark a:focus-visible { outline-color: var(--band-fg); }
+.band-dark .foot { border-top-color: var(--band-linea); color: var(--band-fg2); }
+.h2 { font-size: clamp(34px, 4.6vw, 52px); font-weight: 800; font-stretch: 72%; line-height: 1; letter-spacing: -0.008em; }
 
-.tech-chip:hover {
-  transform: translateY(-2px) scale(1.03);
-  filter: brightness(1.08);
-}
+/* Servicio */
+.sv { display: flex; flex-wrap: wrap; gap: 48px 88px; }
+.sv-head { flex: 1 1 320px; max-width: 440px; min-width: 0; }
+.sv-lead { margin-top: 22px; font-size: 19px; line-height: 1.55; }
+.sv-sample { margin-top: 28px; font-size: 16px; line-height: 1.5; color: var(--tinta2); }
+.sv-sample + .sv-sample { margin-top: 12px; }
+.steps { flex: 1.5 1 420px; min-width: 0; border-bottom: 1px solid var(--linea2); }
+.step { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 0 8px; padding: 22px 0 24px; border-top: 1px solid var(--linea2); }
+.step .n { font-size: 44px; font-weight: 800; font-stretch: 70%; line-height: 1; color: var(--accion); }
+.step h3 { font-size: 21px; font-weight: 700; font-stretch: 88%; line-height: 1.25; padding-top: 2px; }
+.step p { margin-top: 6px; font-size: 16.5px; line-height: 1.55; max-width: 36em; }
 
-/* ===== Tech marquee: color + neon premium ===== */
+/* Proyectos */
+.pr-lead { margin-top: 16px; font-size: 19px; max-width: 44em; }
+.rows { margin: 48px -16px 0; border-top: 1px solid var(--linea2); border-bottom: 1px solid var(--linea2); }
+.row { display: flex; flex-wrap: wrap; gap: 20px 56px; padding: 36px 16px 40px; }
+.row:nth-child(odd) { background: var(--barra); }
+.row-name { flex: 1 1 220px; max-width: 300px; min-width: 0; }
+.row-name :is(h2, h3) { font-size: 28px; font-weight: 700; font-stretch: 80%; line-height: 1.1; }
+.stack { margin-top: 10px; font-size: 14px; line-height: 1.5; color: var(--tinta2); }
+.row-body { flex: 3 1 420px; min-width: 0; }
+.row-body > p { font-size: 17px; line-height: 1.55; max-width: 38em; }
+.proofs { margin-top: 18px; display: grid; gap: 8px; }
+.row .acts { margin-top: 24px; }
+.proofs li { position: relative; padding-left: 32px; font-size: 16px; line-height: 1.45; }
+.proofs svg { position: absolute; left: 0; top: 1px; }
+.legend { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px; font-size: 14px; color: var(--tinta2); }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
 
-@keyframes float-soft {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
-}
+/* Contacto y pie */
+.ct { display: flex; flex-wrap: wrap; gap: 40px 88px; align-items: flex-start; }
+.ct-main { flex: 1 1 360px; max-width: 520px; min-width: 0; }
+.ct-main p { margin-top: 18px; font-size: 19px; line-height: 1.55; }
+.ct-links { flex: 1 1 240px; min-width: 0; display: grid; gap: 0; align-content: start; }
+.fv .ct-links a { font-size: 17px; font-weight: 600; padding: 12px 0; color: var(--accion); text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
+.foot { padding: 24px 0 40px; border-top: 1px solid var(--linea2); font-size: 14px; color: var(--tinta2); }
+.foot p + p { margin-top: 6px; }
 
-/* base: apagado */
-.tech-chip {
-  position: relative;
-  transition:
-    transform 200ms ease,
-    filter 200ms ease,
-    opacity 200ms ease;
-  opacity: 0.88;
-}
-
-/* halo radial debajo del icono */
-.tech-chip::before {
-  content: "";
-  position: absolute;
-  inset: -18px -22px;
-  background: radial-gradient(
-    circle at 50% 45%,
-    rgba(120, 180, 255, 0.22),
-    transparent 55%
-  );
-  filter: blur(10px);
-  opacity: 0;
-  transition: opacity 220ms ease;
-  pointer-events: none;
-}
-
-/* reflejo / neon */
-.tech-chip::after {
-  content: "";
-  position: absolute;
-  width: 120px;
-  height: 34px;
-  left: 50%;
-  top: 52%;
-  transform: translateX(-50%) rotate(-12deg);
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(170, 210, 255, 0.22),
-    transparent
-  );
-  filter: blur(8px);
-  opacity: 0;
-  transition: opacity 220ms ease;
-  pointer-events: none;
-}
-
-.tech-chip:hover {
-  opacity: 1;
-  filter: brightness(1.12);
-  transform: translateY(-2px) scale(1.04);
-}
-
-.tech-chip:hover::before,
-.tech-chip:hover::after {
-  opacity: 1;
-}
-
-/* animación flotante independiente (suave) - Deje comentado por si quiero volver a usarlo
-.tech-float {
-  animation: float-soft 5.5s ease-in-out infinite;
-} */
-
-/* seguridad: reduce motion */
-@media (prefers-reduced-motion: reduce) {
-  .tech-float {
-    animation: none;
-  }
-}
-
-/* ===== Degradés por tecnología (se aplican en hover) ===== */
-.tech-grad {
-  background: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: currentColor;
-}
-
-/* En hover, el ícono se vuelve gradiente */
-.group:hover .tech-grad {
-  -webkit-text-fill-color: transparent;
-}
-
-/* React */
-.group:hover .grad-react {
-  background-image: linear-gradient(
-    90deg,
-    rgba(34, 211, 238, 1),
-    rgba(168, 85, 247, 1)
-  );
-}
-/* Next */
-.group:hover .grad-next {
-  background-image: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 1),
-    rgba(148, 163, 184, 1)
-  );
-}
-/* Node */
-.group:hover .grad-node {
-  background-image: linear-gradient(
-    90deg,
-    rgba(52, 211, 153, 1),
-    rgba(34, 197, 94, 1)
-  );
-}
-/* JS */
-.group:hover .grad-js {
-  background-image: linear-gradient(
-    90deg,
-    rgba(250, 204, 21, 1),
-    rgba(251, 146, 60, 1)
-  );
-}
-/* TS */
-.group:hover .grad-ts {
-  background-image: linear-gradient(
-    90deg,
-    rgba(56, 189, 248, 1),
-    rgba(59, 130, 246, 1)
-  );
-}
-/* Python */
-.group:hover .grad-py {
-  background-image: linear-gradient(
-    90deg,
-    rgba(96, 165, 250, 1),
-    rgba(250, 204, 21, 1)
-  );
-}
-/* Tailwind */
-.group:hover .grad-tw {
-  background-image: linear-gradient(
-    90deg,
-    rgba(45, 212, 191, 1),
-    rgba(34, 211, 238, 1)
-  );
-}
+/* Páginas secundarias (Sobre mí, CV): texto corrido con el mismo ritmo que el resto. */
+.page { padding: clamp(40px, 6vw, 72px) 0 clamp(48px, 6.5vw, 88px); }
+.page .prose { margin-top: 28px; max-width: 38em; display: grid; gap: 18px; font-size: 19px; line-height: 1.55; }
+.facts { margin-top: 40px; max-width: 38em; border-top: 1px solid var(--linea2); }
+.facts div { display: grid; grid-template-columns: minmax(0, 150px) minmax(0, 1fr); gap: 4px 24px; padding: 16px 0; border-bottom: 1px solid var(--linea2); }
+.facts dt { font-size: 15px; font-weight: 600; color: var(--tinta2); }
+.facts dd { margin: 0; font-size: 17px; line-height: 1.5; }
+@media (max-width: 520px) { .facts div { grid-template-columns: minmax(0, 1fr); } }

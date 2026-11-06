@@ -2,7 +2,7 @@
 
 Portfolio personal de Franco Villagra, desarrollador orientado a ciberseguridad.
 
-Proyectos que combinan desarrollo (TypeScript/Next.js · Python/FastAPI) con seguridad aplicada: autenticación, escaneo de vulnerabilidades, reconocimiento automatizado y monitoreo de logs de seguridad. El código se comparte a pedido, bajo NDA. También ofrece revisiones de seguridad para aplicaciones web (sección Servicios).
+Proyectos que combinan desarrollo (TypeScript/Next.js · Python/FastAPI) con seguridad aplicada: autenticación, escaneo de vulnerabilidades, reconocimiento automatizado y monitoreo de logs de seguridad. El código se comparte a pedido, bajo NDA. También ofrece revisiones de seguridad para aplicaciones web (sección Servicio).
 
 🔗 **[francoverse.fvillagra-dev.workers.dev](https://francoverse.fvillagra-dev.workers.dev)**
 
@@ -10,11 +10,23 @@ Proyectos que combinan desarrollo (TypeScript/Next.js · Python/FastAPI) con seg
 
 ## Secciones
 
-- **Hero** — Presentación con tagline, descarga de CV y marquee de tecnologías con color de marca
-- **Sobre mí** — Bio + ficha rápida (Formación / Stack / Foco)
-- **Proyectos** — Filtro interactivo por tecnología + cards con imagen, stack, comprobaciones verificadas, estado de la demo y pedido de acceso al código. Vista completa en `/proyectos`
-- **Servicios** — Revisión de seguridad express para aplicaciones Next.js/Supabase/Vercel y seguridad automática en repositorios. El botón de contacto abre un correo con una plantilla para describir el sitio
-- **Contacto** — Email y redes sociales
+Una sola página, con una barra superior que incluye el botón del modo nocturno:
+
+- **Portada** — Nombre, perfil y un hallazgo de ejemplo (con datos ficticios) que pasa de «Antes» a «Después» de corregirlo
+- **Servicio** — Revisión de seguridad express para aplicaciones Next.js/Supabase/Vercel: alcance por escrito, revisión, informe, llamada de devolución y verificación opcional. Los botones abren un correo con una plantilla
+- **Proyectos** — Una fila por proyecto, con su stack, las comprobaciones verificadas, el estado de la demo y el pedido de acceso al código. La misma lista está en `/proyectos`
+- **Contacto** — Email, CV en PDF y redes
+
+Las direcciones del portfolio anterior siguen funcionando: `/section/about` (Sobre mí), `/section/projects` y `/section/cv`.
+
+### Modo día y noche
+
+El sitio tiene dos paletas, día y noche. La primera vez que se entra sigue el modo del sistema; el botón «Modo nocturno» de la barra cambia el modo y guarda la elección en ese navegador (`localStorage`, con `next-themes`).
+
+- Las paletas son variables CSS (`--papel`, `--tinta`, `--accion`, …) en `app/globals.css`, que elige la clase `t-day` o `t-night` de `<html>`; `tailwind.config.js` las expone como colores.
+- `next-themes` pone esa clase antes de que el navegador pinte (con un script en línea cuyo hash entra en la CSP, como el resto), así que no hay destello. Sin JavaScript manda el modo del sistema.
+- El contraste se midió sobre lo que dibuja el navegador, en las dos paletas y en escritorio y móvil: texto de 4,5:1 o más (3:1 en el texto grande) y gráficos de 3:1 o más.
+- Tipografía: Archivo, con eje de ancho, cargada con `next/font`.
 
 ---
 
@@ -25,9 +37,8 @@ Proyectos que combinan desarrollo (TypeScript/Next.js · Python/FastAPI) con seg
 | **Next.js 16** | Framework fullstack con App Router |
 | **React 19** | UI con hooks y componentes funcionales |
 | **TypeScript** | Tipado estático en todo el proyecto |
-| **Tailwind CSS** | Estilos utilitarios y diseño responsivo |
-| **Framer Motion** | Animaciones declarativas, AnimatePresence, useReducedMotion |
-| **Lucide React** | Íconos SVG |
+| **Tailwind CSS** | Base de estilos y colores; el diseño está en `app/globals.css` |
+| **next-themes** | Modo día y noche: sigue al sistema y recuerda la elección |
 | **Cloudflare Workers** | Hosting del sitio como archivos estáticos (gratis, también para uso comercial) |
 | **Vercel Web Analytics** | Conteo de visitas, solo en el despliegue de Vercel (hay que habilitarlo en el proyecto) |
 
@@ -46,13 +57,13 @@ Proyectos que combinan desarrollo (TypeScript/Next.js · Python/FastAPI) con seg
 
 Cada proyecto declara en `data/projects.ts` el campo `demo`:
 
-- `"live"` — responde hoy: la card muestra el botón **Ver demo** con `liveUrl`.
-- `"paused"` — existe, pero su backend está detenido (por ejemplo, base de datos en el plan gratuito de Supabase, que se pausa tras una semana sin uso): la card muestra **Demo en pausa** y no enlaza nada.
+- `"live"` — responde hoy: la fila muestra el botón **Ver demo** con `liveUrl`.
+- `"paused"` — existe, pero su backend está detenido (por ejemplo, base de datos en el plan gratuito de Supabase, que se pausa tras una semana sin uso): la fila muestra «Demo en pausa» y no enlaza nada.
 - `"none"` — no hay demo que mostrar.
 
 Así el portfolio no promete nada que no responda. Para reactivar una demo, alcanza con restaurar el backend y cambiar `demo` a `"live"`.
 
-El código no se enlaza: cada card tiene el botón **Pedir acceso al código**, que abre un correo con el asunto y una plantilla ya escritos (`codeAccessMailto` en `lib/contact.ts`). La lista `proofs` de cada proyecto solo incluye lo que hoy se puede demostrar (pruebas, CI, controles verificados).
+El código no se enlaza: cada fila tiene el enlace **Pedir acceso al código**, que abre un correo con el asunto y una plantilla ya escritos (`codeAccessMailto` en `lib/contact.ts`). La lista `proofs` de cada proyecto solo incluye lo que hoy se puede demostrar (pruebas, CI, controles verificados); `summary` es el texto breve en lenguaje simple que se muestra en la fila.
 
 ---
 
@@ -120,30 +131,23 @@ NEXT_PUBLIC_STATIC_EXPORT=1 yarn build   # genera la carpeta out/
 ```
 Francoverse/
 ├── app/
-│   ├── page.tsx                  # Página principal (Hero + secciones)
-│   ├── layout.tsx                # Layout global, metadata SEO/OG y Web Analytics
+│   ├── layout.tsx                # Layout global: fuente, modo día/noche, barra superior y pie; metadata SEO/OG y Web Analytics
+│   ├── page.tsx                  # Página principal (Portada, Servicio, Proyectos, Contacto)
+│   ├── globals.css               # Paletas de día y noche (variables CSS) y estilos del sitio
 │   ├── proyectos/
-│   │   └── page.tsx              # Vista completa de proyectos con sort
-│   └── section/[section]/        # Rutas dinámicas: about, projects, cv
+│   │   └── page.tsx              # La lista de proyectos en su propia página
+│   └── section/[section]/        # Direcciones del portfolio anterior: about, projects, cv
 ├── components/
-│   ├── sections/
-│   │   ├── Hero/                 # HeroSection + TechMarquee
-│   │   ├── About/                # AboutSection (bio + cards Formación/Stack/Foco)
-│   │   ├── Projects/             # ProjectsSection (filtro + grilla) + ProjectCard
-│   │   ├── Services/             # ServicesSection (revisión de seguridad express)
-│   │   ├── Contact/              # ContactSection
-│   │   └── Navigation/           # TopNav, menú móvil, ScrollNavigator
-│   ├── layout/                   # MainLayout, SectionContainer, wrappers
-│   └── ui/                       # Button, Title, ScrollNavigator, etc.
+│   ├── providers/                # ThemeProvider (next-themes, clases t-day y t-night)
+│   └── site/                     # SiteHeader, ThemeToggle, Hero, FindingPanel, ServiceSection, ProjectsSection, ContactSection, SiteFooter, Marks
 ├── data/
-│   ├── projects.ts               # Array de proyectos (featured, completedAt, technologies, demo)
-│   ├── skills.ts                 # 7 tiles curados con match[] y color
-│   └── techColors.ts             # Fuente única de color por tecnología (rgb)
+│   └── projects.ts               # Proyectos: resumen, stack, estado de la demo (demo) y comprobaciones (proofs)
 ├── lib/
-│   ├── contact.ts                # Email de contacto, URL del escáner y mailto de la revisión y del acceso al código
-│   └── security-headers.ts       # Headers de seguridad y CSP
+│   ├── contact.ts                # Email de contacto, URL del escáner y mailto de la revisión, del informe de muestra y del acceso al código
+│   ├── security-headers.ts       # Headers de seguridad y CSP
+│   └── site-url.ts               # URL del sitio y modo estático
 ├── public/
-│   └── projects/                 # Imágenes de los proyectos
+│   └── projects/                 # Imágenes de la versión anterior (el diseño actual no las usa)
 └── types/                        # Tipos TypeScript globales
 ```
 
@@ -152,14 +156,13 @@ Francoverse/
 ## Decisiones de arquitectura
 
 **Una sola fuente de verdad por concepto:**
-- Colores de tecnología → `data/techColors.ts` (usados en TechMarquee y SkillTiles)
-- Stack y estado de la demo de cada proyecto → `data/projects.ts` (`technologies[]`, `demo`)
-- Datos de contacto → `lib/contact.ts` (usados por la sección Contacto, el botón de Servicios y el pedido de acceso al código)
-- Tiles de habilidades → `data/skills.ts` con `match[]` que puente hacia `technologies[]`
+- Stack, resumen, comprobaciones y estado de la demo de cada proyecto → `data/projects.ts` (`technologies[]`, `summary`, `proofs[]`, `demo`)
+- Datos de contacto → `lib/contact.ts` (usados por el Contacto, los botones de Servicio y el pedido de acceso al código)
+- Colores → variables CSS de `app/globals.css` (una paleta de día y otra de noche); `tailwind.config.js` las expone como colores
 
-**Habilidades data-driven:** los tiles de la sección Proyectos derivan su conteo y filtrado del array de proyectos en tiempo de render. Agregar un proyecto nuevo con su `technologies[]` lo hace aparecer automáticamente bajo cada tile que matchee — sin tocar el componente.
+**Proyectos data-driven:** la lista de la portada y la de `/proyectos` salen del mismo array. Agregar un proyecto con su `summary`, `technologies[]`, `proofs[]` y `demo` lo suma a las dos sin tocar ningún componente.
 
-**Contraste monocromático:** escala de grises basada en `fg` (blanco puro) con opacidad: `fg/95` primario · `fg/70` cuerpo · `fg/60` secundario (piso) · `fg/50` hints decorativos únicamente.
+**Las marcas nunca van solas:** el tilde («comprobado»), la cruz («abierto») y el círculo punteado («no disponible») siempre acompañan un texto; el color no es el único aviso.
 
 ---
 

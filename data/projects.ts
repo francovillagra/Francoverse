@@ -13,6 +13,8 @@ export interface Project {
   id: string;
   title: string;
   description: string;
+  /** Texto breve en lenguaje simple: es el que se muestra en la página principal. */
+  summary: string;
   technologies: string[];
   featured: boolean;
   completedAt: string; // "YYYY-MM" of last commit
@@ -31,6 +33,7 @@ const projects: Project[] = [
     featured: true,
     completedAt: '2026-06',
     description: "Chequeo básico de seguridad para un sitio web, sin registro: HTTPS y certificado TLS, headers, cookies e información expuesta, con recomendaciones en lenguaje claro.",
+    summary: "Chequeo básico de seguridad para un sitio web, sin registro: HTTPS y certificado TLS, cabeceras, cookies e información expuesta, con recomendaciones en lenguaje claro.",
     technologies: ["Next.js", "TypeScript", "Axios", "Tailwind CSS", "Zod", "Vitest", "Vercel"],
     demo: "live",
     liveUrl: "https://web-vulnerability-scanner-red.vercel.app",
@@ -47,6 +50,7 @@ const projects: Project[] = [
     featured: true,
     completedAt: '2026-06',
     description: "Plataforma de reconocimiento automatizado para assessments de seguridad autorizados. Enumera subdominios, escanea puertos y detecta tecnologías con verificación de propiedad de dominio obligatoria antes de cualquier scan.",
+    summary: "Mapea qué partes de un sitio están expuestas en Internet, y solo si su dueño lo autoriza: subdominios, puertos y tecnologías.",
     technologies: ["Next.js", "TypeScript", "FastAPI", "Python", "PostgreSQL", "Supabase", "Railway", "Recharts", "Tailwind CSS"],
     demo: "paused", // la base de datos (Supabase, plan gratuito) está en pausa
     liveUrl: "https://recon-scope.vercel.app",
@@ -63,6 +67,7 @@ const projects: Project[] = [
     featured: true,
     completedAt: '2026-06',
     description: "SIEM-lite de Blue Team: ingiere logs, detecta patrones de ataque en tiempo real (fuerza bruta, SQLi, path traversal, XSS, scanners) y transmite alertas a un dashboard live vía WebSocket.",
+    summary: "Recibe los registros (logs) de una aplicación y avisa en tiempo real cuando detecta patrones de ataque: fuerza bruta, inyección SQL, path traversal, XSS y escáneres. Las alertas llegan a un panel en vivo.",
     demo: "paused", // la base de datos (Supabase, plan gratuito) está en pausa
     liveUrl: "https://log-sentinel-eta.vercel.app",
     proofs: [
@@ -79,6 +84,7 @@ const projects: Project[] = [
     featured: true,
     completedAt: '2026-06',
     description: "API REST con autenticación JWT, rate limiting y bcrypt. Registro, login, logout que revoca la sesión y rutas protegidas por rol. Documentación con ejemplos de uso.",
+    summary: "API de registro e inicio de sesión: contraseñas con bcrypt, tokens JWT, límite de pedidos y rutas protegidas por rol. Al cerrar sesión, la sesión se revoca.",
     technologies: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "JWT", "Redis", "Zod"],
     // Sin demo: es una API sin interfaz, y la dirección que se enlazaba antes no era la del proyecto.
     demo: "none",
