@@ -63,5 +63,5 @@ yarn lint
 
 ---
 
-Desarrollador por Franco Villagra - Desarrollador Fullstack
+Desarrollador por Franco Villagra - Desarrollador orientado a Ciberseguridad
 Creando Soluciones con tecnología

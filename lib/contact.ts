@@ -16,3 +16,17 @@ export function reviewMailto(): string {
 
   return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
+
+/** Enlace de correo para pedir acceso al código de un proyecto: se comparte a pedido, bajo NDA. */
+export function codeAccessMailto(projectTitle: string): string {
+  const subject = `Acceso al código: ${projectTitle}`;
+  const body = [
+    `Hola Franco, quiero pedir acceso al código de ${projectTitle}.`,
+    "",
+    "Quién soy y para qué quiero verlo:",
+    "Empresa o equipo:",
+    "Si hace falta un NDA, lo firmo antes de recibir el acceso.",
+  ].join("\n");
+
+  return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
