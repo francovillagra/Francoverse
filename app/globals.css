@@ -236,8 +236,9 @@ html.t-night .btn:hover { filter: brightness(1.1); }
 .foot { padding: 24px 0 40px; border-top: 1px solid var(--linea2); font-size: 14px; color: var(--tinta2); }
 .foot p + p { margin-top: 6px; }
 
-/* Páginas secundarias (Sobre mí, CV): texto corrido con el mismo ritmo que el resto. */
-.page { padding: clamp(40px, 6vw, 72px) 0 clamp(48px, 6.5vw, 88px); }
+/* Páginas secundarias (Sobre mí, CV): texto corrido con el mismo ritmo que el resto. Va con .wrap, así que solo fija el
+   espacio vertical: un `padding` completo borraría el margen lateral de .wrap (el texto quedaba pegado al borde). */
+.page { padding-block: clamp(40px, 6vw, 72px) clamp(48px, 6.5vw, 88px); }
 .page .prose { margin-top: 28px; max-width: 38em; display: grid; gap: 18px; font-size: 19px; line-height: 1.55; }
 .facts { margin-top: 40px; max-width: 38em; border-top: 1px solid var(--linea2); }
 .facts div { display: grid; grid-template-columns: minmax(0, 150px) minmax(0, 1fr); gap: 4px 24px; padding: 16px 0; border-bottom: 1px solid var(--linea2); }
