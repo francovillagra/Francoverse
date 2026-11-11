@@ -1,99 +1,103 @@
-import Link from "next/link";
-import ProjectsSection from "@/components/sections/Projects/ProjectsSection";
-import AboutSection from "@/components/sections/About/AboutSection";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import ProjectsSection from "@/components/site/ProjectsSection";
 
-type SectionKey = "about" | "projects" | "cv";
+// Estas direcciones existen desde el portfolio anterior (y están en el mapa del sitio y en enlaces ajenos): se
+// mantienen. Las secciones válidas se generan al compilar (necesario para el modo estático) y cualquier otra
+// ruta devuelve 404.
+const SECTIONS = ["about", "projects", "cv"] as const;
+type Section = (typeof SECTIONS)[number];
 type Props = { params: Promise<{ section: string }> };
 
-// Las secciones válidas se generan al compilar (necesario para el modo estático) y cualquier otra
-// ruta devuelve 404.
 export const dynamicParams = false;
 export function generateStaticParams() {
-  return (["about", "projects", "cv"] as const).map((section) => ({ section }));
+  return SECTIONS.map((section) => ({ section }));
 }
 
-function BackHome() {
-  return (
-    <div className="absolute top-4 left-4 z-20">
-      <Link
-        href="/"
-        className="rounded-xl px-3 py-2 border border-black/15 dark:border-white/30
-                   text-neutral-900 dark:text-white hover:bg-black/[0.05] dark:hover:bg-white/10
-                   transition"
-      >
-        ← Volver
-      </Link>
-    </div>
-  );
+const isSection = (value: string): value is Section => (SECTIONS as readonly string[]).includes(value);
+
+const META: Record<Section, { title: string; description: string; canonical: string }> = {
+  about: {
+    title: "Sobre mí | Franco Villagra",
+    description: "Franco Villagra: desarrollador orientado a ciberseguridad, con 8 años como auditor externo en el sector público.",
+    canonical: "/section/about",
+  },
+  projects: {
+    title: "Proyectos | Franco Villagra",
+    description: "Proyectos de seguridad de aplicaciones de Franco Villagra, cada uno con lo que hoy se puede comprobar.",
+    canonical: "/proyectos",
+  },
+  cv: {
+    title: "CV | Franco Villagra",
+    description: "Currículum de Franco Villagra, desarrollador orientado a ciberseguridad, en PDF.",
+    canonical: "/section/cv",
+  },
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { section } = await params;
+  if (!isSection(section)) return {};
+  const { title, description, canonical } = META[section];
+  return { title, description, alternates: { canonical } };
 }
 
 export default async function SectionPage({ params }: Props) {
   const { section } = await params;
+  if (!isSection(section)) notFound();
 
-  switch (section as SectionKey) {
-    case "about":
-      return (
-        <main
-          className="relative w-full h-dvh
-                     bg-white/80 text-neutral-900 dark:bg-[#030014]/95 dark:text-white
-                     backdrop-blur transition-colors"
-        >
-          <AboutSection />
-        </main>
-      );
+  if (section === "projects") {
+    return (
+      <main id="contenido">
+        <ProjectsSection headingAs="h1" />
+      </main>
+    );
+  }
 
-    case "projects":
-      return (
-        <main
-          className="relative w-full h-dvh px-6
-                     bg-white/80 text-neutral-900 dark:bg-[#030014]/95 dark:text-white
-                     backdrop-blur transition-colors"
-        >
-          <BackHome />
-          <div className="mx-auto max-w-6xl h-full flex items-center">
-            <ProjectsSection />
-          </div>
-        </main>
-      );
-
-    case "cv":
-      return (
-        <main
-          className="relative w-full h-dvh grid place-items-center px-6
-                     bg-white/80 text-neutral-900 dark:bg-[#030014]/95 dark:text-white
-                     backdrop-blur transition-colors"
-        >
-          <BackHome />
-          <div className="text-center space-y-4">
-            <h2 className="text-3xl md:text-4xl font-extrabold">CV</h2>
-            <a
-              href="/cv-franco-villagra.pdf"
-              download
-              className="inline-block rounded-2xl px-5 py-3
-                         bg-black text-white dark:bg-white dark:text-black
-                         font-semibold hover:opacity-90 transition"
-            >
-              Descargar CV
+  if (section === "cv") {
+    return (
+      <main id="contenido">
+        <div className="wrap page">
+          <h1 className="h2">CV</h1>
+          <p className="prose">Currículum en PDF, de una página.</p>
+          <div className="acts">
+            <a className="btn" href="/cv-franco-villagra.pdf" download="CV-Franco-Villagra.pdf">
+              Descargar CV (PDF)
             </a>
           </div>
-        </main>
-      );
-
-    default:
-      return (
-        <main
-          className="w-full h-dvh grid place-items-center px-6 text-center
-                     bg-white/80 text-neutral-900 dark:bg-[#030014]/95 dark:text-white
-                     backdrop-blur transition-colors"
-        >
-          <BackHome />
-          <div>
-            <h2 className="text-3xl md:text-4xl font-extrabold">Sección no encontrada</h2>
-            <p className="text-neutral-600 dark:text-white/70 mt-2">
-              Probá con /section/about, /section/projects o /section/cv.
-            </p>
-          </div>
-        </main>
-      );
+        </div>
+      </main>
+    );
   }
+
+  return (
+    <main id="contenido">
+      <div className="wrap page">
+        <h1 className="h2">Sobre mí</h1>
+        <div className="prose">
+          <p>
+            Soy desarrollador orientado a ciberseguridad. Construyo con TypeScript/Next.js y Python/FastAPI, con la seguridad como
+            requisito en todo el ciclo de vida del software (SDLC), y pruebo lo que construyo antes de darlo por bueno.
+          </p>
+          <p>
+            Vengo de 8 años como auditor externo en el sector público: verificar con evidencia es mi oficio. El código de mis
+            proyectos se comparte a pedido, bajo NDA.
+          </p>
+        </div>
+        <dl className="facts">
+          <div>
+            <dt>Formación</dt>
+            <dd>Desarrollo Full Stack (UTN). Licenciatura en Ciberdefensa en curso (FADENA).</dd>
+          </div>
+          <div>
+            <dt>Stack</dt>
+            <dd>TypeScript y Next.js en web; Python y FastAPI en backend y en herramientas de seguridad.</dd>
+          </div>
+          <div>
+            <dt>Foco</dt>
+            <dd>Seguridad de aplicaciones web en todo el SDLC, del diseño al despliegue.</dd>
+          </div>
+        </dl>
+      </div>
+    </main>
+  );
 }

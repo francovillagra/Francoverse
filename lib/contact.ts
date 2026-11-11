@@ -17,6 +17,18 @@ export function reviewMailto(): string {
   return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
+/** Enlace de correo para pedir el informe de muestra de la revisión de seguridad. */
+export function sampleReportMailto(): string {
+  const subject = "Informe de muestra";
+  const body = [
+    "Hola Franco, quiero ver el informe de muestra de la revisión de seguridad.",
+    "",
+    "Sitio o aplicación que tengo en mente (opcional):",
+  ].join("\n");
+
+  return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
 /** Enlace de correo para pedir acceso al código de un proyecto: se comparte a pedido, bajo NDA. */
 export function codeAccessMailto(projectTitle: string): string {
   const subject = `Acceso al código: ${projectTitle}`;
