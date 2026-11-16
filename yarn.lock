@@ -1707,13 +1707,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:^2.1.1":
-  version: 2.1.1
-  resolution: "clsx@npm:2.1.1"
-  checksum: 10c0/c4c8eb865f8c82baab07e71bfa8897c73454881c4f99d6bc81585aecd7c441746c1399d08363dc096c550cceaf97bd4ce1e8854e1771e9998d9f94c4fe075839
-  languageName: node
-  linkType: hard
-
 "color-convert@npm:^2.0.1":
   version: 2.0.1
   resolution: "color-convert@npm:2.0.1"
@@ -2593,28 +2586,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:^12.23.7":
-  version: 12.23.7
-  resolution: "framer-motion@npm:12.23.7"
-  dependencies:
-    motion-dom: "npm:^12.23.7"
-    motion-utils: "npm:^12.23.6"
-    tslib: "npm:^2.4.0"
-  peerDependencies:
-    "@emotion/is-prop-valid": "*"
-    react: ^18.0.0 || ^19.0.0
-    react-dom: ^18.0.0 || ^19.0.0
-  peerDependenciesMeta:
-    "@emotion/is-prop-valid":
-      optional: true
-    react:
-      optional: true
-    react-dom:
-      optional: true
-  checksum: 10c0/46f128b5f5cbfbd454390f86c4a850dd704caf6f9bf44719e41f7dbca0f498b0ad4ac8c02e90c0c6215c8d0b645da52c5b251eead40ec252939cd8e10659c483
-  languageName: node
-  linkType: hard
-
 "francoverse@workspace:.":
   version: 0.0.0-use.local
   resolution: "francoverse@workspace:."
@@ -2627,20 +2598,15 @@ __metadata:
     "@typescript-eslint/parser": "npm:^8.33.1"
     "@vercel/analytics": "npm:^2.0.1"
     autoprefixer: "npm:^10.4.20"
-    clsx: "npm:^2.1.1"
     eslint: "npm:^9.28.0"
     eslint-config-next: "npm:15.2.1"
     eslint-import-resolver-typescript: "npm:^4.4.3"
     eslint-plugin-import: "npm:^2.31.0"
-    framer-motion: "npm:^12.23.7"
-    lucide-react: "npm:^0.543.0"
     next: "npm:^16.4.5"
     next-themes: "npm:^0.4.6"
     postcss: "npm:^8.4.49"
     react: "npm:^19.1.0"
     react-dom: "npm:^19.1.0"
-    react-icons: "npm:^5.6.0"
-    react-intersection-observer: "npm:^9.16.0"
     tailwindcss: "npm:^3.4.17"
     typescript: "npm:^5"
   languageName: unknown
@@ -3453,15 +3419,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lucide-react@npm:^0.543.0":
-  version: 0.543.0
-  resolution: "lucide-react@npm:0.543.0"
-  peerDependencies:
-    react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10c0/76bb54f9c602ff5d44ec66f2786c035d92aaabca1e1abb380b0c8101dfb3290e52c82fa4d630e286ef07c05b63696e187f0ca3ae186535d9c5b4de7aa8825bd3
-  languageName: node
-  linkType: hard
-
 "make-fetch-happen@npm:^14.0.3":
   version: 14.0.3
   resolution: "make-fetch-happen@npm:14.0.3"
@@ -3612,22 +3569,6 @@ __metadata:
   bin:
     mkdirp: dist/cjs/src/bin.js
   checksum: 10c0/9f2b975e9246351f5e3a40dcfac99fcd0baa31fbfab615fe059fb11e51f10e4803c63de1f384c54d656e4db31d000e4767e9ef076a22e12a641357602e31d57d
-  languageName: node
-  linkType: hard
-
-"motion-dom@npm:^12.23.7":
-  version: 12.23.7
-  resolution: "motion-dom@npm:12.23.7"
-  dependencies:
-    motion-utils: "npm:^12.23.6"
-  checksum: 10c0/611e9eacad38820a2736027b1634f4ba97337bb480db403f5f589355564bd0a7083f347c79278193870ef576a55975b254787f8d121b56645a7da58203187f9f
-  languageName: node
-  linkType: hard
-
-"motion-utils@npm:^12.23.6":
-  version: 12.23.6
-  resolution: "motion-utils@npm:12.23.6"
-  checksum: 10c0/c058e8ba6423b3baa63e985bcc669877ee7d9579d938f5348b4e60c5ea1b4b33dd7f4877434436a4a5807f3cf00370d3fd4079a6fdd6309c5c87aa62b311a897
   languageName: node
   linkType: hard
 
@@ -4203,28 +4144,6 @@ __metadata:
   peerDependencies:
     react: ^19.1.0
   checksum: 10c0/3e26e89bb6c67c9a6aa86cb888c7a7f8258f2e347a6d2a15299c17eb16e04c19194e3452bc3255bd34000a61e45e2cb51e46292392340432f133e5a5d2dfb5fc
-  languageName: node
-  linkType: hard
-
-"react-icons@npm:^5.6.0":
-  version: 5.6.0
-  resolution: "react-icons@npm:5.6.0"
-  peerDependencies:
-    react: "*"
-  checksum: 10c0/addba1ebfd45cdf7f69291d0c93df64fca1271cfdb66df657abd223e3451c73356b035f50e75858627dd182b02129596c79eaaaa45d32eb52658e443a992645c
-  languageName: node
-  linkType: hard
-
-"react-intersection-observer@npm:^9.16.0":
-  version: 9.16.0
-  resolution: "react-intersection-observer@npm:9.16.0"
-  peerDependencies:
-    react: ^17.0.0 || ^18.0.0 || ^19.0.0
-    react-dom: ^17.0.0 || ^18.0.0 || ^19.0.0
-  peerDependenciesMeta:
-    react-dom:
-      optional: true
-  checksum: 10c0/2aee5103fb460c6e5a3ab5a4fdc8c69a5215e23699a12d7857f25ba765fed48eacbed94ca835d79edf00c0edcc9c4fbb5bb057a373402d0551718546810e0e48
   languageName: node
   linkType: hard
 

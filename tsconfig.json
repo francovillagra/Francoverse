@@ -15,7 +15,6 @@
       "node"
     ],
     "typeRoots": [
-      "./types",
       "./node_modules/@types"
     ],
     "esModuleInterop": true,
@@ -44,7 +43,6 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "globals.d.ts",
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
