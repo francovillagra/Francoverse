@@ -1,9 +1,37 @@
-import projects, { type Project } from "@/data/projects";
+import projects, { type Project, type ProjectVideo } from "@/data/projects";
 import { codeAccessMailto } from "@/lib/contact";
 import { OpenMark, TickMark } from "./Marks";
 
+/**
+ * Grabación de la demo. No arranca sola ni descarga nada hasta que se la reproduce (`preload="none"`): al cargar la
+ * página solo se baja la portada. El video no tiene audio, así que el texto de abajo es su alternativa y también lo lee
+ * el lector de pantalla (`aria-describedby`).
+ */
+function DemoVideo({ id, title, video }: { id: string; title: string; video: ProjectVideo }) {
+  return (
+    <figure className="demo">
+      <video
+        controls
+        playsInline
+        preload="none"
+        poster={video.poster}
+        width={video.width}
+        height={video.height}
+        aria-label={`Demo en video de ${title}`}
+        aria-describedby={`${id}-texto`}
+      >
+        <source src={video.src} type="video/mp4" />
+        Este navegador no puede reproducir el video. <a href={video.src}>Descargar la grabación (MP4)</a>.
+      </video>
+      <figcaption id={`${id}-texto`}>
+        <strong>Demo en video, {video.duration}.</strong> {video.description}
+      </figcaption>
+    </figure>
+  );
+}
+
 function ProjectRow({ project, as: Title }: { project: Project; as: "h2" | "h3" }) {
-  const { title, summary, technologies, proofs = [], demo, liveUrl } = project;
+  const { id, title, summary, technologies, proofs = [], demo, liveUrl, video } = project;
 
   return (
     <article className="row">
@@ -34,10 +62,11 @@ function ProjectRow({ project, as: Title }: { project: Project; as: "h2" | "h3" 
             </li>
           )}
         </ul>
+        {video && <DemoVideo id={`demo-${id}`} title={title} video={video} />}
         <div className="acts">
           {demo === "live" && liveUrl && (
             <a className="btn" href={liveUrl} target="_blank" rel="noopener noreferrer">
-              Ver demo
+              Ver demo en vivo
               <span className="sr"> (se abre en una pestaña nueva)</span>
             </a>
           )}
@@ -52,6 +81,8 @@ function ProjectRow({ project, as: Title }: { project: Project; as: "h2" | "h3" 
 
 /** Los proyectos, uno por fila, cada uno con lo que hoy se puede comprobar. */
 export default function ProjectsSection({ headingAs: Heading = "h2" }: { headingAs?: "h1" | "h2" }) {
+  // La marca «no disponible» solo se explica si alguna fila la muestra (hoy ninguna: las demos detenidas tienen grabación).
+  const showsPaused = projects.some((project) => project.demo === "paused");
   return (
     <section className="sec" id="proyectos" aria-labelledby="t-proyectos">
       <div className="wrap">
@@ -70,10 +101,12 @@ export default function ProjectsSection({ headingAs: Heading = "h2" }: { heading
             <TickMark />
             Comprobado en el código o en producción
           </span>
-          <span>
-            <OpenMark />
-            No disponible por ahora
-          </span>
+          {showsPaused && (
+            <span>
+              <OpenMark />
+              No disponible por ahora
+            </span>
+          )}
         </p>
       </div>
     </section>
