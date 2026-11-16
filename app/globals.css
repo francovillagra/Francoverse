@@ -224,6 +224,11 @@ html.t-night .btn:hover { filter: brightness(1.1); }
 .row .acts { margin-top: 24px; }
 .proofs li { position: relative; padding-left: 32px; font-size: 16px; line-height: 1.45; }
 .proofs svg { position: absolute; left: 0; top: 1px; }
+/* Demo en video: grabación del laboratorio. El texto de abajo dice lo que se ve (el video no tiene audio). */
+.demo { margin: 24px 0 0; max-width: 38em; }
+.demo video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: var(--papel2); border: 1px solid var(--linea2); border-radius: 4px; }
+.demo figcaption { margin-top: 10px; font-size: 14px; line-height: 1.5; color: var(--tinta2); }
+.demo figcaption strong { font-weight: 600; color: var(--tinta); }
 .legend { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px; font-size: 14px; color: var(--tinta2); }
 .legend span { display: inline-flex; align-items: center; gap: 8px; }
 
