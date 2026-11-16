@@ -179,4 +179,4 @@ Francoverse/
 
 ## Licencia
 
-MIT — libre para usar, modificar y distribuir.
+Todos los derechos reservados (ver [LICENSE](LICENSE)). El código está publicado para que se pueda consultar; no se concede licencia para usarlo, copiarlo ni distribuirlo.
