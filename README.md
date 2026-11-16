@@ -14,7 +14,7 @@ Una sola página, con una barra superior que incluye el botón del modo nocturno
 
 - **Portada** — Nombre, perfil y un hallazgo de ejemplo (con datos ficticios) que pasa de «Antes» a «Después» de corregirlo
 - **Servicio** — Revisión de seguridad express para aplicaciones Next.js/Supabase/Vercel: alcance por escrito, revisión, informe, llamada de devolución y verificación opcional. Los botones abren un correo con una plantilla
-- **Proyectos** — Una fila por proyecto, con su stack, las comprobaciones verificadas, el estado de la demo y el pedido de acceso al código. La misma lista está en `/proyectos`
+- **Proyectos** — Una fila por proyecto, con su stack, las comprobaciones verificadas, la demo (en vivo o en video) y el pedido de acceso al código. La misma lista está en `/proyectos`
 - **Contacto** — Email, CV en PDF y redes
 
 Las direcciones del portfolio anterior siguen funcionando: `/section/about` (Sobre mí), `/section/projects` y `/section/cv`.
@@ -49,19 +49,27 @@ El sitio tiene dos paletas, día y noche. La primera vez que se entra sigue el m
 | Proyecto | Stack | Demo | Código |
 |---|---|---|---|
 | **Web Vulnerability Scanner** | Next.js · TypeScript · Axios · Tailwind CSS · Zod · Vitest · Vercel | [En línea](https://web-vulnerability-scanner-red.vercel.app) | A pedido, bajo NDA |
-| **Recon Scope** | Next.js · TypeScript · FastAPI · Python · PostgreSQL · Supabase · Railway · Recharts · Tailwind CSS | En pausa | A pedido, bajo NDA |
-| **Log-Sentinel** | Python · FastAPI · Next.js · TypeScript · Redis · Supabase · WebSocket · JWT | En pausa | A pedido, bajo NDA |
-| **Authentication & Authorization API** | Next.js · TypeScript · Prisma · PostgreSQL · JWT · Redis · Zod | Sin demo (API sin interfaz) | A pedido, bajo NDA |
+| **Recon Scope** | Next.js · TypeScript · FastAPI · Python · PostgreSQL · Supabase · Railway · Recharts · Tailwind CSS | Video | A pedido, bajo NDA |
+| **Log-Sentinel** | Python · FastAPI · Next.js · TypeScript · Redis · Supabase · WebSocket · JWT | Video | A pedido, bajo NDA |
+| **Authentication & Authorization API** | Next.js · TypeScript · Prisma · PostgreSQL · JWT · Redis · Zod | Video (API sin interfaz) | A pedido, bajo NDA |
 
-### Estado de las demos
+### Demos
 
-Cada proyecto declara en `data/projects.ts` el campo `demo`:
+Cada proyecto declara en `data/projects.ts` el estado de su demo en línea (`demo`) y, si la tiene, una grabación (`video`):
 
-- `"live"` — responde hoy: la fila muestra el botón **Ver demo** con `liveUrl`.
-- `"paused"` — existe, pero su backend está detenido (por ejemplo, base de datos en el plan gratuito de Supabase, que se pausa tras una semana sin uso): la fila muestra «Demo en pausa» y no enlaza nada.
-- `"none"` — no hay demo que mostrar.
+- `demo: "live"` — responde hoy: la fila muestra el botón **Ver demo en vivo** con `liveUrl`.
+- `demo: "paused"` — existe, pero su backend está detenido (por ejemplo, base de datos en el plan gratuito de Supabase, que se pausa tras una semana sin uso): la fila muestra «Demo en pausa» y no enlaza nada.
+- `demo: "none"` — no hay demo en línea que mostrar.
+- `video` — grabación de la demo, hecha en un laboratorio propio con datos de práctica. La fila la muestra debajo de las comprobaciones, con su portada y un texto que dice lo que pasa en pantalla (`description`: es la alternativa en texto del video, que no tiene audio). No se descarga nada hasta que se la reproduce (`preload="none"`).
 
-Así el portfolio no promete nada que no responda. Para reactivar una demo, alcanza con restaurar el backend y cambiar `demo` a `"live"`.
+Hoy Recon Scope, Log-Sentinel y Authentication & Authorization API se muestran con video, porque su demo en línea está detenida o no existe. Así el portfolio no promete nada que no responda. Para reactivar una demo en línea, alcanza con restaurar el backend y cambiar `demo` a `"live"`.
+
+Los videos están en `public/videos/`, como MP4 H.264 sin audio y con una portada WebP del mismo nombre. Para sumar uno:
+
+```bash
+ffmpeg -i original.mp4 -c:v libx264 -profile:v high -pix_fmt yuv420p -preset slow -crf 28 -movflags +faststart -an public/videos/<proyecto>.mp4
+ffmpeg -ss 30 -i public/videos/<proyecto>.mp4 -frames:v 1 -vf scale=1280:-2 -c:v libwebp -quality 80 public/videos/<proyecto>.webp
+```
 
 El código no se enlaza: cada fila tiene el enlace **Pedir acceso al código**, que abre un correo con el asunto y una plantilla ya escritos (`codeAccessMailto` en `lib/contact.ts`). La lista `proofs` de cada proyecto solo incluye lo que hoy se puede demostrar (pruebas, CI, controles verificados); `summary` es el texto breve en lenguaje simple que se muestra en la fila.
 
@@ -141,13 +149,13 @@ Francoverse/
 │   ├── providers/                # ThemeProvider (next-themes, clases t-day y t-night)
 │   └── site/                     # SiteHeader, ThemeToggle, Hero, FindingPanel, ServiceSection, ProjectsSection, ContactSection, SiteFooter, Marks
 ├── data/
-│   └── projects.ts               # Proyectos: resumen, stack, estado de la demo (demo) y comprobaciones (proofs)
+│   └── projects.ts               # Proyectos: resumen, stack, estado de la demo (demo), video y comprobaciones (proofs)
 ├── lib/
 │   ├── contact.ts                # Email de contacto, URL del escáner y mailto de la revisión, del informe de muestra y del acceso al código
 │   ├── security-headers.ts       # Headers de seguridad y CSP
 │   └── site-url.ts               # URL del sitio y modo estático
 ├── public/
-│   └── projects/                 # Imágenes de los proyectos (las nombra data/projects.ts)
+│   └── videos/                   # Grabaciones de las demos (MP4) y sus portadas (WebP)
 ```
 
 ---
@@ -155,7 +163,7 @@ Francoverse/
 ## Decisiones de arquitectura
 
 **Una sola fuente de verdad por concepto:**
-- Stack, resumen, comprobaciones y estado de la demo de cada proyecto → `data/projects.ts` (`technologies[]`, `summary`, `proofs[]`, `demo`)
+- Stack, resumen, comprobaciones y estado de la demo de cada proyecto → `data/projects.ts` (`technologies[]`, `summary`, `proofs[]`, `demo`, `video`)
 - Datos de contacto → `lib/contact.ts` (usados por el Contacto, los botones de Servicio y el pedido de acceso al código)
 - Colores → variables CSS de `app/globals.css` (una paleta de día y otra de noche); `tailwind.config.js` las expone como colores
 
