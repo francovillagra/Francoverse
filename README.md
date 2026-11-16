@@ -147,8 +147,7 @@ Francoverse/
 │   ├── security-headers.ts       # Headers de seguridad y CSP
 │   └── site-url.ts               # URL del sitio y modo estático
 ├── public/
-│   └── projects/                 # Imágenes de la versión anterior (el diseño actual no las usa)
-└── types/                        # Tipos TypeScript globales
+│   └── projects/                 # Imágenes de los proyectos (las nombra data/projects.ts)
 ```
 
 ---
